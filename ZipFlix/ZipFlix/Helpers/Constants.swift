@@ -13,6 +13,8 @@ struct Constants {
     static let lightModeNotificationKey = "lightMode"
     static let darkModeNotificationKey = "darkMode"
     
+    static let dimNotificationKey = "dimmedMode"
+    static let cancelDimNotificationKey = "cancelDimmedMode"
     
     static let iconSize: CGFloat = 30
     static let logoSize: CGFloat = 80

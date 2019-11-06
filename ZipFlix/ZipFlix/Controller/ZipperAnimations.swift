@@ -19,7 +19,8 @@ extension ViewController {
         
         if zipperState == .open {
             print("Closing Zipper")
-            clearInputButton.isEnabled = false // to prevent starting open zipper animation during animation
+            clearInputButton.isEnabled = false // prevents starting open zipper animation during animation
+            modeToggleButton.isEnabled = false // prevents switching modes during animation (and thereby resetting animation)
             zipperState = .closed
             UIView.animate(withDuration: zipDuration,
                            delay: 0.0,
@@ -66,6 +67,9 @@ extension ViewController {
     
     func openZipper() {
         
+//        let dimmerNotification = Notification.Name(rawValue: Constants.dimNotificationKey)
+        let cancelDimmerNotification = Notification.Name(rawValue: Constants.cancelDimNotificationKey)
+
         let zipDistance = leftZipperFour.bounds.width * (3/4) - 12
         
         let zipDuration: TimeInterval = 0.4
@@ -109,6 +113,10 @@ extension ViewController {
                            completion: { _ in
                             self.animationCompleted()
                             self.suggestMovieButton.isEnabled = true
+                            self.modeToggleButton.isEnabled = true
+                            
+                            NotificationCenter.default.post(name: cancelDimmerNotification, object: nil)
+                            NotificationCenter.default.removeObserver(cancelDimmerNotification)
                        })
                    })
                 })

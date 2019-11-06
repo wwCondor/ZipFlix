@@ -10,11 +10,6 @@ import UIKit
 
 class LeftSideZipper: Zipper {
     
-//    var isOn = false
-    
-//    let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)
-//    let darkModeNotification = Notification.Name(rawValue: Constants.darkModeNotificationKey)
-
     override func draw(_ rect: CGRect) {
         let width = self.bounds.size.width
         let widthOffset = width / 4
@@ -33,6 +28,7 @@ class LeftSideZipper: Zipper {
         let p8 = CGPoint(x: 0, y: height)
 
         let path = UIBezierPath()
+
         path.move(to: p1)
         path.addLine(to: p2)
         path.addLine(to: p3)
@@ -42,35 +38,24 @@ class LeftSideZipper: Zipper {
         path.addLine(to: p7)
         path.addLine(to: p8)
         path.close()
-        zipperColor.set()
+        
+//        zipperBorderColor.setStroke()
+//        path.lineWidth = 5
+//        path.stroke()
+
+        zipperColor.setFill()
         path.fill()
 
+//        let shapeLayer = CAShapeLayer()
+//        shapeLayer.path = path.cgPath
+//        self.layer.mask = shapeLayer
+
     }
-
-//    func addObservers() {
-//        NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: lightModeNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: darkModeNotification, object: nil)
-//    }
-//
-//    @objc private func toggleState(notification: NSNotification) {
-//        activateButton(bool: !isOn)
-//    }
-//
-//    private func activateButton(bool: Bool) {
-//        isOn = bool
-//
-//        let lightModeColor = UIColor(named: Colors.zipper.color)
-//        let darkModeColor = UIColor.black
-//        tintColor = bool ? darkModeColor : lightModeColor
-//    }
-
 }
 
 
 class RigthSideZipper: Zipper {
     
-    var color: UIColor? = UIColor.gray
-
     override func draw(_ rect: CGRect) {
         let width = self.bounds.size.width
         let widthOffset = width / 4
@@ -89,6 +74,9 @@ class RigthSideZipper: Zipper {
         let p8 = CGPoint(x: widthOffset, y: 2 * heightPart)
 
         let path = UIBezierPath()
+
+        zipperColor.setFill()
+
         path.move(to: p1)
         path.addLine(to: p2)
         path.addLine(to: p3)
@@ -98,18 +86,27 @@ class RigthSideZipper: Zipper {
         path.addLine(to: p7)
         path.addLine(to: p8)
         path.close()
-        zipperColor.set()
         path.fill()
 
     }
-
 }
 
 
 class Zipper: UIView {
     
-    let zipperColor = UIColor(named: Colors.zipper.color)!
-    let zipperBorderColor = UIColor(named: Colors.zipperBorder.color)!
+    var zipperColor = UIColor(named: Colors.zipper.color)! {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    var isOn = false
+    
+    let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)
+    let darkModeNotification = Notification.Name(rawValue: Constants.darkModeNotificationKey)
+    
+//    let zipperColor = UIColor(named: Colors.zipper.color)!
+//    let zipperBorderColor = UIColor(named: Colors.zipperBorder.color)!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -124,10 +121,37 @@ class Zipper: UIView {
     }
     
     func setupView() {
+//        addObservers()
         layer.masksToBounds = false
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.8
         layer.shadowOffset = CGSize(width: 0, height: 3.0)
         layer.shadowRadius = 15
+    }
+    
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: lightModeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: darkModeNotification, object: nil)
+    }
+    
+
+    @objc private func toggleState(notification: NSNotification) {
+        activateButton(bool: !isOn)
+    }
+    
+    private func activateButton(bool: Bool) {
+        isOn = bool
+        
+        // In here we do something if darkmode is selected
+        
+//        let fillColor = UIColor(named: Colors.zipper.color)?.setFill()
+
+
+        
+        // Changes alpha when dark mode is selected
+//        let lightModeIcon = UIImage(named: Icons.movieIcon.image)?.withRenderingMode(.alwaysOriginal)
+//        let darkModeIcon = UIImage(named: Icons.movieIcon.image)!.alpha(0.5)
+//        let image = bool ? darkModeIcon : lightModeIcon
+//        setImage(image, for: .normal)
     }
 }
