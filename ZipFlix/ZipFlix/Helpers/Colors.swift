@@ -14,6 +14,11 @@ enum ModeSelected {
     
 }
 
+enum ZipperState {
+    case open
+    case closed
+}
+
 enum Colors {
     case dmBackground
     case dmNavBar
@@ -21,7 +26,11 @@ enum Colors {
     case lmBackground
     case lmNavBar
     
-    case statusBarBackground
+    case lmStatusBar
+    
+    case sideMenuView
+    case zipper
+    case zipperBorder
     
     var color: String {
         switch self {
@@ -31,7 +40,11 @@ enum Colors {
         case .lmBackground: return "LMBackground"
         case .lmNavBar: return "LMNavBar"
             
-        case .statusBarBackground: return "StatusBarBackground"
+        case .lmStatusBar: return "LMStatusBar"
+            
+        case .sideMenuView: return "SideMenuView"
+        case .zipper: return "Zipper"
+        case .zipperBorder: return "ZipperBorder"
         }
     }
 }

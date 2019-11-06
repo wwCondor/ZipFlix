@@ -12,7 +12,7 @@ enum Icons {
     case darkModeIcon
     case lightModeIcon
     case reset
-    case clapperboard
+    case movieIcon
     case zipperIcon
     
     var image: String {
@@ -20,7 +20,7 @@ enum Icons {
         case .darkModeIcon: return "DarkMode"
         case .lightModeIcon: return "LightMode"
         case .reset: return "Reset"
-        case .clapperboard: return "Clapperboard"
+        case .movieIcon: return "MovieIcon"
         case .zipperIcon: return "ZipperIcon"
             
         }

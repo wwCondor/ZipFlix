@@ -15,12 +15,19 @@
 		0B7ABD182370190200EF16B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ABD162370190200EF16B0 /* LaunchScreen.storyboard */; };
 		0B7ABD2023701FD700EF16B0 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD1F23701FD700EF16B0 /* Colors.swift */; };
 		0B7ABD2623702A3F00EF16B0 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD2523702A3F00EF16B0 /* Icons.swift */; };
-		0B7ABD282370387B00EF16B0 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD272370387B00EF16B0 /* CustomNavigationBar.swift */; };
 		0B7ABD2A23703B9700EF16B0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD2923703B9700EF16B0 /* Extensions.swift */; };
 		0B7ABD2C2370A6DC00EF16B0 /* ModeToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD2B2370A6DC00EF16B0 /* ModeToggleButton.swift */; };
 		0B7ABD2E2370ADA600EF16B0 /* ClearInputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD2D2370ADA600EF16B0 /* ClearInputButton.swift */; };
 		0B7ABD302370BD1F00EF16B0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD2F2370BD1F00EF16B0 /* Constants.swift */; };
 		0B7ABD32237160DC00EF16B0 /* LogoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD31237160DC00EF16B0 /* LogoImageView.swift */; };
+		0B7ABD372371B3B700EF16B0 /* ViewControllerMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD362371B3B700EF16B0 /* ViewControllerMethods.swift */; };
+		0B7ABD392371BC6000EF16B0 /* LeftSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD382371BC6000EF16B0 /* LeftSelectionMenu.swift */; };
+		0B7ABD3B2371C75E00EF16B0 /* SuggestMovieButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD3A2371C75E00EF16B0 /* SuggestMovieButton.swift */; };
+		0B7ABD3F2371C83A00EF16B0 /* RighSelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD3E2371C83A00EF16B0 /* RighSelectionMenu.swift */; };
+		0B7ABD412371FEA800EF16B0 /* TopButtonBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD402371FEA800EF16B0 /* TopButtonBar.swift */; };
+		0B7ABD432372ABD200EF16B0 /* SideMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD422372ABD200EF16B0 /* SideMenuButton.swift */; };
+		0B7ABD452372B5B600EF16B0 /* Zipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD442372B5B600EF16B0 /* Zipper.swift */; };
+		0B7ABD472372F2B400EF16B0 /* ZipperAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD462372F2B400EF16B0 /* ZipperAnimations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,12 +41,19 @@
 		0B7ABD192370190200EF16B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B7ABD1F23701FD700EF16B0 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		0B7ABD2523702A3F00EF16B0 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
-		0B7ABD272370387B00EF16B0 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		0B7ABD2923703B9700EF16B0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0B7ABD2B2370A6DC00EF16B0 /* ModeToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeToggleButton.swift; sourceTree = "<group>"; };
 		0B7ABD2D2370ADA600EF16B0 /* ClearInputButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearInputButton.swift; sourceTree = "<group>"; };
 		0B7ABD2F2370BD1F00EF16B0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0B7ABD31237160DC00EF16B0 /* LogoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoImageView.swift; sourceTree = "<group>"; };
+		0B7ABD362371B3B700EF16B0 /* ViewControllerMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMethods.swift; sourceTree = "<group>"; };
+		0B7ABD382371BC6000EF16B0 /* LeftSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSelectionMenu.swift; sourceTree = "<group>"; };
+		0B7ABD3A2371C75E00EF16B0 /* SuggestMovieButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestMovieButton.swift; sourceTree = "<group>"; };
+		0B7ABD3E2371C83A00EF16B0 /* RighSelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RighSelectionMenu.swift; sourceTree = "<group>"; };
+		0B7ABD402371FEA800EF16B0 /* TopButtonBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButtonBar.swift; sourceTree = "<group>"; };
+		0B7ABD422372ABD200EF16B0 /* SideMenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuButton.swift; sourceTree = "<group>"; };
+		0B7ABD442372B5B600EF16B0 /* Zipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zipper.swift; sourceTree = "<group>"; };
+		0B7ABD462372F2B400EF16B0 /* ZipperAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipperAnimations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				0B7ABD0F2370190000EF16B0 /* ViewController.swift */,
+				0B7ABD362371B3B700EF16B0 /* ViewControllerMethods.swift */,
+				0B7ABD462372F2B400EF16B0 /* ZipperAnimations.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -98,9 +114,12 @@
 		0B7ABD222370208E00EF16B0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0B7ABD2B2370A6DC00EF16B0 /* ModeToggleButton.swift */,
+				0B7ABD3C2371C77100EF16B0 /* Buttons */,
 				0B7ABD31237160DC00EF16B0 /* LogoImageView.swift */,
-				0B7ABD2D2370ADA600EF16B0 /* ClearInputButton.swift */,
+				0B7ABD402371FEA800EF16B0 /* TopButtonBar.swift */,
+				0B7ABD382371BC6000EF16B0 /* LeftSelectionMenu.swift */,
+				0B7ABD3E2371C83A00EF16B0 /* RighSelectionMenu.swift */,
+				0B7ABD442372B5B600EF16B0 /* Zipper.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -126,9 +145,19 @@
 		0B7ABD332371611400EF16B0 /* Delete? */ = {
 			isa = PBXGroup;
 			children = (
-				0B7ABD272370387B00EF16B0 /* CustomNavigationBar.swift */,
 			);
 			path = "Delete?";
+			sourceTree = "<group>";
+		};
+		0B7ABD3C2371C77100EF16B0 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				0B7ABD2B2370A6DC00EF16B0 /* ModeToggleButton.swift */,
+				0B7ABD2D2370ADA600EF16B0 /* ClearInputButton.swift */,
+				0B7ABD3A2371C75E00EF16B0 /* SuggestMovieButton.swift */,
+				0B7ABD422372ABD200EF16B0 /* SideMenuButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,16 +232,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B7ABD2C2370A6DC00EF16B0 /* ModeToggleButton.swift in Sources */,
-				0B7ABD282370387B00EF16B0 /* CustomNavigationBar.swift in Sources */,
+				0B7ABD412371FEA800EF16B0 /* TopButtonBar.swift in Sources */,
+				0B7ABD472372F2B400EF16B0 /* ZipperAnimations.swift in Sources */,
 				0B7ABD102370190000EF16B0 /* ViewController.swift in Sources */,
 				0B7ABD2E2370ADA600EF16B0 /* ClearInputButton.swift in Sources */,
+				0B7ABD3F2371C83A00EF16B0 /* RighSelectionMenu.swift in Sources */,
 				0B7ABD32237160DC00EF16B0 /* LogoImageView.swift in Sources */,
 				0B7ABD0C2370190000EF16B0 /* AppDelegate.swift in Sources */,
+				0B7ABD432372ABD200EF16B0 /* SideMenuButton.swift in Sources */,
 				0B7ABD302370BD1F00EF16B0 /* Constants.swift in Sources */,
 				0B7ABD2023701FD700EF16B0 /* Colors.swift in Sources */,
 				0B7ABD2623702A3F00EF16B0 /* Icons.swift in Sources */,
+				0B7ABD372371B3B700EF16B0 /* ViewControllerMethods.swift in Sources */,
 				0B7ABD0E2370190000EF16B0 /* SceneDelegate.swift in Sources */,
+				0B7ABD392371BC6000EF16B0 /* LeftSelectionMenu.swift in Sources */,
+				0B7ABD3B2371C75E00EF16B0 /* SuggestMovieButton.swift in Sources */,
 				0B7ABD2A23703B9700EF16B0 /* Extensions.swift in Sources */,
+				0B7ABD452372B5B600EF16B0 /* Zipper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

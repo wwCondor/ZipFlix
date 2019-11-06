@@ -13,9 +13,28 @@ struct Constants {
     static let lightModeNotificationKey = "lightMode"
     static let darkModeNotificationKey = "darkMode"
     
+    
     static let iconSize: CGFloat = 30
     static let logoSize: CGFloat = 80
-    static let navBarIconOffset: CGFloat = 50
+    static let iconInset: CGFloat = 15
     
+    // 
+    static let topBarIconOffset: CGFloat = 8
+    static let topBarHeigth: CGFloat = 58
+    static let barLogoHeight: CGFloat = 92
+    
+    // Colors
+    static let barButtonItemsColor: UIColor = .clear // topbar item background color
+    static let sideMenuViewColor: UIColor = UIColor.gray
+    
+    
+    static let movieButtonSize: CGFloat = 90
+    static let movieButtonCornerRadius: CGFloat = 15
+    static let movieIconInset: CGFloat = 15
+
+    // Side menu constants
+    static let menuCornerRadius: CGFloat = 15
+    static let topOffset: CGFloat = 100
+    static let bottomOffset: CGFloat = -90
 }
 

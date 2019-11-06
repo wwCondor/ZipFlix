@@ -30,15 +30,15 @@ class LogoImageView: UIImageView {
         super.layoutSubviews()
 //        addObservers()
         
-        tintColor = UIColor.white
-        backgroundColor = UIColor.clear
-        frame = CGRect(x: -38, y: -14, width: Constants.logoSize, height: Constants.logoSize)
+//        tintColor = UIColor.white
+        backgroundColor = Constants.barButtonItemsColor
+//        frame = CGRect(x: -38, y: -14, width: Constants.logoSize, height: Constants.logoSize)
 //        let inset: CGFloat = 6
 //        image?.alignmentRectInsets(UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset + Constants.navBarIconOffset))
-        contentMode = .scaleAspectFit
-        isUserInteractionEnabled = true
+        contentMode = .scaleToFill
+        isUserInteractionEnabled = true // Only needed if when implementing animation/sound
     }
-    
+//    
 //    func addObservers() {
 //        NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: lightModeNotification, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: darkModeNotification, object: nil)
@@ -51,9 +51,8 @@ class LogoImageView: UIImageView {
 //    private func activateButton(bool: Bool) {
 //        isOn = bool
 //
-//        let lightModeTint = UIColor.white
-//        let darkModeTint = UIColor.black
-//        tintColor = bool ? darkModeTint : lightModeTint
+//        // Changes alpha when dark mode is selected
+//
 //    }
-    
+//
 }
