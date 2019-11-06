@@ -23,7 +23,7 @@ class ModeToggleButton: CustomButton {
         contentMode = .center
         backgroundColor = Constants.barButtonItemsColor
         let inset: CGFloat = Constants.iconInset
-        imageEdgeInsets = UIEdgeInsets(top: inset, left: inset + Constants.topBarIconOffset, bottom: inset, right: inset)
+        imageEdgeInsets = UIEdgeInsets(top: inset, left: inset + Constants.topBarIconOffset, bottom: inset + 3, right: inset)
         addTarget(self, action: #selector(buttonPressed(sender:)), for: .touchUpInside)
     }
     
@@ -40,26 +40,28 @@ class ModeToggleButton: CustomButton {
     private func activateDimmer(bool: Bool) {
         // Dims button image during disable
         isDimmed = bool
-        
-//        let dim: String = "Dimmed"
-//        let normal: String = "Normal"
-//
-//        let message = bool ? dim : normal
-//        print("Button state:\(message)")
-        
+
         let dimmedAlpha: CGFloat = 0.5
         let normalAlpha: CGFloat = 1.0
         let alpha = bool ? dimmedAlpha : normalAlpha
         self.alpha = alpha
     }
     
-    // Image Toggle
+    // Mode image toggle 
     @objc private func buttonPressed(sender: UIButton) {
         activateButton(bool: !isOn)
     }
     
     private func activateButton(bool: Bool) {
         isOn = bool
+        
+        print(bool)
+
+        let trueState: String = "True"
+        let falseState: String = "False"
+        
+        let message = bool ? trueState : falseState
+        print("Button state:\(message)")
         
         let lightModeIcon = UIImage(named: Icons.lightModeIcon.image)?.withRenderingMode(.alwaysOriginal)
         let darkModeIcon = UIImage(named: Icons.darkModeIcon.image)?.withRenderingMode(.alwaysTemplate)
@@ -89,6 +91,3 @@ class CustomButton: UIButton {
 
     }
 }
-  
-
-

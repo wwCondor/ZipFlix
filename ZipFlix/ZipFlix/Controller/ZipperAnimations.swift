@@ -11,14 +11,16 @@ import UIKit
 extension ViewController {
     
     func closeZipper() {
+        let dimmerNotification = Notification.Name(rawValue: Constants.dimNotificationKey)
         
         let zipDistance = leftZipperFour.bounds.width * (3/4) - 12
-        
         let zipDuration: TimeInterval = 0.5
         let zipDelay: TimeInterval = -0.2
         
         if zipperState == .open {
             print("Closing Zipper")
+            NotificationCenter.default.post(name: dimmerNotification, object: nil)
+            NotificationCenter.default.removeObserver(dimmerNotification)
             clearInputButton.isEnabled = false // prevents starting open zipper animation during animation
             modeToggleButton.isEnabled = false // prevents switching modes during animation (and thereby resetting animation)
             zipperState = .closed
@@ -66,12 +68,9 @@ extension ViewController {
     }
     
     func openZipper() {
-        
-//        let dimmerNotification = Notification.Name(rawValue: Constants.dimNotificationKey)
         let cancelDimmerNotification = Notification.Name(rawValue: Constants.cancelDimNotificationKey)
 
         let zipDistance = leftZipperFour.bounds.width * (3/4) - 12
-        
         let zipDuration: TimeInterval = 0.4
         let zipDelay: TimeInterval = -0.2
         

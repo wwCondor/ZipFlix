@@ -17,10 +17,10 @@ class LeftSelectionMenu: SelectionMenu {
     
     override func setupView() {
         backgroundColor = UIColor(named:Colors.sideMenuView.color)
+//        addBorders(edges: [.top, .right, .bottom], color: .black, inset: 0, thickness: 3.0)
         addSubview(menuButton)
     }
     
-
     override func layoutSubviews() {
         super.layoutSubviews()
         roundCorners(corners: [.topRight, .bottomRight], radius: Constants.menuCornerRadius)
@@ -36,8 +36,6 @@ class RightSelectionMenu: SelectionMenu {
         backgroundColor = UIColor(named:Colors.sideMenuView.color)
     }
     
-
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         roundCorners(corners: [.topLeft, .bottomLeft], radius: Constants.menuCornerRadius)
@@ -51,14 +49,14 @@ class RightSelectionMenu: SelectionMenu {
 
 
 class SelectionMenu: UIView {
-    //initWithFrame to init view from code
+    //init from code
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
         setupConstraints()
     }
     
-    //initWithCode to init view from storyboard
+    //init from storyboard
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()

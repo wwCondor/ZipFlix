@@ -5,7 +5,6 @@
 //  Created by Wouter Willebrands on 04/11/2019.
 //  Copyright © 2019 Studio Willebrands. All rights reserved.
 //
-// Icons made by Pixel perfect from https://www.flaticon.com/
 
 import UIKit
 

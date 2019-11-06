@@ -27,6 +27,8 @@ class TopButtonBar: UIView {
         layer.shadowOpacity = 0.8
         layer.shadowOffset = CGSize(width: 0, height: 3.0)
         layer.shadowRadius = 15
+        
+//        addBorders(edges: [.bottom], color: .black, inset: 0, thickness: 3.0)
     }
     
 }

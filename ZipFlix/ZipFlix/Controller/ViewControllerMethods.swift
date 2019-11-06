@@ -13,8 +13,7 @@ extension ViewController {
     @objc func clearInput(sender: UIButton) {
         openZipper()
         print("Cleared Input")
-        let dimmerNotification = Notification.Name(rawValue: Constants.dimNotificationKey)
-        NotificationCenter.default.removeObserver(dimmerNotification)
+
     }
     
     @objc func switchMode(sender: UIButton) {
@@ -55,7 +54,7 @@ extension ViewController {
             self.modeSelected = .darkMode
             
             self.style = .darkContent
-//            self.setNeedsStatusBarAppearanceUpdate()
+            self.setNeedsStatusBarAppearanceUpdate()
             
             NotificationCenter.default.removeObserver(lightModeNotification)
             NotificationCenter.default.post(name: darkModeNotification, object: nil)
@@ -81,13 +80,11 @@ extension ViewController {
     }
     
     @objc func suggestMovie(sender: UIButton) {
-        let dimmerNotification = Notification.Name(rawValue: Constants.dimNotificationKey)
-        NotificationCenter.default.post(name: dimmerNotification, object: nil)
-        
         closeZipper()
         print("Start Loading")
         print("Present Movie Suggestion")
         print("Stop Loading")
     }
 }
+
 

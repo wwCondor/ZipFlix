@@ -25,7 +25,7 @@ extension UIView {
 
 
 extension UIView {
-    // Used to round of certain corners
+    // Used to round of left and right menu corners
     public func roundCorners(corners: UIRectCorner, radius: CGFloat) {
         let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
@@ -34,9 +34,12 @@ extension UIView {
     }
 }
 
+
+
+// MARK: Untested
 extension UIView {
     // Used to apply border(s) for views at the indicated sides
-//    @discardableResult
+    @discardableResult
     func addBorders(edges: UIRectEdge,
                     color: UIColor,
                     inset: CGFloat = 0.0,
@@ -84,9 +87,7 @@ Usage:
 view.addBorder(edges: [.all]) // All with default arguments
 view.addBorder(edges: [.top], color: .green) // Just Top, green, default thickness
 view.addBorder(edges: [.left, .right, .bottom], color: .red, thickness: 3) // All except Top, red, thickness 3
- 
 */
-
 
 extension UIView {
 // Used to add border at a single side
