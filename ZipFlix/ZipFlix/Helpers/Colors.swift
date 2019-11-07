@@ -30,7 +30,8 @@ enum Colors {
     
     case sideMenuView
     case zipper
-    case zipperBorder
+    case border
+    case sideButton
     
     var color: String {
         switch self {
@@ -44,7 +45,8 @@ enum Colors {
             
         case .sideMenuView: return "SideMenuView"
         case .zipper: return "Zipper"
-        case .zipperBorder: return "ZipperBorder"
+        case .border: return "Border"
+        case .sideButton: return "SideButton"
         }
     }
 }

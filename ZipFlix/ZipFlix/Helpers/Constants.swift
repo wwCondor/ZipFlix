@@ -22,7 +22,6 @@ struct Constants {
     static let iconInset: CGFloat = 14
     static let topBarIconOffset: CGFloat = 8
 
-    
     // topBar
     static let topBarHeigth: CGFloat = 58
     static let barLogoHeight: CGFloat = 92

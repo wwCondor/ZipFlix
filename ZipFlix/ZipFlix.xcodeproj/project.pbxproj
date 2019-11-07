@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B73945D237493AE0087C95F /* LeftMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73945C237493AE0087C95F /* LeftMenuCell.swift */; };
 		0B7ABD0C2370190000EF16B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD0B2370190000EF16B0 /* AppDelegate.swift */; };
 		0B7ABD0E2370190000EF16B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD0D2370190000EF16B0 /* SceneDelegate.swift */; };
 		0B7ABD102370190000EF16B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD0F2370190000EF16B0 /* ViewController.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B73945C237493AE0087C95F /* LeftMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuCell.swift; sourceTree = "<group>"; };
 		0B7ABD082370190000EF16B0 /* ZipFlix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZipFlix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7ABD0B2370190000EF16B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B7ABD0D2370190000EF16B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B73945B2374519F0087C95F /* SideSelectionMenus */ = {
+			isa = PBXGroup;
+			children = (
+				0B7ABD422372ABD200EF16B0 /* SideMenuButton.swift */,
+				0B7ABD382371BC6000EF16B0 /* LeftSelectionMenu.swift */,
+				0B73945C237493AE0087C95F /* LeftMenuCell.swift */,
+				0B7ABD3E2371C83A00EF16B0 /* RighSelectionMenu.swift */,
+				0B7ABD442372B5B600EF16B0 /* Zipper.swift */,
+			);
+			path = SideSelectionMenus;
+			sourceTree = "<group>";
+		};
 		0B7ABCFF2370190000EF16B0 = {
 			isa = PBXGroup;
 			children = (
@@ -117,12 +131,9 @@
 		0B7ABD222370208E00EF16B0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0B7ABD3C2371C77100EF16B0 /* Buttons */,
-				0B7ABD31237160DC00EF16B0 /* LogoImageView.swift */,
-				0B7ABD402371FEA800EF16B0 /* TopButtonBar.swift */,
-				0B7ABD382371BC6000EF16B0 /* LeftSelectionMenu.swift */,
-				0B7ABD3E2371C83A00EF16B0 /* RighSelectionMenu.swift */,
-				0B7ABD442372B5B600EF16B0 /* Zipper.swift */,
+				0B7ABD3C2371C77100EF16B0 /* TopButtonBar */,
+				0B73945B2374519F0087C95F /* SideSelectionMenus */,
+				0B7ABD3A2371C75E00EF16B0 /* SuggestMovieButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -152,15 +163,15 @@
 			path = "Delete?";
 			sourceTree = "<group>";
 		};
-		0B7ABD3C2371C77100EF16B0 /* Buttons */ = {
+		0B7ABD3C2371C77100EF16B0 /* TopButtonBar */ = {
 			isa = PBXGroup;
 			children = (
-				0B7ABD2B2370A6DC00EF16B0 /* ModeToggleButton.swift */,
+				0B7ABD402371FEA800EF16B0 /* TopButtonBar.swift */,
 				0B7ABD2D2370ADA600EF16B0 /* ClearInputButton.swift */,
-				0B7ABD3A2371C75E00EF16B0 /* SuggestMovieButton.swift */,
-				0B7ABD422372ABD200EF16B0 /* SideMenuButton.swift */,
+				0B7ABD31237160DC00EF16B0 /* LogoImageView.swift */,
+				0B7ABD2B2370A6DC00EF16B0 /* ModeToggleButton.swift */,
 			);
-			path = Buttons;
+			path = TopButtonBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +262,7 @@
 				0B7ABD0E2370190000EF16B0 /* SceneDelegate.swift in Sources */,
 				0B7ABD392371BC6000EF16B0 /* LeftSelectionMenu.swift in Sources */,
 				0B7ABD3B2371C75E00EF16B0 /* SuggestMovieButton.swift in Sources */,
+				0B73945D237493AE0087C95F /* LeftMenuCell.swift in Sources */,
 				0B7ABD2A23703B9700EF16B0 /* Extensions.swift in Sources */,
 				0B7ABD452372B5B600EF16B0 /* Zipper.swift in Sources */,
 			);

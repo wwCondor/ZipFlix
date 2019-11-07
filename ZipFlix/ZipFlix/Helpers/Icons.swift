@@ -15,6 +15,8 @@ enum Icons {
     case movieIcon
     case zipperIcon
     
+    case spareIcon
+    
     var image: String {
         switch self {
         case .darkModeIcon: return "DarkMode"
@@ -22,6 +24,8 @@ enum Icons {
         case .reset: return "Reset"
         case .movieIcon: return "MovieIcon"
         case .zipperIcon: return "ZipperIcon"
+            
+        case .spareIcon: return "SpareIcon"
             
         }
     }
