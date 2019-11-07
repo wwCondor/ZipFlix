@@ -16,7 +16,6 @@ class ClearInputButton: CustomButton {
     override func setupButton() {
         addObservers()
         let image = UIImage(named: Icons.reset.image)?.withRenderingMode(.alwaysTemplate)
-//        frame = CGRect(x: 0, y: 0, width: Constants.logoSize, height: Constants.logoSize)
         tintColor = .white
         setImage(image, for: .normal)
         imageView?.contentMode = .scaleAspectFit

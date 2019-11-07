@@ -31,7 +31,6 @@ class SideMenuButton: ToggleButton {
     }
 }
 
-
 // The button class that gets it state swiched by modeToggleButton
 class ToggleButton: CustomButton {
     
@@ -51,10 +50,6 @@ class ToggleButton: CustomButton {
     }
     
     func activateButton(bool: Bool) {
-//        isOn = bool
-//
-//        let lightModeTint = UIColor.white
-//        let darkModeTint = UIColor.black
-//        tintColor = bool ? darkModeTint : lightModeTint
+
     }
 }

@@ -16,7 +16,6 @@ class SuggestMovieButton: CustomButton {
     override func setupButton() {
         addObservers()
         let image = UIImage(named: Icons.movieIcon.image)?.withRenderingMode(.alwaysOriginal)
-//        tintColor = .white
         setImage(image, for: .normal)
         imageView?.contentMode = .scaleAspectFit
         contentMode = .center

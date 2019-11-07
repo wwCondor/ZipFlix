@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+//    let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+    
     var modeSelected: ModeSelected = .lightMode
     
     var zipperState: ZipperState = .open
@@ -128,6 +130,9 @@ class ViewController: UIViewController {
     }()
 
     private func setupTopButtonBar() {
+        let height = view.safeAreaLayoutGuide.layoutFrame.size.height
+        let topBarHeigth = height / 14
+    
         view.addSubview(topButtonBar)        
         view.addSubview(statusBarView)
         
@@ -145,129 +150,138 @@ class ViewController: UIViewController {
 
         topButtonBar.translatesAutoresizingMaskIntoConstraints = false
         topButtonBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        topButtonBar.heightAnchor.constraint(equalToConstant: Constants.topBarHeigth).isActive = true
+        topButtonBar.heightAnchor.constraint(equalToConstant: topBarHeigth).isActive = true
         topButtonBar.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
         
         clearInputButton.translatesAutoresizingMaskIntoConstraints = false
         clearInputButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        clearInputButton.heightAnchor.constraint(equalToConstant: Constants.topBarHeigth).isActive = true
+        clearInputButton.heightAnchor.constraint(equalToConstant: topBarHeigth).isActive = true
         clearInputButton.widthAnchor.constraint(equalToConstant: barButtonWidth).isActive = true
         clearInputButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         
         modeToggleButton.translatesAutoresizingMaskIntoConstraints = false
         modeToggleButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        modeToggleButton.heightAnchor.constraint(equalToConstant: Constants.topBarHeigth).isActive = true
+        modeToggleButton.heightAnchor.constraint(equalToConstant: topBarHeigth).isActive = true
         modeToggleButton.widthAnchor.constraint(equalToConstant: barButtonWidth).isActive = true
         modeToggleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -12).isActive = true
-        logoImageView.heightAnchor.constraint(equalToConstant: Constants.barLogoHeight).isActive = true
+        logoImageView.heightAnchor.constraint(equalToConstant: 1.5 * topBarHeigth).isActive = true
         logoImageView.widthAnchor.constraint(equalToConstant: barButtonLogo).isActive = true
         logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     private func setupLeftSelectionMenu() {
+
+        let height = view.bounds.height
+        let padding = ((3/14) * height) / 2
+                
+        let menuWidth = view.bounds.width / 4
+        let zipperWidth = menuWidth + 10
+        let zipperHeight = menuWidth
+        let zipperXOffset = menuWidth / 4
+        let zipperSpacing = menuWidth / 5
+                
         view.addSubview(leftZipperOne)
         view.addSubview(leftZipperTwo)
         view.addSubview(leftZipperThree)
         view.addSubview(leftZipperFour)
         
         view.addSubview(leftSelectionMenu)
-        
-        let menuWidth = view.bounds.width / 4
-        
-        let zipperWidth = menuWidth + 10
-        let zipperHeight = menuWidth
-        let zipperSpacing = zipperHeight / 4
-        let zipperXOffset = menuWidth / 4
 
+        leftSelectionMenu.translatesAutoresizingMaskIntoConstraints = false
+        leftSelectionMenu.topAnchor.constraint(equalTo: topButtonBar.bottomAnchor, constant: padding).isActive = true
+        leftSelectionMenu.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        leftSelectionMenu.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding).isActive = true
+        leftSelectionMenu.widthAnchor.constraint(equalToConstant: menuWidth).isActive = true
+                
         leftZipperOne.translatesAutoresizingMaskIntoConstraints = false
-        leftZipperOne.topAnchor.constraint(equalTo: leftSelectionMenu.topAnchor, constant: zipperSpacing).isActive = true
         leftZipperOne.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         leftZipperOne.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
         leftZipperOne.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: zipperXOffset).isActive = true
-
+        leftZipperOne.bottomAnchor.constraint(equalTo: leftZipperTwo.topAnchor, constant: -zipperSpacing).isActive = true
+        
         leftZipperTwo.translatesAutoresizingMaskIntoConstraints = false
-        leftZipperTwo.topAnchor.constraint(equalTo: leftZipperOne.bottomAnchor, constant: zipperSpacing).isActive = true
         leftZipperTwo.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         leftZipperTwo.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
         leftZipperTwo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: zipperXOffset).isActive = true
+        leftZipperTwo.bottomAnchor.constraint(equalTo: leftSelectionMenu.centerYAnchor, constant: -zipperSpacing / 2).isActive = true
 
         leftZipperThree.translatesAutoresizingMaskIntoConstraints = false
-        leftZipperThree.topAnchor.constraint(equalTo: leftZipperTwo.bottomAnchor, constant: zipperSpacing).isActive = true
         leftZipperThree.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         leftZipperThree.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
+        leftZipperThree.topAnchor.constraint(equalTo: leftSelectionMenu.centerYAnchor, constant: zipperSpacing / 2).isActive = true
         leftZipperThree.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: zipperXOffset).isActive = true
 
         leftZipperFour.translatesAutoresizingMaskIntoConstraints = false
-        leftZipperFour.topAnchor.constraint(equalTo: leftZipperThree.bottomAnchor, constant: zipperSpacing).isActive = true
         leftZipperFour.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         leftZipperFour.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
+        leftZipperFour.topAnchor.constraint(equalTo: leftZipperThree.bottomAnchor, constant: zipperSpacing).isActive = true
         leftZipperFour.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: zipperXOffset).isActive = true
         
-        leftSelectionMenu.translatesAutoresizingMaskIntoConstraints = false
-        leftSelectionMenu.topAnchor.constraint(equalTo: topButtonBar.bottomAnchor, constant: Constants.topOffset).isActive = true
-        leftSelectionMenu.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        leftSelectionMenu.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: Constants.bottomOffset).isActive = true
-        leftSelectionMenu.widthAnchor.constraint(equalToConstant: menuWidth).isActive = true
-
     }
     
     private func setupRightSelectionMenu() {
+        let height = view.bounds.height
+        let padding = ((3/14) * height) / 2
+                
+        let menuWidth = view.bounds.width / 4
+        let zipperWidth = menuWidth + 10
+        let zipperHeight = menuWidth
+        let zipperXOffset = -menuWidth / 4
+        let zipperSpacing = menuWidth / 5
+                
         view.addSubview(rightZipperOne)
         view.addSubview(rightZipperTwo)
         view.addSubview(rightZipperThree)
         view.addSubview(rightZipperFour)
         
         view.addSubview(rightSelectionMenu)
-        
-        let menuWidth = view.bounds.width / 4
-        
-        let zipperWidth = menuWidth + 10
-        let zipperHeight = menuWidth
-        let zipperSpacing = zipperHeight / 4
-        let zipperXOffset = menuWidth / 4
-        
-        rightZipperOne.translatesAutoresizingMaskIntoConstraints = false
-        rightZipperOne.topAnchor.constraint(equalTo: rightSelectionMenu.topAnchor, constant: zipperSpacing).isActive = true
-        rightZipperOne.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
-        rightZipperOne.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        rightZipperOne.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -zipperXOffset).isActive = true
-        
-        rightZipperTwo.translatesAutoresizingMaskIntoConstraints = false
-        rightZipperTwo.topAnchor.constraint(equalTo: rightZipperOne.bottomAnchor, constant: zipperSpacing).isActive = true
-        rightZipperTwo.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
-        rightZipperTwo.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        rightZipperTwo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -zipperXOffset).isActive = true
-
-        rightZipperThree.translatesAutoresizingMaskIntoConstraints = false
-        rightZipperThree.topAnchor.constraint(equalTo: rightZipperTwo.bottomAnchor, constant: zipperSpacing).isActive = true
-        rightZipperThree.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
-        rightZipperThree.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        rightZipperThree.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -zipperXOffset).isActive = true
-
-        rightZipperFour.translatesAutoresizingMaskIntoConstraints = false
-        rightZipperFour.topAnchor.constraint(equalTo: leftZipperThree.bottomAnchor, constant: zipperSpacing).isActive = true
-        rightZipperFour.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
-        rightZipperFour.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        rightZipperFour.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -zipperXOffset).isActive = true
 
         rightSelectionMenu.translatesAutoresizingMaskIntoConstraints = false
-        rightSelectionMenu.topAnchor.constraint(equalTo: topButtonBar.bottomAnchor, constant: Constants.topOffset).isActive = true
+        rightSelectionMenu.topAnchor.constraint(equalTo: topButtonBar.bottomAnchor, constant: padding).isActive = true
         rightSelectionMenu.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        rightSelectionMenu.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: Constants.bottomOffset).isActive = true
+        rightSelectionMenu.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding).isActive = true
         rightSelectionMenu.widthAnchor.constraint(equalToConstant: menuWidth).isActive = true
+                
+        rightZipperOne.translatesAutoresizingMaskIntoConstraints = false
+        rightZipperOne.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
+        rightZipperOne.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
+        rightZipperOne.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: zipperXOffset).isActive = true
+        rightZipperOne.bottomAnchor.constraint(equalTo: rightZipperTwo.topAnchor, constant: -zipperSpacing).isActive = true
+        
+        rightZipperTwo.translatesAutoresizingMaskIntoConstraints = false
+        rightZipperTwo.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
+        rightZipperTwo.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
+        rightZipperTwo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: zipperXOffset).isActive = true
+        rightZipperTwo.bottomAnchor.constraint(equalTo: rightSelectionMenu.centerYAnchor, constant: -zipperSpacing / 2).isActive = true
+
+        rightZipperThree.translatesAutoresizingMaskIntoConstraints = false
+        rightZipperThree.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
+        rightZipperThree.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
+        rightZipperThree.topAnchor.constraint(equalTo: rightSelectionMenu.centerYAnchor, constant: zipperSpacing / 2).isActive = true
+        rightZipperThree.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: zipperXOffset).isActive = true
+
+        rightZipperFour.translatesAutoresizingMaskIntoConstraints = false
+        rightZipperFour.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
+        rightZipperFour.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
+        rightZipperFour.topAnchor.constraint(equalTo: rightZipperThree.bottomAnchor, constant: zipperSpacing).isActive = true
+        rightZipperFour.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: zipperXOffset).isActive = true
     }
     
     private func setupSuggestMovieButton() {
+        
+        let safeHeigth = view.safeAreaLayoutGuide.layoutFrame.size.height
+        let movieButtonSize = ((3/14) * safeHeigth) / 2
+        
         view.addSubview(suggestMovieButton)
         
         suggestMovieButton.translatesAutoresizingMaskIntoConstraints = false
         suggestMovieButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         suggestMovieButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-        suggestMovieButton.widthAnchor.constraint(equalToConstant: Constants.movieButtonSize).isActive = true
-        suggestMovieButton.heightAnchor.constraint(equalToConstant: Constants.movieButtonSize).isActive = true
+        suggestMovieButton.widthAnchor.constraint(equalToConstant: movieButtonSize).isActive = true
+        suggestMovieButton.heightAnchor.constraint(equalToConstant: movieButtonSize).isActive = true
     }
 
 }
