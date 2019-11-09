@@ -45,7 +45,7 @@ class ToggleButton: CustomButton {
     override func setupButton() {
     }
     
-    func addObservers() {
+    override func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: lightModeNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: darkModeNotification, object: nil)
     }

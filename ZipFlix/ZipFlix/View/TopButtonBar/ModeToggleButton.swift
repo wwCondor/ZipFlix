@@ -27,7 +27,7 @@ class ModeToggleButton: CustomButton {
         addTarget(self, action: #selector(buttonPressed(sender:)), for: .touchUpInside)
     }
     
-    func addObservers() {
+    override func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(toggleDimmer), name: dimmerNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(toggleDimmer), name: cancelDimmerNotification, object: nil)
     }
@@ -55,13 +55,13 @@ class ModeToggleButton: CustomButton {
     private func activateButton(bool: Bool) {
         isOn = bool
         
-        print(bool)
-
-        let trueState: String = "True"
-        let falseState: String = "False"
-        
-        let message = bool ? trueState : falseState
-        print("Button state:\(message)")
+//        print(bool)
+//
+//        let trueState: String = "True"
+//        let falseState: String = "False"
+//        
+//        let message = bool ? trueState : falseState
+//        print("Button state:\(message)")
         
         let lightModeIcon = UIImage(named: Icons.lightModeIcon.image)?.withRenderingMode(.alwaysOriginal)
         let darkModeIcon = UIImage(named: Icons.darkModeIcon.image)?.withRenderingMode(.alwaysTemplate)
@@ -80,14 +80,24 @@ class CustomButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupButton()
+        addObservers()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupButton()
+        addObservers()
     }
     
     func setupButton() {
 
+    }
+    
+    func addObservers() {
+        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }

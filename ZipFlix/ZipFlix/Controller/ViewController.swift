@@ -9,11 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-//    let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-    
+        
     var modeSelected: ModeSelected = .lightMode
-    
     var zipperState: ZipperState = .open
         
     override var preferredStatusBarStyle: UIStatusBarStyle {

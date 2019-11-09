@@ -20,8 +20,6 @@ extension ViewController {
         let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)
         let darkModeNotification = Notification.Name(rawValue: Constants.darkModeNotificationKey)
         
-        let alphaValue: CGFloat = 0.5
-
         if modeSelected == .darkMode {
             // In here we switch modeSelected
             self.modeSelected = .lightMode
@@ -30,25 +28,12 @@ extension ViewController {
             self.style = .lightContent
             self.setNeedsStatusBarAppearanceUpdate()
             
-            // We update notificationCenter
-            NotificationCenter.default.removeObserver(darkModeNotification)
+            // We set notification in notificationCenter
             NotificationCenter.default.post(name: lightModeNotification, object: nil)
 
             // Change background
             self.view.backgroundColor = UIColor(named: Colors.lmBackground.color)
             
-            // Dim/undim zippers
-            self.leftZipperOne.zipperColor = UIColor(named: Colors.zipper.color)!
-            self.leftZipperTwo.zipperColor = UIColor(named: Colors.zipper.color)!
-            self.leftZipperThree.zipperColor = UIColor(named: Colors.zipper.color)!
-            self.leftZipperFour.zipperColor = UIColor(named: Colors.zipper.color)!
-
-            self.rightZipperOne.zipperColor = UIColor(named: Colors.zipper.color)!
-            self.rightZipperTwo.zipperColor = UIColor(named: Colors.zipper.color)!
-            self.rightZipperThree.zipperColor = UIColor(named: Colors.zipper.color)!
-            self.rightZipperFour.zipperColor = UIColor(named: Colors.zipper.color)!
-
-//            DispatchQueue.main.async {  }
 
         } else if modeSelected == .lightMode {
             self.modeSelected = .darkMode
@@ -56,22 +41,10 @@ extension ViewController {
             self.style = .darkContent
             self.setNeedsStatusBarAppearanceUpdate()
             
-            NotificationCenter.default.removeObserver(lightModeNotification)
             NotificationCenter.default.post(name: darkModeNotification, object: nil)
             
             self.view.backgroundColor = UIColor(named: Colors.dmBackground.color)
-            
-            self.leftZipperOne.zipperColor = UIColor(named: Colors.zipper.color)!.withAlphaComponent(alphaValue)
-            self.leftZipperTwo.zipperColor = UIColor(named: Colors.zipper.color)!.withAlphaComponent(alphaValue)
-            self.leftZipperThree.zipperColor = UIColor(named: Colors.zipper.color)!.withAlphaComponent(alphaValue)
-            self.leftZipperFour.zipperColor = UIColor(named: Colors.zipper.color)!.withAlphaComponent(alphaValue)
 
-            self.rightZipperOne.zipperColor = UIColor(named: Colors.zipper.color)!.withAlphaComponent(alphaValue)
-            self.rightZipperTwo.zipperColor = UIColor(named: Colors.zipper.color)!.withAlphaComponent(alphaValue)
-            self.rightZipperThree.zipperColor = UIColor(named: Colors.zipper.color)!.withAlphaComponent(alphaValue)
-            self.rightZipperFour.zipperColor = UIColor(named: Colors.zipper.color)!.withAlphaComponent(alphaValue)
-            
-//            DispatchQueue.main.async { } // Might need to move everything in here
         }
     }
 

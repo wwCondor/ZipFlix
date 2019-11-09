@@ -13,7 +13,7 @@ class LeftSelectionMenu: SelectionMenu {
     let cellId = "leftSelectionMenuId"
     
     // MARK: Set Actual image names
-    let imagesNames = [Icons.spareIcon.image, Icons.spareIcon.image, Icons.spareIcon.image, Icons.spareIcon.image, Icons.spareIcon.image]
+    let imageNames = [Icons.spareIcon.image, Icons.spareIcon.image, Icons.spareIcon.image, Icons.spareIcon.image, Icons.spareIcon.image]
     
     lazy var selectionMenu: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -56,7 +56,7 @@ extension LeftSelectionMenu: UICollectionViewDataSource, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = selectionMenu.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LeftMenuCell
         let inset: CGFloat = -20
-        cell.imageView.image = UIImage(named: imagesNames[indexPath.item])!.withAlignmentRectInsets(UIEdgeInsets(top: inset, left: inset, bottom: inset - 15, right: inset))
+        cell.imageView.image = UIImage(named: imageNames[indexPath.item])!.withAlignmentRectInsets(UIEdgeInsets(top: inset, left: inset, bottom: inset - 15, right: inset))
 
         return cell
     }

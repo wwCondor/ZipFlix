@@ -14,18 +14,18 @@ class ClearInputButton: CustomButton {
     let darkModeNotification = Notification.Name(rawValue: Constants.darkModeNotificationKey)
     
     override func setupButton() {
-        addObservers()
+//        addObservers()
         let image = UIImage(named: Icons.reset.image)?.withRenderingMode(.alwaysTemplate)
         tintColor = .white
         setImage(image, for: .normal)
         imageView?.contentMode = .scaleAspectFit
         contentMode = .center
         backgroundColor = Constants.barButtonItemsColor
-        let inset: CGFloat = Constants.iconInset
+        let inset: CGFloat = Constants.iconInset + 1
         imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset + 3, right: inset + Constants.topBarIconOffset)
     }
     
-    func addObservers() {
+    override func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: lightModeNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: darkModeNotification, object: nil)
     }

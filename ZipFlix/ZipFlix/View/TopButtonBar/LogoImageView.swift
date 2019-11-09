@@ -11,8 +11,8 @@ import UIKit
 class LogoImageView: UIImageView {
     var isOn = false
     
-    let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)
-    let darkModeNotification = Notification.Name(rawValue: Constants.darkModeNotificationKey)
+//    let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)
+//    let darkModeNotification = Notification.Name(rawValue: Constants.darkModeNotificationKey)
     
     override init(image: UIImage?) {
         super.init(image: image)

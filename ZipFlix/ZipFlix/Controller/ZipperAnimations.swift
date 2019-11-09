@@ -20,7 +20,6 @@ extension ViewController {
         if zipperState == .open {
             print("Closing Zipper")
             NotificationCenter.default.post(name: dimmerNotification, object: nil)
-            NotificationCenter.default.removeObserver(dimmerNotification)
             clearInputButton.isEnabled = false // prevents starting open zipper animation during animation
             modeToggleButton.isEnabled = false // prevents switching modes during animation (and thereby resetting animation)
             zipperState = .closed
@@ -115,7 +114,6 @@ extension ViewController {
                             self.modeToggleButton.isEnabled = true
                             
                             NotificationCenter.default.post(name: cancelDimmerNotification, object: nil)
-                            NotificationCenter.default.removeObserver(cancelDimmerNotification)
                        })
                    })
                 })

@@ -14,7 +14,6 @@ class SuggestMovieButton: CustomButton {
     let darkModeNotification = Notification.Name(rawValue: Constants.darkModeNotificationKey)
     
     override func setupButton() {
-        addObservers()
         let image = UIImage(named: Icons.movieIcon.image)?.withRenderingMode(.alwaysOriginal)
         setImage(image, for: .normal)
         imageView?.contentMode = .scaleAspectFit
@@ -26,7 +25,7 @@ class SuggestMovieButton: CustomButton {
         layer.cornerRadius = Constants.movieButtonCornerRadius
     }
     
-    func addObservers() {
+    override func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: lightModeNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: darkModeNotification, object: nil)
     }
@@ -47,13 +46,4 @@ class SuggestMovieButton: CustomButton {
 }
 
 
-extension UIImage {
-    // Used to change alpha
-    func alpha(_ value: CGFloat) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
-    }
-}
+
