@@ -11,7 +11,6 @@ import Foundation
 enum ModeSelected {
     case lightMode
     case darkMode
-    
 }
 
 enum ZipperState {
@@ -35,18 +34,18 @@ enum Colors {
     
     var color: String {
         switch self {
-        case .dmBackground: return "DMBackground"
-        case .dmNavBar: return "DMNavBar"
+        case .dmBackground:     return "DMBackground"
+        case .dmNavBar:         return "DMNavBar"
             
-        case .lmBackground: return "LMBackground"
-        case .lmNavBar: return "LMNavBar"
+        case .lmBackground:     return "LMBackground"
+        case .lmNavBar:         return "LMNavBar"
             
-        case .lmStatusBar: return "LMStatusBar"
+        case .lmStatusBar:      return "LMStatusBar"
             
-        case .sideMenuView: return "SideMenuView"
-        case .zipper: return "Zipper"
-        case .border: return "Border"
-        case .sideButton: return "SideButton"
+        case .sideMenuView:     return "SideMenuView"
+        case .zipper:           return "Zipper"
+        case .border:           return "Border"
+        case .sideButton:       return "SideButton"
         }
     }
 }

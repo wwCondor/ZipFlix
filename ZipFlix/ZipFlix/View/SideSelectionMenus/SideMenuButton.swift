@@ -36,7 +36,7 @@ class SideMenuButton: ToggleButton {
     }
 }
 
-// The button class that gets it state swiched by modeToggleButton
+// The button class that gets its appearance altered by a notification posted by modeToggleButton
 class ToggleButton: CustomButton {
     
     let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)

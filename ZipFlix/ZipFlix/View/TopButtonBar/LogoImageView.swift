@@ -16,19 +16,23 @@ class LogoImageView: UIImageView {
     
     override init(image: UIImage?) {
         super.init(image: image)
+        
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        //        addObservers()
+
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        //        addObservers()
+
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-//        addObservers()
         
 //        tintColor = UIColor.white
         backgroundColor = Constants.barButtonItemsColor

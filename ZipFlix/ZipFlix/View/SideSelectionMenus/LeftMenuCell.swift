@@ -12,8 +12,8 @@ class LeftMenuCell: BaseCell {
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        backgroundColor = UIColor.systemPink
-//        backgroundColor = UIColor(named: Colors.sideMenuView.color)
+//        backgroundColor = UIColor.systemPink
+        backgroundColor = UIColor(named: Colors.sideMenuView.color)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()

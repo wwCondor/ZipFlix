@@ -35,7 +35,7 @@ extension UIView {
 }
 
 extension UIImage {
-    // Used to change alpha
+    // Used to change alpha for objects after light/dark mode selection
     func alpha(_ value: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         draw(at: CGPoint.zero, blendMode: .normal, alpha: value)

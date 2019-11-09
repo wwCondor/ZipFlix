@@ -15,17 +15,17 @@ enum Icons {
     case movieIcon
     case zipperIcon
     
-    case spareIcon
+    case spareIcon // filler icon
     
     var image: String {
         switch self {
-        case .darkModeIcon: return "DarkMode"
-        case .lightModeIcon: return "LightMode"
-        case .reset: return "Reset"
-        case .movieIcon: return "MovieIcon"
-        case .zipperIcon: return "ZipperIcon"
+        case .darkModeIcon:     return "DarkMode"
+        case .lightModeIcon:    return "LightMode"
+        case .reset:            return "Reset"
+        case .movieIcon:        return "MovieIcon"
+        case .zipperIcon:       return "ZipperIcon"
             
-        case .spareIcon: return "SpareIcon"
+        case .spareIcon:        return "SpareIcon"
             
         }
     }

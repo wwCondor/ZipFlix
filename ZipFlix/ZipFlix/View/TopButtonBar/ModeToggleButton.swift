@@ -16,7 +16,6 @@ class ModeToggleButton: CustomButton {
     let cancelDimmerNotification = Notification.Name(rawValue: Constants.cancelDimNotificationKey)
 
     override func setupButton() {
-        addObservers()
         let image = UIImage(named: Icons.lightModeIcon.image)!.withRenderingMode(.alwaysOriginal)
         setImage(image, for: .normal)
         imageView?.contentMode = .scaleAspectFit

@@ -14,7 +14,6 @@ class ClearInputButton: CustomButton {
     let darkModeNotification = Notification.Name(rawValue: Constants.darkModeNotificationKey)
     
     override func setupButton() {
-//        addObservers()
         let image = UIImage(named: Icons.reset.image)?.withRenderingMode(.alwaysTemplate)
         tintColor = .white
         setImage(image, for: .normal)
