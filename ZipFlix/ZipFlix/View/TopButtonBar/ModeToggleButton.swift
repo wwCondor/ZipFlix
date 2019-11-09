@@ -40,7 +40,7 @@ class ModeToggleButton: CustomButton {
         // Dims button image during disable
         isDimmed = bool
 
-        let dimmedAlpha: CGFloat = 0.5
+        let dimmedAlpha = Constants.dimAlpha
         let normalAlpha: CGFloat = 1.0
         let alpha = bool ? dimmedAlpha : normalAlpha
         self.alpha = alpha

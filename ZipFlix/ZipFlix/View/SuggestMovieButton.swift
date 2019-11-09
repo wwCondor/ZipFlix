@@ -39,7 +39,7 @@ class SuggestMovieButton: CustomButton {
         
         // Change alpha when light/dark mode is enabled
         let lightModeIcon = UIImage(named: Icons.movieIcon.image)?.withRenderingMode(.alwaysOriginal)
-        let darkModeIcon = UIImage(named: Icons.movieIcon.image)!.alpha(0.5)
+        let darkModeIcon = UIImage(named: Icons.movieIcon.image)!.alpha(Constants.dimAlpha)
         let image = bool ? darkModeIcon : lightModeIcon
         setImage(image, for: .normal)
     }

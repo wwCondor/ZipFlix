@@ -45,7 +45,6 @@ class LeftSideZipper: Zipper {
     }
 }
 
-
 class RigthSideZipper: Zipper {
     
     override func draw(_ rect: CGRect) {
@@ -96,9 +95,7 @@ class Zipper: UIView {
     
     let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)
     let darkModeNotification = Notification.Name(rawValue: Constants.darkModeNotificationKey)
-    
-    
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.clear
@@ -135,7 +132,7 @@ class Zipper: UIView {
         
         // Change alpha when light/dark mode is enabled
         let lightModeZipperColor = UIColor(named: Colors.zipper.color)!
-        let darkModeZipperColor = UIColor(named: Colors.zipper.color)!.withAlphaComponent(0.5)
+        let darkModeZipperColor = UIColor(named: Colors.zipper.color)!.withAlphaComponent(Constants.dimAlpha)
         zipperColor = bool ? darkModeZipperColor : lightModeZipperColor
     }
     

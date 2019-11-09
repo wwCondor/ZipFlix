@@ -14,7 +14,7 @@ extension ViewController {
         let dimmerNotification = Notification.Name(rawValue: Constants.dimNotificationKey)
         
         let zipDistance = leftZipperFour.bounds.width * (3/4) - 12
-        let zipDuration: TimeInterval = 0.5
+        let zipDuration: TimeInterval = 0.35
         let zipDelay: TimeInterval = -0.2
         
         if zipperState == .open {
@@ -25,6 +25,22 @@ extension ViewController {
             zipperState = .closed
             UIView.animate(withDuration: zipDuration,
                            delay: 0.0,
+                           options: [.curveEaseIn],
+                           animations: {
+                            self.leftZipperSix.center.x += zipDistance
+                            self.rightZipperSix.center.x -= zipDistance
+            },
+                           completion: { _ in
+            UIView.animate(withDuration: zipDuration,
+                           delay: zipDelay,
+                           options: [.curveEaseIn],
+                           animations: {
+                            self.leftZipperFive.center.x += zipDistance
+                            self.rightZipperFive.center.x -= zipDistance
+            },
+                           completion: { _ in
+            UIView.animate(withDuration: zipDuration,
+                           delay: zipDelay,
                            options: [.curveEaseIn],
                            animations: {
                             self.leftZipperFour.center.x += zipDistance
@@ -57,7 +73,9 @@ extension ViewController {
                            completion: { _ in
                             self.animationCompleted()
                             self.clearInputButton.isEnabled = true
-                       })
+                                })
+                            })
+                        })
                    })
                 })
             })
@@ -70,7 +88,7 @@ extension ViewController {
         let cancelDimmerNotification = Notification.Name(rawValue: Constants.cancelDimNotificationKey)
 
         let zipDistance = leftZipperFour.bounds.width * (3/4) - 12
-        let zipDuration: TimeInterval = 0.4
+        let zipDuration: TimeInterval = 0.3
         let zipDelay: TimeInterval = -0.2
         
         if zipperState == .closed {
@@ -109,11 +127,29 @@ extension ViewController {
                             self.rightZipperFour.center.x += zipDistance
             },
                            completion: { _ in
+            UIView.animate(withDuration: zipDuration,
+                           delay: zipDelay,
+                           options: [.curveEaseOut],
+                           animations: {
+                            self.leftZipperFive.center.x -= zipDistance
+                            self.rightZipperFive.center.x += zipDistance
+            },
+                            completion: { _ in
+            UIView.animate(withDuration: zipDuration,
+                           delay: zipDelay,
+                           options: [.curveEaseOut],
+                           animations: {
+                            self.leftZipperSix.center.x -= zipDistance
+                            self.rightZipperSix.center.x += zipDistance
+            },
+                             completion: { _ in
                             self.animationCompleted()
                             self.suggestMovieButton.isEnabled = true
                             self.modeToggleButton.isEnabled = true
                             
                             NotificationCenter.default.post(name: cancelDimmerNotification, object: nil)
+                              })
+                           })
                        })
                    })
                 })

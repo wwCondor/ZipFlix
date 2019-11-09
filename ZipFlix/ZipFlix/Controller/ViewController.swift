@@ -106,6 +106,16 @@ class ViewController: UIViewController {
         return zipper
     }()
     
+    lazy var leftZipperFive: LeftSideZipper = {
+        let zipper = LeftSideZipper()
+        return zipper
+    }()
+    
+    lazy var leftZipperSix: LeftSideZipper = {
+        let zipper = LeftSideZipper()
+        return zipper
+    }()
+    
     lazy var rightZipperOne: RigthSideZipper = {
         let zipper = RigthSideZipper()
         return zipper
@@ -122,6 +132,16 @@ class ViewController: UIViewController {
     }()
     
     lazy var rightZipperFour: RigthSideZipper = {
+        let zipper = RigthSideZipper()
+        return zipper
+    }()
+    
+    lazy var rightZipperFive: RigthSideZipper = {
+        let zipper = RigthSideZipper()
+        return zipper
+    }()
+    
+    lazy var rightZipperSix: RigthSideZipper = {
         let zipper = RigthSideZipper()
         return zipper
     }()
@@ -174,16 +194,19 @@ class ViewController: UIViewController {
         let height = view.bounds.height
         let padding = ((3/14) * height) / 2
                 
-        let menuWidth = view.bounds.width / 4
-        let zipperWidth = menuWidth + 10
-        let zipperHeight = menuWidth
-        let zipperXOffset = menuWidth / 4
-        let zipperSpacing = menuWidth / 5
+        let menuWidth = view.bounds.width / 3
+        let zipperSize = menuWidth / 2
+        let zipperWidth = zipperSize + 10
+        let zipperHeight = zipperSize
+        let zipperXOffset = zipperSize * (1 / 4)
+        let zipperSpacing = zipperSize / 5
                 
         view.addSubview(leftZipperOne)
         view.addSubview(leftZipperTwo)
         view.addSubview(leftZipperThree)
         view.addSubview(leftZipperFour)
+        view.addSubview(leftZipperFive)
+        view.addSubview(leftZipperSix)
         
         view.addSubview(leftSelectionMenu)
 
@@ -196,26 +219,38 @@ class ViewController: UIViewController {
         leftZipperOne.translatesAutoresizingMaskIntoConstraints = false
         leftZipperOne.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         leftZipperOne.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        leftZipperOne.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: zipperXOffset).isActive = true
         leftZipperOne.bottomAnchor.constraint(equalTo: leftZipperTwo.topAnchor, constant: -zipperSpacing).isActive = true
+        leftZipperOne.centerXAnchor.constraint(equalTo: leftSelectionMenu.trailingAnchor, constant: -zipperXOffset).isActive = true
         
         leftZipperTwo.translatesAutoresizingMaskIntoConstraints = false
         leftZipperTwo.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         leftZipperTwo.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        leftZipperTwo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: zipperXOffset).isActive = true
-        leftZipperTwo.bottomAnchor.constraint(equalTo: leftSelectionMenu.centerYAnchor, constant: -zipperSpacing / 2).isActive = true
-
+        leftZipperTwo.bottomAnchor.constraint(equalTo: leftZipperThree.topAnchor, constant: -zipperSpacing).isActive = true
+        leftZipperTwo.centerXAnchor.constraint(equalTo: leftSelectionMenu.trailingAnchor, constant: -zipperXOffset).isActive = true
+        
         leftZipperThree.translatesAutoresizingMaskIntoConstraints = false
         leftZipperThree.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         leftZipperThree.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        leftZipperThree.topAnchor.constraint(equalTo: leftSelectionMenu.centerYAnchor, constant: zipperSpacing / 2).isActive = true
-        leftZipperThree.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: zipperXOffset).isActive = true
+        leftZipperThree.bottomAnchor.constraint(equalTo: leftSelectionMenu.centerYAnchor, constant: -zipperSpacing / 2).isActive = true
+        leftZipperThree.centerXAnchor.constraint(equalTo: leftSelectionMenu.trailingAnchor, constant: -zipperXOffset).isActive = true
 
         leftZipperFour.translatesAutoresizingMaskIntoConstraints = false
         leftZipperFour.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         leftZipperFour.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        leftZipperFour.topAnchor.constraint(equalTo: leftZipperThree.bottomAnchor, constant: zipperSpacing).isActive = true
-        leftZipperFour.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: zipperXOffset).isActive = true
+        leftZipperFour.topAnchor.constraint(equalTo: leftSelectionMenu.centerYAnchor, constant: zipperSpacing / 2).isActive = true
+        leftZipperFour.centerXAnchor.constraint(equalTo: leftSelectionMenu.trailingAnchor, constant: -zipperXOffset).isActive = true
+
+        leftZipperFive.translatesAutoresizingMaskIntoConstraints = false
+        leftZipperFive.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
+        leftZipperFive.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
+        leftZipperFive.topAnchor.constraint(equalTo: leftZipperFour.bottomAnchor, constant: zipperSpacing).isActive = true
+        leftZipperFive.centerXAnchor.constraint(equalTo: leftSelectionMenu.trailingAnchor, constant: -zipperXOffset).isActive = true
+        
+        leftZipperSix.translatesAutoresizingMaskIntoConstraints = false
+        leftZipperSix.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
+        leftZipperSix.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
+        leftZipperSix.topAnchor.constraint(equalTo: leftZipperFive.bottomAnchor, constant: zipperSpacing).isActive = true
+        leftZipperSix.centerXAnchor.constraint(equalTo: leftSelectionMenu.trailingAnchor, constant: -zipperXOffset).isActive = true
         
     }
     
@@ -223,16 +258,19 @@ class ViewController: UIViewController {
         let height = view.bounds.height
         let padding = ((3/14) * height) / 2
                 
-        let menuWidth = view.bounds.width / 4
-        let zipperWidth = menuWidth + 10
-        let zipperHeight = menuWidth
-        let zipperXOffset = -menuWidth / 4
-        let zipperSpacing = menuWidth / 5
+        let menuWidth = view.bounds.width / 3
+        let zipperSize = menuWidth / 2
+        let zipperWidth = zipperSize + 10
+        let zipperHeight = zipperSize
+        let zipperXOffset = zipperSize * (1 / 4)
+        let zipperSpacing = zipperSize / 5
                 
         view.addSubview(rightZipperOne)
         view.addSubview(rightZipperTwo)
         view.addSubview(rightZipperThree)
         view.addSubview(rightZipperFour)
+        view.addSubview(rightZipperFive)
+        view.addSubview(rightZipperSix)
         
         view.addSubview(rightSelectionMenu)
 
@@ -245,26 +283,38 @@ class ViewController: UIViewController {
         rightZipperOne.translatesAutoresizingMaskIntoConstraints = false
         rightZipperOne.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         rightZipperOne.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        rightZipperOne.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: zipperXOffset).isActive = true
         rightZipperOne.bottomAnchor.constraint(equalTo: rightZipperTwo.topAnchor, constant: -zipperSpacing).isActive = true
-        
+        rightZipperOne.centerXAnchor.constraint(equalTo: rightSelectionMenu.leadingAnchor, constant: zipperXOffset).isActive = true
+
         rightZipperTwo.translatesAutoresizingMaskIntoConstraints = false
         rightZipperTwo.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         rightZipperTwo.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        rightZipperTwo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: zipperXOffset).isActive = true
-        rightZipperTwo.bottomAnchor.constraint(equalTo: rightSelectionMenu.centerYAnchor, constant: -zipperSpacing / 2).isActive = true
+        rightZipperTwo.bottomAnchor.constraint(equalTo: rightZipperThree.topAnchor, constant: -zipperSpacing).isActive = true
+        rightZipperTwo.centerXAnchor.constraint(equalTo: rightSelectionMenu.leadingAnchor, constant: zipperXOffset).isActive = true
 
         rightZipperThree.translatesAutoresizingMaskIntoConstraints = false
         rightZipperThree.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         rightZipperThree.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        rightZipperThree.topAnchor.constraint(equalTo: rightSelectionMenu.centerYAnchor, constant: zipperSpacing / 2).isActive = true
-        rightZipperThree.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: zipperXOffset).isActive = true
+        rightZipperThree.bottomAnchor.constraint(equalTo: rightSelectionMenu.centerYAnchor, constant: -zipperSpacing / 2).isActive = true
+        rightZipperThree.centerXAnchor.constraint(equalTo: rightSelectionMenu.leadingAnchor, constant: zipperXOffset).isActive = true
 
         rightZipperFour.translatesAutoresizingMaskIntoConstraints = false
         rightZipperFour.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
         rightZipperFour.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
-        rightZipperFour.topAnchor.constraint(equalTo: rightZipperThree.bottomAnchor, constant: zipperSpacing).isActive = true
-        rightZipperFour.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: zipperXOffset).isActive = true
+        rightZipperFour.topAnchor.constraint(equalTo: rightSelectionMenu.centerYAnchor, constant: zipperSpacing / 2).isActive = true
+        rightZipperFour.centerXAnchor.constraint(equalTo: rightSelectionMenu.leadingAnchor, constant: zipperXOffset).isActive = true
+
+        rightZipperFive.translatesAutoresizingMaskIntoConstraints = false
+        rightZipperFive.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
+        rightZipperFive.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
+        rightZipperFive.topAnchor.constraint(equalTo: rightZipperFour.bottomAnchor, constant: zipperSpacing).isActive = true
+        rightZipperFive.centerXAnchor.constraint(equalTo: rightSelectionMenu.leadingAnchor, constant: zipperXOffset).isActive = true
+        
+        rightZipperSix.translatesAutoresizingMaskIntoConstraints = false
+        rightZipperSix.widthAnchor.constraint(equalToConstant: zipperWidth).isActive = true
+        rightZipperSix.heightAnchor.constraint(equalToConstant: zipperHeight).isActive = true
+        rightZipperSix.topAnchor.constraint(equalTo: rightZipperFive.bottomAnchor, constant: zipperSpacing).isActive = true
+        rightZipperSix.centerXAnchor.constraint(equalTo: rightSelectionMenu.leadingAnchor, constant: zipperXOffset).isActive = true
     }
     
     private func setupSuggestMovieButton() {
