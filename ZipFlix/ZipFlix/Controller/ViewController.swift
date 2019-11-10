@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let movieSuggestionsManager = SuggestionsManager()
         
     var modeSelected: ModeSelected = .lightMode
     var zipperState: ZipperState = .open
@@ -199,7 +201,7 @@ class ViewController: UIViewController {
         let zipperWidth = zipperSize + 10
         let zipperHeight = zipperSize
         let zipperXOffset = zipperSize * (1 / 4)
-        let zipperSpacing = zipperSize / 5
+        let zipperSpacing = zipperSize / 6
                 
         view.addSubview(leftZipperOne)
         view.addSubview(leftZipperTwo)
@@ -263,7 +265,7 @@ class ViewController: UIViewController {
         let zipperWidth = zipperSize + 10
         let zipperHeight = zipperSize
         let zipperXOffset = zipperSize * (1 / 4)
-        let zipperSpacing = zipperSize / 5
+        let zipperSpacing = zipperSize / 6
                 
         view.addSubview(rightZipperOne)
         view.addSubview(rightZipperTwo)
@@ -319,8 +321,8 @@ class ViewController: UIViewController {
     
     private func setupSuggestMovieButton() {
         
-        let safeHeigth = view.safeAreaLayoutGuide.layoutFrame.size.height
-        let movieButtonSize = ((3/14) * safeHeigth) / 2
+        let height = view.bounds.height
+        let movieButtonSize = ((3/14) * height) / 2
         
         view.addSubview(suggestMovieButton)
         

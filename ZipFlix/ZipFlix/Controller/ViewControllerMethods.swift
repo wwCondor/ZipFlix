@@ -23,6 +23,7 @@ extension ViewController {
         if modeSelected == .darkMode {
             // In here we switch modeSelected
             self.modeSelected = .lightMode
+            movieSuggestionsManager.modeSelected = .lightMode
             
             // We set and update statusBar
             self.style = .lightContent
@@ -33,10 +34,10 @@ extension ViewController {
 
             // Change background
             self.view.backgroundColor = UIColor(named: Colors.lmBackground.color)
-            
 
         } else if modeSelected == .lightMode {
             self.modeSelected = .darkMode
+            movieSuggestionsManager.modeSelected = .darkMode
             
             self.style = .darkContent
             self.setNeedsStatusBarAppearanceUpdate()

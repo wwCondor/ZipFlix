@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0B73945D237493AE0087C95F /* LeftMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73945C237493AE0087C95F /* LeftMenuCell.swift */; };
+		0B73946823774B000087C95F /* SuggestionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73946723774B000087C95F /* SuggestionsManager.swift */; };
+		0B73946B23783C350087C95F /* SwipeIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73946A23783C350087C95F /* SwipeIndicator.swift */; };
+		0B73946D237842C00087C95F /* MovieSuggestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73946C237842C00087C95F /* MovieSuggestions.swift */; };
 		0B7ABD0C2370190000EF16B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD0B2370190000EF16B0 /* AppDelegate.swift */; };
 		0B7ABD0E2370190000EF16B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD0D2370190000EF16B0 /* SceneDelegate.swift */; };
 		0B7ABD102370190000EF16B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD0F2370190000EF16B0 /* ViewController.swift */; };
@@ -34,6 +37,9 @@
 
 /* Begin PBXFileReference section */
 		0B73945C237493AE0087C95F /* LeftMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuCell.swift; sourceTree = "<group>"; };
+		0B73946723774B000087C95F /* SuggestionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsManager.swift; sourceTree = "<group>"; };
+		0B73946A23783C350087C95F /* SwipeIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeIndicator.swift; sourceTree = "<group>"; };
+		0B73946C237842C00087C95F /* MovieSuggestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSuggestions.swift; sourceTree = "<group>"; };
 		0B7ABD082370190000EF16B0 /* ZipFlix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZipFlix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7ABD0B2370190000EF16B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B7ABD0D2370190000EF16B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,16 +77,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B73945B2374519F0087C95F /* SideSelectionMenus */ = {
+		0B73945B2374519F0087C95F /* SideSelectionMenu */ = {
 			isa = PBXGroup;
 			children = (
-				0B7ABD422372ABD200EF16B0 /* SideMenuButton.swift */,
 				0B7ABD382371BC6000EF16B0 /* LeftSelectionMenu.swift */,
 				0B73945C237493AE0087C95F /* LeftMenuCell.swift */,
 				0B7ABD3E2371C83A00EF16B0 /* RighSelectionMenu.swift */,
 				0B7ABD442372B5B600EF16B0 /* Zipper.swift */,
 			);
-			path = SideSelectionMenus;
+			path = SideSelectionMenu;
+			sourceTree = "<group>";
+		};
+		0B73946923783C030087C95F /* SuggestionsMenu */ = {
+			isa = PBXGroup;
+			children = (
+				0B73946A23783C350087C95F /* SwipeIndicator.swift */,
+				0B73946C237842C00087C95F /* MovieSuggestions.swift */,
+			);
+			path = SuggestionsMenu;
 			sourceTree = "<group>";
 		};
 		0B7ABCFF2370190000EF16B0 = {
@@ -124,6 +138,7 @@
 				0B7ABD0F2370190000EF16B0 /* ViewController.swift */,
 				0B7ABD362371B3B700EF16B0 /* ViewControllerMethods.swift */,
 				0B7ABD462372F2B400EF16B0 /* ZipperAnimations.swift */,
+				0B73946723774B000087C95F /* SuggestionsManager.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -131,8 +146,9 @@
 		0B7ABD222370208E00EF16B0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0B73946923783C030087C95F /* SuggestionsMenu */,
 				0B7ABD3C2371C77100EF16B0 /* TopButtonBar */,
-				0B73945B2374519F0087C95F /* SideSelectionMenus */,
+				0B73945B2374519F0087C95F /* SideSelectionMenu */,
 				0B7ABD3A2371C75E00EF16B0 /* SuggestMovieButton.swift */,
 			);
 			path = View;
@@ -159,6 +175,7 @@
 		0B7ABD332371611400EF16B0 /* Delete? */ = {
 			isa = PBXGroup;
 			children = (
+				0B7ABD422372ABD200EF16B0 /* SideMenuButton.swift */,
 			);
 			path = "Delete?";
 			sourceTree = "<group>";
@@ -247,6 +264,7 @@
 			files = (
 				0B7ABD2C2370A6DC00EF16B0 /* ModeToggleButton.swift in Sources */,
 				0B7ABD412371FEA800EF16B0 /* TopButtonBar.swift in Sources */,
+				0B73946B23783C350087C95F /* SwipeIndicator.swift in Sources */,
 				0B7ABD472372F2B400EF16B0 /* ZipperAnimations.swift in Sources */,
 				0B7ABD102370190000EF16B0 /* ViewController.swift in Sources */,
 				0B7ABD2E2370ADA600EF16B0 /* ClearInputButton.swift in Sources */,
@@ -255,8 +273,10 @@
 				0B7ABD0C2370190000EF16B0 /* AppDelegate.swift in Sources */,
 				0B7ABD432372ABD200EF16B0 /* SideMenuButton.swift in Sources */,
 				0B7ABD302370BD1F00EF16B0 /* Constants.swift in Sources */,
+				0B73946D237842C00087C95F /* MovieSuggestions.swift in Sources */,
 				0B7ABD2023701FD700EF16B0 /* Colors.swift in Sources */,
 				0B7ABD4923732CCC00EF16B0 /* IconLegalStuff.swift in Sources */,
+				0B73946823774B000087C95F /* SuggestionsManager.swift in Sources */,
 				0B7ABD2623702A3F00EF16B0 /* Icons.swift in Sources */,
 				0B7ABD372371B3B700EF16B0 /* ViewControllerMethods.swift in Sources */,
 				0B7ABD0E2370190000EF16B0 /* SceneDelegate.swift in Sources */,
