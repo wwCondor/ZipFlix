@@ -22,6 +22,7 @@ class TopButtonBar: UIView {
     
     func setupView() {
         backgroundColor = UIColor(named:Colors.sideMenuView.color)
+        translatesAutoresizingMaskIntoConstraints = false
         layer.masksToBounds = false
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.8

@@ -11,6 +11,7 @@ import UIKit
 class RightSelectionMenu: SelectionMenu {
     override func setupView() {
         backgroundColor = UIColor(named:Colors.sideMenuView.color)
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     override func layoutSubviews() {

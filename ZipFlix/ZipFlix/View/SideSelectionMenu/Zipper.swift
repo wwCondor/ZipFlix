@@ -111,6 +111,7 @@ class Zipper: UIView {
     }
     
     func setupView() {
+        translatesAutoresizingMaskIntoConstraints = false
         layer.masksToBounds = false
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.8

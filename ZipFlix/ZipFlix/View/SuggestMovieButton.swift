@@ -23,6 +23,7 @@ class SuggestMovieButton: CustomButton {
         imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
         layer.masksToBounds = false
         layer.cornerRadius = Constants.movieButtonCornerRadius
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     override func addObservers() {

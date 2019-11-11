@@ -46,13 +46,10 @@ class SuggestionsManager: NSObject {
         if let window = window {
             
             window.addSubview(fadeBackgroundView)
-            
             window.addSubview(leftNavigator)
             window.addSubview(rightNavigator)
-            
             window.addSubview(movieSuggestions)
 
-            
             fadeBackgroundView.frame = window.frame
             fadeBackgroundView.alpha = 0
             fadeBackgroundView.backgroundColor = UIColor.black
@@ -79,19 +76,22 @@ class SuggestionsManager: NSObject {
             let offset: CGFloat = 2
 
             leftNavigator.backgroundColor = .clear
-            leftNavigator.translatesAutoresizingMaskIntoConstraints = false
-            leftNavigator.heightAnchor.constraint(equalToConstant: indicatorSize).isActive = true
-            leftNavigator.widthAnchor.constraint(equalToConstant: indicatorSize / 2).isActive = true
-            leftNavigator.trailingAnchor.constraint(equalTo: movieSuggestions.leadingAnchor, constant: offset).isActive = true
-            leftNavigator.centerYAnchor.constraint(equalTo: movieSuggestions.centerYAnchor).isActive = true
-            
             rightNavigator.backgroundColor = .clear
+            leftNavigator.translatesAutoresizingMaskIntoConstraints = false
             rightNavigator.translatesAutoresizingMaskIntoConstraints = false
-            rightNavigator.heightAnchor.constraint(equalToConstant: indicatorSize).isActive = true
-            rightNavigator.widthAnchor.constraint(equalToConstant: indicatorSize / 2).isActive = true
-            rightNavigator.leadingAnchor.constraint(equalTo: movieSuggestions.trailingAnchor, constant: -offset).isActive = true
-            rightNavigator.centerYAnchor.constraint(equalTo: movieSuggestions.centerYAnchor).isActive = true
             
+            NSLayoutConstraint.activate([
+                leftNavigator.heightAnchor.constraint(equalToConstant: indicatorSize),
+                leftNavigator.widthAnchor.constraint(equalToConstant: indicatorSize / 2),
+                leftNavigator.trailingAnchor.constraint(equalTo: movieSuggestions.leadingAnchor, constant: offset),
+                leftNavigator.centerYAnchor.constraint(equalTo: movieSuggestions.centerYAnchor),
+                
+                rightNavigator.heightAnchor.constraint(equalToConstant: indicatorSize),
+                rightNavigator.widthAnchor.constraint(equalToConstant: indicatorSize / 2),
+                rightNavigator.leadingAnchor.constraint(equalTo: movieSuggestions.trailingAnchor, constant: -offset),
+                rightNavigator.centerYAnchor.constraint(equalTo: movieSuggestions.centerYAnchor)
+            ])
+
             UIView.animate(
                 withDuration: 0.5,
                 delay: 0,

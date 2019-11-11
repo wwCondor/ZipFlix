@@ -22,6 +22,7 @@ class ClearInputButton: CustomButton {
         backgroundColor = Constants.barButtonItemsColor
         let inset: CGFloat = Constants.iconInset + 1
         imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset + 3, right: inset + Constants.topBarIconOffset)
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     override func addObservers() {

@@ -24,6 +24,7 @@ class ModeToggleButton: CustomButton {
         let inset: CGFloat = Constants.iconInset
         imageEdgeInsets = UIEdgeInsets(top: inset, left: inset + Constants.topBarIconOffset, bottom: inset + 3, right: inset)
         addTarget(self, action: #selector(buttonPressed(sender:)), for: .touchUpInside)
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     override func addObservers() {

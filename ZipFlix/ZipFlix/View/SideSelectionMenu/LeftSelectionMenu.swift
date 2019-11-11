@@ -28,6 +28,7 @@ class LeftSelectionMenu: SelectionMenu {
     
     override func setupView() {
         backgroundColor = UIColor(named:Colors.sideMenuView.color)
+        translatesAutoresizingMaskIntoConstraints = false
         addSubview(selectionMenu)
         selectionMenu.isScrollEnabled = false
     }
@@ -74,15 +75,15 @@ extension LeftSelectionMenu: UICollectionViewDataSource, UICollectionViewDelegat
     // Sets up what to do when a cell gets tapped
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            print("Lauch 1st menu")
+            print("Launch 1st menu")
         } else if indexPath.row == 1 {
-            print("Lauch 2nd menu")
+            print("Launch 2nd menu")
         } else if indexPath.row == 2 {
-            print("Lauch 3rd menu")
+            print("Launch 3rd menu")
         } else if indexPath.row == 3 {
-            print("Lauch 4th menu")
+            print("Launch 4th menu")
         } else {
-            print("Lauch 5th menu")
+            print("Launch 5th menu")
         }
     }
 }

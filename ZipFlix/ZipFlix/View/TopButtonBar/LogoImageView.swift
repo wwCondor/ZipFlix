@@ -41,6 +41,7 @@ class LogoImageView: UIImageView {
 //        image?.alignmentRectInsets(UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset + Constants.navBarIconOffset))
         contentMode = .scaleToFill
         isUserInteractionEnabled = true // Only needed if when implementing animation/sound
+        translatesAutoresizingMaskIntoConstraints = false
     }
 //    
 //    func addObservers() {
