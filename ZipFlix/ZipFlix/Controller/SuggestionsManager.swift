@@ -77,8 +77,6 @@ class SuggestionsManager: NSObject {
 
             leftNavigator.backgroundColor = .clear
             rightNavigator.backgroundColor = .clear
-            leftNavigator.translatesAutoresizingMaskIntoConstraints = false
-            rightNavigator.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([
                 leftNavigator.heightAnchor.constraint(equalToConstant: indicatorSize),
@@ -130,7 +128,6 @@ class SuggestionsManager: NSObject {
         switch sender.direction {
 
         case .left: showNextSuggestion() // In here we should go to index + 1, e.g move right along suggestions array
-
         case .right: showPreviousSuggestion() // In here index - 1, e.g. move left along suggestions array
         default:
             print("This does not work")

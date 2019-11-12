@@ -15,6 +15,9 @@ enum Icons {
     case movieIcon
     case zipperIcon
     
+    case bubbleEmpty
+    case bubbleSelected
+    
     case spareIcon // filler icon
     
     var image: String {
@@ -24,6 +27,9 @@ enum Icons {
         case .reset:            return "Reset"
         case .movieIcon:        return "MovieIcon"
         case .zipperIcon:       return "ZipperIcon"
+            
+        case .bubbleEmpty:      return "BubbleEmpty"
+        case .bubbleSelected:   return "BubbleSelected"
             
         case .spareIcon:        return "SpareIcon"
             

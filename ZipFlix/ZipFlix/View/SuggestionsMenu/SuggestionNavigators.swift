@@ -98,6 +98,7 @@ class Navigator: UIView {
         layer.shadowOffset = CGSize(width: 0, height: 1.0)
         layer.shadowRadius = 10
         isUserInteractionEnabled = true
+        translatesAutoresizingMaskIntoConstraints = false
     }
   
 }

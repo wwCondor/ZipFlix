@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let movieSuggestionsManager = SuggestionsManager()
+    let selectionManager = SelectionManager()
         
     var modeSelected: ModeSelected = .lightMode
     var zipperState: ZipperState = .open
@@ -18,11 +19,26 @@ class ViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return self.style
     }
+    
+    fileprivate let apiKey: String = "ed3e128599234a1dca2c7d4787238741"
+    
+    // The url that obtains all the genres
+    lazy var genreUrl: URL = {
+        return URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=\(self.apiKey)")!
+    }()
 
     var style: UIStatusBarStyle = .lightContent
+    
+    var movieGenres: [Genre] = [Genre]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Client.getGenres(url: genreUrl) { (genres, error) in
+            if let genres = genres {
+                
+            }
+        }
         
         setupTopButtonBar()
         setupLeftSelectionMenu()
@@ -36,9 +52,9 @@ class ViewController: UIViewController {
         }
     }
     
-    override func loadView() {
-        self.view = SelectionMenu(frame: UIScreen.main.bounds)
-    }
+//    override func loadView() {
+//        self.view = SelectionMenu(frame: UIScreen.main.bounds)
+//    }
     
     lazy var topButtonBar: TopButtonBar = {
         let topButtonBar = TopButtonBar()
@@ -161,12 +177,6 @@ class ViewController: UIViewController {
         
         let barButtonWidth = view.bounds.width * (2/5)
         let barButtonLogo = view.bounds.width * (1/5)
-        
-//        statusBarView.translatesAutoresizingMaskIntoConstraints = false
-//        topButtonBar.translatesAutoresizingMaskIntoConstraints = false
-//        clearInputButton.translatesAutoresizingMaskIntoConstraints = false
-//        modeToggleButton.translatesAutoresizingMaskIntoConstraints = false
-//        logoImageView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             statusBarView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -215,14 +225,6 @@ class ViewController: UIViewController {
         view.addSubview(leftZipperSix)
         
         view.addSubview(leftSelectionMenu)
-
-//        leftSelectionMenu.translatesAutoresizingMaskIntoConstraints = false
-//        leftZipperOne.translatesAutoresizingMaskIntoConstraints = false
-//        leftZipperTwo.translatesAutoresizingMaskIntoConstraints = false
-//        leftZipperThree.translatesAutoresizingMaskIntoConstraints = false
-//        leftZipperFour.translatesAutoresizingMaskIntoConstraints = false
-//        leftZipperFive.translatesAutoresizingMaskIntoConstraints = false
-//        leftZipperSix.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             leftSelectionMenu.topAnchor.constraint(equalTo: topButtonBar.bottomAnchor, constant: padding),
@@ -284,14 +286,6 @@ class ViewController: UIViewController {
         
         view.addSubview(rightSelectionMenu)
 
-//        rightSelectionMenu.translatesAutoresizingMaskIntoConstraints = false
-//        rightZipperOne.translatesAutoresizingMaskIntoConstraints = false
-//        rightZipperTwo.translatesAutoresizingMaskIntoConstraints = false
-//        rightZipperThree.translatesAutoresizingMaskIntoConstraints = false
-//        rightZipperFour.translatesAutoresizingMaskIntoConstraints = false
-//        rightZipperFive.translatesAutoresizingMaskIntoConstraints = false
-//        rightZipperSix.translatesAutoresizingMaskIntoConstraints = false
-
         NSLayoutConstraint.activate([
             rightSelectionMenu.topAnchor.constraint(equalTo: topButtonBar.bottomAnchor, constant: padding),
             rightSelectionMenu.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -337,9 +331,7 @@ class ViewController: UIViewController {
         let movieButtonSize = ((3/14) * height) / 2
         
         view.addSubview(suggestMovieButton)
-        
-//        suggestMovieButton.translatesAutoresizingMaskIntoConstraints = false
-        
+                
         NSLayoutConstraint.activate([
         suggestMovieButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         suggestMovieButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),

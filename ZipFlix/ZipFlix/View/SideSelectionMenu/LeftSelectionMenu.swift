@@ -9,11 +9,15 @@
 import UIKit
 
 class LeftSelectionMenu: SelectionMenu {
+    
+    let selectionManager = SelectionManager()
         
     let cellId = "leftSelectionMenuId"
     
-    // MARK: Set Actual image names
-    let imageNames = [Icons.spareIcon.image, Icons.spareIcon.image, Icons.spareIcon.image, Icons.spareIcon.image, Icons.spareIcon.image]
+    let emptyBubbleImage = Icons.bubbleEmpty.image
+    let selectedBubbleImage = Icons.bubbleSelected.image
+    
+    lazy var imageNames = { [emptyBubbleImage, emptyBubbleImage, emptyBubbleImage] }()
     
     lazy var selectionMenu: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -50,21 +54,22 @@ extension LeftSelectionMenu: UICollectionViewDataSource, UICollectionViewDelegat
     
     // Sets the amount of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     
     // Sets up cell content
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = selectionMenu.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LeftMenuCell
-        let inset: CGFloat = -20
-        cell.imageView.image = UIImage(named: imageNames[indexPath.item])!.withAlignmentRectInsets(UIEdgeInsets(top: inset, left: inset, bottom: inset - 15, right: inset))
+        let inset: CGFloat = -40
+        let edgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset - 20, right: inset)
+        cell.imageView.image = UIImage(named: imageNames[indexPath.item])!.withAlignmentRectInsets(edgeInsets)
 
         return cell
     }
     
     // Sets up size of the cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width, height: frame.height / 5)
+        return CGSize(width: frame.width, height: frame.height / 3)
     }
     
     // Sets up spacing between posts
@@ -75,6 +80,7 @@ extension LeftSelectionMenu: UICollectionViewDataSource, UICollectionViewDelegat
     // Sets up what to do when a cell gets tapped
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
+            selectionManager.presentOptions()
             print("Launch 1st menu")
         } else if indexPath.row == 1 {
             print("Launch 2nd menu")

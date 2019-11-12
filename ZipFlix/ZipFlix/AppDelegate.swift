@@ -15,14 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
                 
-        let navigationBarAppearance = UINavigationBar.appearance()
-
-        navigationBarAppearance.barTintColor = UIColor(named: Colors.dmNavBar.color) // Sets navBar background Color
-        navigationBarAppearance.isTranslucent = true // Sets navBar as transparant
+//        let navigationBarAppearance = UINavigationBar.appearance()
+//
+//        navigationBarAppearance.barTintColor = UIColor(named: Colors.dmNavBar.color) // Sets navBar background Color
+//        navigationBarAppearance.isTranslucent = true // Sets navBar as transparant
         
         window = UIWindow(frame: UIScreen.main.bounds)
+        
+//        window?.rootViewController = UINavigationController(rootViewController: ViewController())
+        window?.rootViewController = ViewController()
+
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: ViewController())
         
 //        let statusBarBackgroundView = UIView()
 //        statusBarBackgroundView.backgroundColor = UIColor(named: Colors.statusBarBackground.color)
