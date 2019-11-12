@@ -8,16 +8,6 @@
 
 import Foundation
 
-enum ModeSelected {
-    case lightMode
-    case darkMode
-}
-
-enum ZipperState {
-    case open
-    case closed
-}
-
 enum Colors {
     case dmBackground
     case dmNavBar

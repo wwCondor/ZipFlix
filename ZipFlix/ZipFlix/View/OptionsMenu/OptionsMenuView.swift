@@ -40,9 +40,6 @@ class OptionsMenu: UIView {
     func setupView() {
         addSubview(options)
         createMenuOptions()
-//        layer.masksToBounds = false
-//        layer.cornerRadius = Constants.menuCornerRadius
-//        translatesAutoresizingMaskIntoConstraints = false
     }
     
     func createMenuOptions() {
@@ -69,7 +66,7 @@ class OptionsMenu: UIView {
         
         let padding = 15
 
-        addConstraintsWithFormat("H:|-\(padding)-[v0]|", views: options)
+        addConstraintsWithFormat("H:|[v0]|", views: options)
         addConstraintsWithFormat("V:|-\(padding)-[v0]-\(padding)-|", views: options)
     }
 }

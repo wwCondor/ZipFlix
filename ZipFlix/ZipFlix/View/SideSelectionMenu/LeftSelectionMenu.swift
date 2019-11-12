@@ -10,7 +10,7 @@ import UIKit
 
 class LeftSelectionMenu: SelectionMenu {
     
-    let selectionManager = SelectionManager()
+    let selectionManager = SelectionViewManager()
         
     let cellId = "leftSelectionMenuId"
     
@@ -24,7 +24,7 @@ class LeftSelectionMenu: SelectionMenu {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         let selectionMenu = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        selectionMenu.register(LeftMenuCell.self, forCellWithReuseIdentifier: cellId)
+        selectionMenu.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
         selectionMenu.dataSource = self
         selectionMenu.delegate = self
         return selectionMenu
@@ -59,7 +59,7 @@ extension LeftSelectionMenu: UICollectionViewDataSource, UICollectionViewDelegat
     
     // Sets up cell content
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = selectionMenu.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LeftMenuCell
+        let cell = selectionMenu.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
         let inset: CGFloat = -40
         let edgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset - 20, right: inset)
         cell.imageView.image = UIImage(named: imageNames[indexPath.item])!.withAlignmentRectInsets(edgeInsets)
@@ -80,7 +80,7 @@ extension LeftSelectionMenu: UICollectionViewDataSource, UICollectionViewDelegat
     // Sets up what to do when a cell gets tapped
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            selectionManager.presentOptions()
+            selectionManager.presentOptions(direction: .fromRight)
             print("Launch 1st menu")
         } else if indexPath.row == 1 {
             print("Launch 2nd menu")

@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let movieSuggestionsManager = SuggestionsManager()
-    let selectionManager = SelectionManager()
+    let selectionManager = SelectionViewManager()
         
     var modeSelected: ModeSelected = .lightMode
     var zipperState: ZipperState = .open
