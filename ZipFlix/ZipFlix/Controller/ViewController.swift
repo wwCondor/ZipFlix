@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let clearInputNotification = Notification.Name(rawValue: Constants.clearInputNotificaitonKey)
+    
     let movieSuggestionsManager = SuggestionsManager()
     let selectionManager = SelectionViewManager()
         
@@ -19,24 +21,21 @@ class ViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return self.style
     }
-    
-    fileprivate let apiKey: String = "ed3e128599234a1dca2c7d4787238741"
-    
-    // The url that obtains all the genres
-    lazy var genreUrl: URL = {
-        return URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=\(self.apiKey)")!
-    }()
 
     var style: UIStatusBarStyle = .lightContent
     
-    var movieGenres: [Genre] = [Genre]()
+    var movieGenres: Genres?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Client.getGenres(url: genreUrl) { (genres, error) in
-            if let genres = genres {
-                
+        Client.getGenres { (genres, error) in
+            DispatchQueue.main.async {
+                guard let genres = genres else {
+                    // Throw error Alert
+                    return
+                }
+                self.movieGenres = genres
             }
         }
         
@@ -89,6 +88,7 @@ class ViewController: UIViewController {
         let logoImageView = LogoImageView(image: zipperIcon)
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(runAnimation(tapGestureRecognizer:)))
         logoImageView.addGestureRecognizer(tapGestureRecognizer)
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
         return logoImageView
     }()
     
@@ -339,6 +339,10 @@ class ViewController: UIViewController {
         suggestMovieButton.heightAnchor.constraint(equalToConstant: movieButtonSize)
         ])
 
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
 }

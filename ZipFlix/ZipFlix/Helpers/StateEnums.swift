@@ -8,11 +8,19 @@
 
 import Foundation
 
+// Handles dark and light mode
 enum ModeSelected {
     case lightMode
     case darkMode
 }
 
+// Handles direction form which selection menu is presented
+enum LaunchDirection {
+    case fromRight
+    case fromLeft
+}
+
+// Handles open or closed state of zipper
 enum ZipperState {
     case open
     case closed

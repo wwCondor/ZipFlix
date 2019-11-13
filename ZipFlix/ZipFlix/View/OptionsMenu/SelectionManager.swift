@@ -8,11 +8,6 @@
 
 import UIKit
 
-enum LaunchDirection {
-    case fromRight
-    case fromLeft
-}
-
 class SelectionViewManager: NSObject {
         
     let fadeBackgroundView = UIView()
@@ -21,12 +16,6 @@ class SelectionViewManager: NSObject {
         
     lazy var optionsMenu: OptionsMenu = {
         let optionsMenu = OptionsMenu()
-//        let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(navigateSuggestionsBySwipe(sender:)))
-//        swipeLeftGesture.direction = .left
-//        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(navigateSuggestionsBySwipe(sender:)))
-//        swipeRightGesture.direction = .right
-//        movieSuggestions.addGestureRecognizer(swipeLeftGesture)
-//        movieSuggestions.addGestureRecognizer(swipeRightGesture)
         return optionsMenu
     }()
         
@@ -42,7 +31,6 @@ class SelectionViewManager: NSObject {
             fadeBackgroundView.frame = window.frame
             fadeBackgroundView.alpha = 0
             fadeBackgroundView.backgroundColor = UIColor.black
-//            fadeBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissOptions(direction:sender:))))
                         
             if modeSelected == .lightMode {
                 optionsMenu.backgroundColor = UIColor(named: Colors.lmBackground.color)
@@ -56,13 +44,13 @@ class SelectionViewManager: NSObject {
             let padding = (3 * screenHeight) / 14
             
             if direction == .fromRight {
-                
-
+    
                 let width = screenWidth * (2/3)
                 let height = screenHeight - padding - topBarHeight
                 let xOffset: CGFloat = screenWidth
                 let yOffset: CGFloat = (padding / 2) + topBarHeight
                 
+                optionsMenu.launchDirection = .fromRight
                 optionsMenu.frame = CGRect(x: xOffset , y: yOffset, width: width, height: height)
                 
                 fadeBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissOptionsToRight(sender:))))
@@ -88,12 +76,13 @@ class SelectionViewManager: NSObject {
                     completion: nil)
                 
             } else {
-                
+
                 let width = screenWidth * (2/3)
                 let height = screenHeight - padding - topBarHeight
                 let xOffset: CGFloat = -width
                 let yOffset: CGFloat = (padding / 2) + topBarHeight
                 
+                optionsMenu.launchDirection = .fromLeft
                 optionsMenu.frame = CGRect(x: xOffset , y: yOffset, width: width, height: height)
                 
                 fadeBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissOptionsToLeft(sender:))))
@@ -121,28 +110,37 @@ class SelectionViewManager: NSObject {
         
         }
     }
-        
+                
     @objc private func dismissOptionsToRight(sender: UISwipeGestureRecognizer) {
-        UIView.animate(
-            withDuration: 0.5,
-            delay: 0,
-            options: .curveEaseIn,
-            animations: {
-                self.fadeBackgroundView.alpha = 0
-                self.optionsMenu.center.x += self.optionsMenu.bounds.width
-        },
-            completion: nil)
+        if optionsMenu.leftSideSelectedGenres.count != 0 {
+            // If we have 1 or more items in selection we are allowed to dismiss
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0,
+                options: .curveEaseIn,
+                animations: {
+                    self.fadeBackgroundView.alpha = 0
+                    self.optionsMenu.center.x += self.optionsMenu.bounds.width
+            },
+                completion: nil)
+        } else {
+            print("LEFT side empty") // otherwise inform user in some way
+        }
     }
     
     @objc private func dismissOptionsToLeft(sender: UISwipeGestureRecognizer) {
-        UIView.animate(
-            withDuration: 0.5,
-            delay: 0,
-            options: .curveEaseIn,
-            animations: {
-                self.fadeBackgroundView.alpha = 0
-                self.optionsMenu.center.x -= self.optionsMenu.bounds.width
-        },
-            completion: nil)
+        if optionsMenu.rightSideSelectedGenres.count != 0 {
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0,
+                options: .curveEaseIn,
+                animations: {
+                    self.fadeBackgroundView.alpha = 0
+                    self.optionsMenu.center.x -= self.optionsMenu.bounds.width
+            },
+                completion: nil)
+        } else {
+            print("RIGHT side empty")
+        }
     }
 }

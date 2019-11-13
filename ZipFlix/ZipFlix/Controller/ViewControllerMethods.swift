@@ -12,6 +12,18 @@ extension ViewController {
     
     @objc func clearInput(sender: UIButton) {
         openZipper()
+        
+        // When button is pressed we should reset selection data
+        // First we post notification for observers of object who need to reset something
+        NotificationCenter.default.post(name: clearInputNotification, object: nil)
+
+        leftSelectionMenu.leftSideHasSelectedGenres = false
+        leftSelectionMenu.selectionMenu.reloadData()
+        
+        rightSelectionMenu.rigthSideHasSelectedGenres = false
+        rightSelectionMenu.selectionMenu.reloadData()
+
+        
         print("Cleared Input")
 
     }

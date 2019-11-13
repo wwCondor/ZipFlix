@@ -9,15 +9,24 @@
 import UIKit
 
 class RightSelectionMenu: SelectionMenu {
-    
-    let selectionManager = SelectionViewManager()
-        
+            
     let cellId = "rightSelectionMenuId"
     
+    var rigthSideHasSelectedGenres = false
+        
     let emptyBubbleImage = Icons.bubbleEmpty.image
     let selectedBubbleImage = Icons.bubbleSelected.image
     
-    lazy var imageNames = { [emptyBubbleImage, emptyBubbleImage, emptyBubbleImage] }()
+    var imageNames: [String] {
+        var imageArray: [String] = [String]()
+
+        if rigthSideHasSelectedGenres == false {
+            imageArray = [emptyBubbleImage, emptyBubbleImage, emptyBubbleImage]
+        } else if rigthSideHasSelectedGenres == true {
+            imageArray = [selectedBubbleImage, emptyBubbleImage, emptyBubbleImage]
+        }
+        return imageArray
+    }
     
     lazy var selectionMenu: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -77,19 +86,20 @@ extension RightSelectionMenu: UICollectionViewDataSource, UICollectionViewDelega
         return 0
     }
     
-    // Sets up what to do when a cell gets tapped
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         if indexPath.row == 0 {
+            if rigthSideHasSelectedGenres == false {
+                rigthSideHasSelectedGenres = true
+                collectionView.reloadItems(at: [indexPath])
+            }
             selectionManager.presentOptions(direction: .fromLeft)
             print("Launch 1st menu")
+            
         } else if indexPath.row == 1 {
             print("Launch 2nd menu")
-        } else if indexPath.row == 2 {
-            print("Launch 3rd menu")
-        } else if indexPath.row == 3 {
-            print("Launch 4th menu")
         } else {
-            print("Launch 5th menu")
+            print("Launch 3th menu")
         }
     }
 }

@@ -10,10 +10,18 @@ import Foundation
 
 class Client {
     
-    fileprivate let apiKey: String = "ed3e128599234a1dca2c7d4787238741"
+    fileprivate static let apiKey: String = "ed3e128599234a1dca2c7d4787238741"
     
 //    lazy var baseUrl: URL = {
 //        return URL(string: "https://api.themoviedb.org/3/movie/550?api_key=\(self.apiKey)")!
+//    }()
+    
+    static let baseUrl: URL = {
+        return URL(string:"https://api.themoviedb.org/3/")!
+    }()
+    
+//    static let genreUrl: URL = {
+//       return URL(string: "genre/movie/list?api_key=\(apiKey)", relativeTo: baseUrl)!
 //    }()
     
     static let decoder: JSONDecoder = {
@@ -23,13 +31,14 @@ class Client {
     
     static let session = URLSession(configuration: .default)
     
-    // The url that obtains all the genres
-    lazy var genreUrl: URL = {
-       return URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=\(self.apiKey)")!
-    }()
     
-    static func getGenres(url: URL, completion: @escaping ([Genre]?, Error?) -> Void) {
-        var allGenres = [Genre]()
+    // Method that obtains all genres
+    static func getGenres(completion: @escaping (Genres?, Error?) -> Void) {
+        
+        guard let url = URL(string: "genre/movie/list?api_key=\(apiKey)", relativeTo: baseUrl) else {
+            completion(nil, MovieDBError.invalidUrl)
+            return
+        }
         
         let request = URLRequest(url: url)
         
@@ -46,17 +55,15 @@ class Client {
                         print("Status Code: \(httpResponse.statusCode)")
                         
                         do {
-                            let results = try Client.decoder.decode([Genre].self, from: data)
-                            
+                            let results = try Client.decoder.decode(Genres.self, from: data)
                             completion(results, nil)
                             
                         } catch let error {
-                            print(error)
-                            completion(nil, error)
+                            completion(nil, MovieDBError.jsonConversionFailure(description: "\(error.localizedDescription)"))
                         }
                         
                     } else {
-                        completion(nil, MovieDBError.invalidData)
+                        completion(nil, MovieDBError.responseUnsuccessful(description: "Status code: \(httpResponse.statusCode)"))
                     }
                     
                 } else if let error = error {
