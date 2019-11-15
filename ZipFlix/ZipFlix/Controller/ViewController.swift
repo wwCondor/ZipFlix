@@ -8,12 +8,20 @@
 
 import UIKit
 
+struct GenreData {
+    
+    static var genres: [Genre] = [Genre]()
+    
+}
+    
+    
+
 class ViewController: UIViewController {
     
     let clearInputNotification = Notification.Name(rawValue: Constants.clearInputNotificaitonKey)
     
     let movieSuggestionsManager = SuggestionsManager()
-    let selectionManager = SelectionViewManager()
+    let selectionManager = GenreMenuManager()
         
     var modeSelected: ModeSelected = .lightMode
     var zipperState: ZipperState = .open
@@ -24,21 +32,29 @@ class ViewController: UIViewController {
 
     var style: UIStatusBarStyle = .lightContent
     
-    var movieGenres: Genres?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        Client.getGenres { (genres, error) in
+//    var allMovies: [Movie]?
+    var allGenres = [Genre]()
+    
+    func getGenres() {
+        GenreClient.fetchGenres { (genres, error) in
             DispatchQueue.main.async {
                 guard let genres = genres else {
-                    // Throw error Alert
+                    print("GenreError: Uinable to obtain genres")
                     return
                 }
-                self.movieGenres = genres
+                GenreData.genres = genres
+                print(GenreData.genres)
+//                self.selectionManager.genreOptionsMenu.allGenres = genres
+//                self.allGenres = genres
+//                print(self.allGenres)
             }
         }
-        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getGenres()
+            
         setupTopButtonBar()
         setupLeftSelectionMenu()
         setupRightSelectionMenu()
@@ -50,10 +66,6 @@ class ViewController: UIViewController {
             view.backgroundColor = UIColor(named: Colors.dmBackground.color)
         }
     }
-    
-//    override func loadView() {
-//        self.view = SelectionMenu(frame: UIScreen.main.bounds)
-//    }
     
     lazy var topButtonBar: TopButtonBar = {
         let topButtonBar = TopButtonBar()

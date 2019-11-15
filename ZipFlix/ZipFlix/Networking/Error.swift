@@ -10,25 +10,24 @@ import Foundation
 
 enum MovieDBError: Error {
     case requestFailed
-    case responseUnsuccessful(description: String)
+    case jsonConversionFailure
     case invalidData
+    case responseUnsuccessful
+    case jsonParsingFailure
     case jsonDecodingFailure
-    case jsonConversionFailure(description: String)
     case invalidUrl
-    case jsonParsingFailure(description: String)
 }
 
 extension MovieDBError: LocalizedError {
     var description: String {
         switch self {
-        case .requestFailed: return "Request Failed"
-        case .responseUnsuccessful: return "Response Unsuccesful"
-        case .invalidData: return "Invalid Data"
-        case .jsonDecodingFailure: return "JSON Decoding Failure"
-
-        case .jsonConversionFailure: return "JSON Conversion Failed"
-        case .invalidUrl: return "Invalid URL"
-        case .jsonParsingFailure: return "JSON Parsing Failed"
+        case .requestFailed:         return "Request Failed"
+        case .invalidData:           return "Invalid Data"
+        case .responseUnsuccessful:  return "Response Unsuccessful"
+        case .jsonParsingFailure:    return "JSON Parsing Failure"
+        case .jsonConversionFailure: return "JSON Conversion Failure"
+        case .jsonDecodingFailure:   return "JSON Decoding Failure"
+        case .invalidUrl:            return "Invalid URL"
         }
     }
 }

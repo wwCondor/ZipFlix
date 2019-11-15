@@ -14,7 +14,7 @@ enum ModeSelected {
     case darkMode
 }
 
-// Handles direction form which selection menu is presented
+// Handles direction from which selection menu is presented
 enum LaunchDirection {
     case fromRight
     case fromLeft

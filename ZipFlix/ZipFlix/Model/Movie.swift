@@ -9,21 +9,20 @@
 import Foundation
 
 struct Movie: Codable, Equatable {
-    
-    let title: String? //yes
-    let id: Int? //yes
-    
+    let title: String?
+    let originalTitle: String?
+    let originalLanguage: String?
+    let id: Int?
     let popularity: Int? //maybe?
     
-    let voteCount: Int? // yes
-    let voteAverage: Int? // yes
+    let voteCount: Int?
+    let voteAverage: Double?
     let releaseDate: String?
     
     let adult: Bool? // maybe
     let genreIds: [Int]? //probably
-    let posterPath: String? // yes dimension: 500x750
+    let posterPath: String? //dimension: 500x750
     let overview: String
-    
 }
 
 

@@ -108,7 +108,7 @@ extension LeftSelectionMenu: UICollectionViewDataSource, UICollectionViewDelegat
 
 class SelectionMenu: UIView {
     
-    let selectionManager = SelectionViewManager()
+    let selectionManager = GenreMenuManager()
  
     //init from code
     override init(frame: CGRect) {
@@ -123,6 +123,8 @@ class SelectionMenu: UIView {
         setupView()
         setupConstraints()
     }
+    
+    
     
     func setupView() {
         

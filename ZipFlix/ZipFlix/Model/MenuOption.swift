@@ -8,21 +8,11 @@
 
 import Foundation
 
-struct Genres: Codable {
-    let genres: [Genre]
-}
-
-struct Genre: Codable {
-    let id: Int
-    let name: String
-}
-
 struct MenuOption: Equatable {
     let genre: MovieGenre
     let id: Int
     var selected: Bool
 }
-
 
 enum MovieGenre {
     case action
