@@ -9,22 +9,49 @@
 import Foundation
 
 struct Movie: Codable, Equatable {
+    let releaseDate: String?
+    let id: Int?
+    let voteCount: Int?
+    let video: Bool?
+    let mediaType: String?
+    let voteAverage: Double?
     let title: String?
+    let genreIds: [Int]? //probably
     let originalTitle: String?
     let originalLanguage: String?
-    let id: Int?
-    let popularity: Int? //maybe?
-    
-    let voteCount: Int?
-    let voteAverage: Double?
-    let releaseDate: String?
-    
     let adult: Bool? // maybe
-    let genreIds: [Int]? //probably
-    let posterPath: String? //dimension: 500x750
+    let backdropPath: String?
     let overview: String
+    let posterPath: String? //dimension: 500x750
+
+//    let popularity: Int? //maybe?
+    
 }
 
+/*
+ {
+     "release_date": "2014-11-14",
+     "id": 205596,
+     "vote_count": 11053,
+     "video": false,
+     "media_type": "movie",
+     "vote_average": 8.1,
+     "title": "The Imitation Game",
+     "genre_ids": [
+         18,
+         36,
+         53,
+         10752
+     ],
+     "original_title": "The Imitation Game",
+     "original_language": "en",
+     "adult": false,
+     "backdrop_path": "/qcb6z1HpokTOKdjqDTsnjJk0Xvg.jpg",
+     "overview": "Based on the real life story of legendary cryptanalyst Alan Turing, the film portrays the nail-biting race against time by Turing and his brilliant team of code-breakers at Britain's top-secret Government Code and Cypher School at Bletchley Park, during the darkest days of World War II.",
+     "poster_path": "/noUp0XOqIcmgefRnRZa1nhtRvWO.jpg"
+ }
+ 
+ */
 
 //{
 //  "page": 5,

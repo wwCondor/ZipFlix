@@ -142,9 +142,9 @@
 				0B739487237B3AD20087C95F /* Endpoint.swift */,
 				0B739481237AD5B60087C95F /* Error.swift */,
 				0B73949A237DF7650087C95F /* PageHandler.swift */,
-				0B7394A0237EC7CB0087C95F /* MovieDataManager.swift */,
 				0B73947423799A150087C95F /* GenreDataManager.swift */,
 				0B73949E237EC6630087C95F /* PeopleDataManager.swift */,
+				0B7394A0237EC7CB0087C95F /* MovieDataManager.swift */,
 				0B739489237C43A30087C95F /* MoveDBClientOld.swift */,
 			);
 			path = Networking;

@@ -30,8 +30,9 @@ enum Endpoint {
         case .discover:
             var components = URLComponents(url: baseURL.appendingPathComponent("discover/movie"), resolvingAgainstBaseURL: false)
 
-            let genresSelected = "some array of genres"
-            let actorsSelected = "some array of actors"
+            // These depend on user selection
+            let genresSelected = "28" + "18"
+            let actorsSelected = "1449329"
 
             components?.queryItems = [URLQueryItem(name: "api_key", value: "\(APIKey.key)"), URLQueryItem(name: "with_genres", value: "\(genresSelected)"), URLQueryItem(name: "with_people", value: "\(actorsSelected)"), URLQueryItem(name: "page", value: String(describing: page))]
             return components!.url!

@@ -34,26 +34,58 @@ class ViewController: UIViewController {
     
 //    var allMovies: [Movie]?
     var allGenres = [Genre]()
+    var allPeople = [Person]()
+    var moviesDiscover = [Movie]()
     
     func getGenres() {
-        GenreClient.fetchGenres { (genres, error) in
+        GenreDataManager.fetchGenres { (genres, error) in
             DispatchQueue.main.async {
                 guard let genres = genres else {
-                    print("GenreError: Uinable to obtain genres")
+                    print("GenreError: Unable to obtain genres")
                     return
                 }
-                GenreData.genres = genres
-                print(GenreData.genres)
 //                self.selectionManager.genreOptionsMenu.allGenres = genres
-//                self.allGenres = genres
-//                print(self.allGenres)
+                self.allGenres = genres
+                print(self.allGenres)
+            }
+        }
+    }
+    
+    func getPeople() {
+        PeopleDataManager.fetchPopularPeople { (people, error) in
+            DispatchQueue.main.async {
+                guard let people = people else {
+                    print()
+                    return
+                }
+                
+                self.allPeople = people
+                print(self.allPeople)
+                
+            }
+        }
+    }
+    
+    func discoverMovies() {
+        MovieDataManager.discoverMovies { (movies, error) in
+            DispatchQueue.main.async {
+                guard let movies = movies else {
+                    print()
+                    return
+                }
+                
+                self.moviesDiscover = movies
+                print(self.moviesDiscover)
+                
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getGenres()
+//        getGenres() // Works
+        getPeople()
+//        discoverMovies()
             
         setupTopButtonBar()
         setupLeftSelectionMenu()

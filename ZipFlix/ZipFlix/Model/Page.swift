@@ -20,4 +20,9 @@ struct Page<T: Codable>: Codable {
     let results: [T]?
 }
 
-
+//    init(page: Int, totalResults: Int, totalPages: Int, results: [T]) {
+//        self.page = page
+//        self.totalResults = totalResults
+//        self.totalPages = totalPages
+//        self.results = results
+//    }
