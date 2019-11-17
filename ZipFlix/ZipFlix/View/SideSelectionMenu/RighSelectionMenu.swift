@@ -89,12 +89,19 @@ extension RightSelectionMenu: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {
+            GenreDataManager.fetchGenres { (genres, error) in
+                DispatchQueue.main.async {
+                    guard genres != nil else {
+                        print("GenreError: Unable to obtain genres") // MARK: throw alert
+                        return
+                    }
+                    self.genreMenuManager.presentOptions(direction: .fromLeft)
+                }
+            }
             if rigthSideHasSelectedGenres == false {
                 rigthSideHasSelectedGenres = true
                 collectionView.reloadItems(at: [indexPath])
             }
-            selectionManager.presentOptions(direction: .fromLeft)
-            print("Launch 1st menu")
             
         } else if indexPath.row == 1 {
             print("Launch 2nd menu")

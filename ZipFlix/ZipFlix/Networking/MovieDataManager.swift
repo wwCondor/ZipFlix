@@ -22,116 +22,43 @@ class MovieDataManager {
     
     static func discoverMovies(completion: @escaping MovieCompletionHandler) {
         var allMovies = [Movie]()
-                getAllMovies { (moviePages, error) in
-                    // first we check wether have pages
-                    if let moviePages = moviePages {
-                        // If we have pages we check for each page if it contains results
-                        for moviePage in moviePages {
-                            guard let movieArray = moviePage.results else {
-                                print("Unable to obtain people array from pages")
-                                completion(nil, error)
-                                return
-                            }
-                            // If it does, each character inside results will be added to an array
-                            for movie in movieArray {
-                                var movieDuplicates = [Movie]()
-                                if !allMovies.contains(movie) {
-                                    allMovies.append(movie)
-                                    print("***")
-                                    print("\(String(describing: movie.title)) added to array; total: \(allMovies.count)")
-                                } else {
-                                    movieDuplicates.append(movie)
-                                }
-                            }
-                            completion(allMovies, nil)
-                        }
-                    } else if let error = error {
-                        print(error)
+        getMoviePages { (moviePages, error) in
+            if let moviePages = moviePages {
+                for moviePage in moviePages {
+                    guard let movieArray = moviePage.results else {
+                        print("Unable to obtain people array from pages")
                         completion(nil, error)
+                        return
                     }
+                    for movie in movieArray {
+                        var movieDuplicates = [Movie]()
+                        if !allMovies.contains(movie) {
+                            allMovies.append(movie)
+                            print("***")
+                            print("\(String(describing: movie.title)) added to array; total: \(allMovies.count)")
+                        } else {
+                            movieDuplicates.append(movie)
+                        }
+                    }
+                    completion(allMovies, nil)
                 }
+            } else if let error = error {
+                print(error)
+                completion(nil, error)
+            }
+        }
     }
-    
     
     typealias MoviePagesCompletionHandler = ([Page<Movie>]?, Error?) -> Void
     
-    static func getAllMovies(completion: @escaping MoviePagesCompletionHandler) {
+    static func getMoviePages(completion: @escaping MoviePagesCompletionHandler) {
         let url = Endpoint.discover.url(page: 1)
         let allpages = [Page<Movie>]()
         
-        MovieDataManager.getAllResourcePages(url: url, pages: allpages, completionHandler: completion)
+        PageHandler.getPages(url: url, pages: allpages, completion: completion)
     }
     
-    static func getAllResourcePages<T>(url: URL, pages: [Page<T>], completionHandler completion: @escaping ([Page<T>]?, Error?) -> Void) {
-            var allData = pages
-            MovieDataManager.getResourcePage(url: url) { (page: Page<T>?, error: Error?) in
-                if let page = page {
-                    allData.append(page)
-                    
-                    let currentPage = page.page
-                    // Now we appened one page, if there is a "next" page we will repeat this process
-                    let next = Endpoint.people.url(page: currentPage! + 1)
-                    
-                    MovieDataManager.getAllResourcePages(url: next, pages: allData, completionHandler: completion)
-//                    if let next = page.next {
-//
-//                        // If there is no "next" it means we have obtained all the data pages
-//                    } else {
-//                        completion(allData, nil)
-//                    }
-                } else if let error = error {
-                    print(error)
-                    completion(nil, error)
-                }
-                
-            }
-        }
-        
-        // Here we retrieve one page of data from the API
-        static func getResourcePage<T>(url: URL, completionHandler completion: @escaping (Page<T>?, Error?) -> Void) {
-         
-            let request = URLRequest(url: url)
-            
-            let task = MovieDataManager.session.dataTask(with: request) { data, response, error in
-                DispatchQueue.main.async {
-                    if let data = data {
-                        
-                        guard let httpResponse = response as? HTTPURLResponse else {
-                            completion(nil, MovieDBError.requestFailed)
-                            return
-                        }
-                        
-                        if 200...299 ~= httpResponse.statusCode {
-    //                        print("Status Code: \(httpResponse.statusCode)")
-                            
-                            do {
-                                let results = try MovieDataManager.decoder.decode(Page<T>.self, from: data)
-                                //                            print(results)
-                                completion(results, nil)
-                            } catch let error {
-    //                            print(error)
-                                completion(nil, error)
-                            }
-                            
-                        } else {
-                            completion(nil, MovieDBError.invalidData)
-                        }
-                        
-                    } else if let error = error {
-                        completion(nil, error)
-                    }
-                }
-            }
-            task.resume()
-        }
-    
 }
-
-
-
-
-
-
 
 /*
  

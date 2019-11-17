@@ -8,19 +8,11 @@
 
 import UIKit
 
-struct GenreData {
-    
-    static var genres: [Genre] = [Genre]()
-    
-}
-    
-    
-
 class ViewController: UIViewController {
     
-    let clearInputNotification = Notification.Name(rawValue: Constants.clearInputNotificaitonKey)
+    let clearInputNotification = Notification.Name(rawValue: Constants.clearInputNotificationKey)
     
-    let movieSuggestionsManager = SuggestionsManager()
+    let movieSuggestionsManager = MovieSuggestionManager()
     let selectionManager = GenreMenuManager()
         
     var modeSelected: ModeSelected = .lightMode
@@ -30,41 +22,26 @@ class ViewController: UIViewController {
         return self.style
     }
 
-    var style: UIStatusBarStyle = .lightContent
+    var style: UIStatusBarStyle = .lightContent // default setting for statusBar
     
-//    var allMovies: [Movie]?
-    var allGenres = [Genre]()
-    var allPeople = [Person]()
-    var moviesDiscover = [Movie]()
+    var genres = [Genre]()
+    var people = [Person]()
+    var movies = [Movie]()
     
-    func getGenres() {
-        GenreDataManager.fetchGenres { (genres, error) in
-            DispatchQueue.main.async {
-                guard let genres = genres else {
-                    print("GenreError: Unable to obtain genres")
-                    return
-                }
-//                self.selectionManager.genreOptionsMenu.allGenres = genres
-                self.allGenres = genres
-                print(self.allGenres)
-            }
-        }
-    }
-    
-    func getPeople() {
-        PeopleDataManager.fetchPopularPeople { (people, error) in
-            DispatchQueue.main.async {
-                guard let people = people else {
-                    print()
-                    return
-                }
-                
-                self.allPeople = people
-                print(self.allPeople)
-                
-            }
-        }
-    }
+//    func getPeople() {
+//        PeopleDataManager.fetchPopularPeople { (people, error) in
+//            DispatchQueue.main.async {
+//                guard let people = people else {
+//                    print()
+//                    return
+//                }
+//
+//                self.people = people
+//                print(self.people)
+//
+//            }
+//        }
+//    }
     
     func discoverMovies() {
         MovieDataManager.discoverMovies { (movies, error) in
@@ -74,8 +51,8 @@ class ViewController: UIViewController {
                     return
                 }
                 
-                self.moviesDiscover = movies
-                print(self.moviesDiscover)
+                self.movies = movies
+                print(self.movies)
                 
             }
         }
@@ -83,8 +60,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        getGenres() // Works
-        getPeople()
+//        getPeople()
 //        discoverMovies()
             
         setupTopButtonBar()
@@ -306,7 +282,6 @@ class ViewController: UIViewController {
             leftZipperSix.topAnchor.constraint(equalTo: leftZipperFive.bottomAnchor, constant: zipperSpacing),
             leftZipperSix.centerXAnchor.constraint(equalTo: leftSelectionMenu.trailingAnchor, constant: -zipperXOffset)
         ])
-        
         
     }
     

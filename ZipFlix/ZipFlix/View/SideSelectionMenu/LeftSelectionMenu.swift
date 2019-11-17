@@ -13,6 +13,7 @@ class LeftSelectionMenu: SelectionMenu {
     let cellId = "leftSelectionMenuId"
     
     var leftSideHasSelectedGenres = false
+    var leftSideHasSelectedPeople = false
         
     let emptyBubbleImage = Icons.bubbleEmpty.image
     let selectedBubbleImage = Icons.bubbleSelected.image
@@ -90,25 +91,46 @@ extension LeftSelectionMenu: UICollectionViewDataSource, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if indexPath.row == 0 {
+            GenreDataManager.fetchGenres { (genres, error) in
+                DispatchQueue.main.async {
+                    guard genres != nil else {
+                        print("GenreError: Unable to obtain genres") // MARK: throw alert
+                        return
+                    }
+                    self.genreMenuManager.presentOptions(direction: .fromRight)
+                }
+            }
             if leftSideHasSelectedGenres == false {
                 leftSideHasSelectedGenres = true
                 collectionView.reloadItems(at: [indexPath])
             }
             
-            selectionManager.presentOptions(direction: .fromRight)
-            print("Launch 1st menu")
+            print("Launched genre selection menu")
             
         } else if indexPath.row == 1 {
-            print("Launch 2nd menu")
+            PeopleDataManager.fetchPopularPeople { (people, error) in
+                DispatchQueue.main.async {
+                    guard people != nil else {
+                        print("GenreError: Unable to obtain genres") // MARK: throw alert
+                        return
+                    }
+                    self.personMenuManager.presentOptions(direction: .fromRight)
+                }
+            }
+            if leftSideHasSelectedPeople == false {
+                leftSideHasSelectedPeople = true
+                collectionView.reloadItems(at: [indexPath])
+            }
         } else {
-            print("Launch 3th menu")
+            print("Launched 3th menu")
         }
     }
 }
 
 class SelectionMenu: UIView {
     
-    let selectionManager = GenreMenuManager()
+    let genreMenuManager = GenreMenuManager()
+    let personMenuManager = PersonMenuManager()
  
     //init from code
     override init(frame: CGRect) {

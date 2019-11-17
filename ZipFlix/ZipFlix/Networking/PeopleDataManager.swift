@@ -15,7 +15,7 @@ class PeopleDataManager {
 
     static func fetchPopularPeople(completion: @escaping PersonCompletionHandler) {
         var allPeople = [Person]()
-                getAllPeople { (peoplePages, error) in
+                getPeoplePages { (peoplePages, error) in
                     // first we check wether have pages
                     if let peoplePages = peoplePages {
                         // If we have pages we check for each page if it contains results
@@ -45,9 +45,10 @@ class PeopleDataManager {
                 }
     }
     
-    static func getAllPeople(completion: @escaping PeoplePagesCompletionHandler) {
+    static func getPeoplePages(completion: @escaping PeoplePagesCompletionHandler) {
+        let url = Endpoint.people.url(page: 1) // First page is always 1
         let allpages = [Page<Person>]()
-        PageHandler.getAllPages(pages: allpages, completionHandler: completion)
+        PageHandler.getPages(url: url, pages: allpages, completion: completion)
     }
     
 }

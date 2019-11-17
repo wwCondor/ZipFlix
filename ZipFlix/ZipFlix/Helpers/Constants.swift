@@ -16,7 +16,7 @@ struct Constants {
     static let dimNotificationKey = "dimmedMode"
     static let cancelDimNotificationKey = "cancelDimmedMode"
     
-    static let clearInputNotificaitonKey = "clearInput"
+    static let clearInputNotificationKey = "clearInput"
     
     // topBar
     static let topBarHeigth: CGFloat = 58

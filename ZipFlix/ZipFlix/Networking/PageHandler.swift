@@ -19,34 +19,34 @@ class PageHandler {
     
     static let session = URLSession(configuration: .default)
     
-    static func getAllPages<T>(pages: [Page<T>], completionHandler completion: @escaping ([Page<T>]?, Error?) -> Void) {
+    static func getPages<T>(url: URL, pages: [Page<T>], completion: @escaping ([Page<T>]?, Error?) -> Void) {
         var allpages = pages
-        let maxPages = 5
-        var currentPage = 1
-        let nextPageUrl = Endpoint.people.url(page: currentPage)
+        let maxPages: Int = 5
         
-        PageHandler.getPage(url: nextPageUrl) { (page: Page<T>?, error: Error?) in
-            
+        PageHandler.getPage(url: url) { (page: Page<T>?, error: Error?) in
             if let page = page {
-                currentPage += 1
+                guard let currentPage = page.page else {
+                    print("Page does not contain value for current Page")
+                    return
+                }
+                
                 allpages.append(page)
                 
-                let totalPages = page.totalPages
-                
-                if currentPage == totalPages || currentPage == maxPages {
+                if currentPage == page.totalPages || currentPage == maxPages {
                     completion(allpages, nil)
                 } else {
-                    print(currentPage)
-                    PageHandler.getAllPages(pages: allpages, completionHandler: completion)
+                    let nextPage = currentPage + 1
+                    let nextUrl = Endpoint.people.url(page: nextPage)
+                    print(nextPage)
+                    PageHandler.getPages(url: nextUrl, pages: allpages, completion: completion)
                 }
             } else if let error = error {
-                print("We are here, with error: \(error)")
                 completion(nil, error)
             }
         }
     }
     
-    static func getPage<T>(url: URL, completionHandler completion: @escaping (Page<T>?, Error?) -> Void) {
+    static func getPage<T>(url: URL, completion: @escaping (Page<T>?, Error?) -> Void) {
         
         let request = URLRequest(url: url)
         

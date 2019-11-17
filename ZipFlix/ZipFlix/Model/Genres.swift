@@ -12,7 +12,7 @@ struct Genres: Codable {
     let genres: [Genre]?
 }
 
-struct Genre: Codable {
+struct Genre: Codable, Equatable {
     let id: Int?
     let name: String?
 }
