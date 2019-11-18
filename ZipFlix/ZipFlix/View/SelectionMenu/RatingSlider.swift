@@ -31,7 +31,7 @@ class RatingSlider: OptionsMenu {
         let slider = UISlider()
         slider.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
         slider.minimumTrackTintColor = UIColor(named: Colors.objectBG.color)
-        slider.maximumTrackTintColor = UIColor.lightGray.withAlphaComponent(0.5)
+        slider.maximumTrackTintColor = UIColor.white.withAlphaComponent(Constants.dimAlpha)
         slider.thumbTintColor = UIColor.white
         slider.maximumValue = 8.5
         slider.minimumValue = 0

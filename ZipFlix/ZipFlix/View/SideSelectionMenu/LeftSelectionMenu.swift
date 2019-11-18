@@ -57,7 +57,7 @@ extension LeftSelectionMenu {
             if modeSelected == .lightMode {
                 image = UIImage(named: imageNames[indexPath.item])!
             } else if modeSelected == .darkMode {
-                image = UIImage(named: imageNames[indexPath.item])!.alpha(0.5)
+                image = UIImage(named: imageNames[indexPath.item])!.alpha(Constants.dimAlpha)
             }
             return image
         }

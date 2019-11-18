@@ -23,7 +23,6 @@ extension UIView {
     }
 }
 
-
 extension UIView {
     // Used to round of left and right menu corners
     public func roundCorners(corners: UIRectCorner, radius: CGFloat) {
@@ -44,8 +43,6 @@ extension UIImage {
         return newImage!
     }
 }
-
-
 
 // MARK: Untested
 extension UIView {

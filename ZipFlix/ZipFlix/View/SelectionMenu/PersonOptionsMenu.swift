@@ -69,7 +69,7 @@ class PersonOptionsMenu: OptionsMenu {
     
 }
 
-extension PersonOptionsMenu { // }: UITableViewDataSource, UITableViewDelegate {
+extension PersonOptionsMenu { 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedPerson = people[indexPath.row] // Cell selected
@@ -81,7 +81,7 @@ extension PersonOptionsMenu { // }: UITableViewDataSource, UITableViewDelegate {
                     print("Total: \(leftSideSelectedPeople.count)")
                     tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.white
                 } else {
-                    print("Already at max (1) selections")
+                    print("Already at max (1) selection")
                 }
             } else if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.white {
                 let genreToRemove = selectedPerson
@@ -99,7 +99,7 @@ extension PersonOptionsMenu { // }: UITableViewDataSource, UITableViewDelegate {
                     print("Total: \(rightSideSelectedPeople.count)")
                     tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.white
                 } else {
-                    print("Already at max (1) selections")
+                    print("Already at max (1) selection")
                 }
             } else if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.white {
                 let genreToRemove = selectedPerson
