@@ -18,12 +18,15 @@ extension ViewController {
         NotificationCenter.default.post(name: clearInputNotification, object: nil)
 
         leftSelectionMenu.leftSideHasSelectedGenres = false
+        leftSelectionMenu.leftSideHasSelectedPeople = false
+        leftSelectionMenu.leftSideHasSelectedRating = false
         leftSelectionMenu.selectionMenu.reloadData()
         
-        rightSelectionMenu.rigthSideHasSelectedGenres = false
+        rightSelectionMenu.rightSideHasSelectedGenres = false
+        rightSelectionMenu.rightSideHasSelectedPeople = false
+        rightSelectionMenu.rightSideHasSelectedRating = false
         rightSelectionMenu.selectionMenu.reloadData()
 
-        
         print("Cleared Input")
 
     }
@@ -35,28 +38,31 @@ extension ViewController {
         if modeSelected == .darkMode {
             // In here we switch modeSelected
             self.modeSelected = .lightMode
-            
-            // We set and update statusBar
-            self.style = .lightContent
-            self.setNeedsStatusBarAppearanceUpdate()
-            
-            // We set notification in notificationCenter
-            NotificationCenter.default.post(name: lightModeNotification, object: nil)
+            leftSelectionMenu.modeSelected = .lightMode
+            rightSelectionMenu.modeSelected = .lightMode
 
-            // Change background
-            self.view.backgroundColor = UIColor(named: Colors.lmBackground.color)
+            self.style = .lightContent // We set and update statusBar
+            
+            NotificationCenter.default.post(name: lightModeNotification, object: nil) // post notification
+
+            self.view.backgroundColor = UIColor(named: Colors.lmBackground.color) // set background
 
         } else if modeSelected == .lightMode {
             self.modeSelected = .darkMode
-            
+            leftSelectionMenu.modeSelected = .darkMode
+            rightSelectionMenu.modeSelected = .darkMode
+
             self.style = .darkContent
-            self.setNeedsStatusBarAppearanceUpdate()
             
             NotificationCenter.default.post(name: darkModeNotification, object: nil)
             
             self.view.backgroundColor = UIColor(named: Colors.dmBackground.color)
 
         }
+        
+        self.setNeedsStatusBarAppearanceUpdate() // reload statusBar
+        leftSelectionMenu.selectionMenu.reloadData() // reload menu to update cell image alpha
+        rightSelectionMenu.selectionMenu.reloadData()
     }
 
     @objc func runAnimation(tapGestureRecognizer: UITapGestureRecognizer) {

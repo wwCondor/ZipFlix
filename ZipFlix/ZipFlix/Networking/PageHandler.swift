@@ -58,18 +58,18 @@ class PageHandler {
                 }
                 
                 if 200...299 ~= httpResponse.statusCode {
-                    print("Status Code: \(httpResponse.statusCode)")
+//                    print("Status Code: \(httpResponse.statusCode)")
                     if let data = data {
-                        print(data)
+//                        print(data)
                         
                         do {
                             let results = try self.decoder.decode(Page<T>.self, from: data)
 //                            print(results)
                             completion(results, nil)
                             
-                        } catch let error {
+                        } catch { // let error {
                             print("Error Exit 4")
-                            completion(nil, error)
+                            completion(nil, MovieDBError.jsonDecodingFailure)
                         }
 
                     } else if let error = error {

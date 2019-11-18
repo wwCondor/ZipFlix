@@ -33,8 +33,9 @@ enum Endpoint {
             // These depend on user selection
             let genresSelected = "28" + "18"
             let actorsSelected = "1449329"
+            let voteAverage = "vote_average.gte"
 
-            components?.queryItems = [URLQueryItem(name: "api_key", value: "\(APIKey.key)"), URLQueryItem(name: "with_genres", value: "\(genresSelected)"), URLQueryItem(name: "with_people", value: "\(actorsSelected)"), URLQueryItem(name: "page", value: String(describing: page))]
+            components?.queryItems = [URLQueryItem(name: "api_key", value: "\(APIKey.key)"), URLQueryItem(name: "with_genres", value: "\(genresSelected)"), URLQueryItem(name: "with_people", value: "\(actorsSelected)"), URLQueryItem(name: "vote_average.gte", value: "\(voteAverage)"), URLQueryItem(name: "page", value: String(describing: page))]
             return components!.url!
         }
     }

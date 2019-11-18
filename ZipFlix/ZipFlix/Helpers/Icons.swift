@@ -14,7 +14,7 @@ enum Icons {
     case reset
     case movieIcon
     case zipperIcon
-    
+    case zipperThumb
     case bubbleEmpty
     case bubbleSelected
     
@@ -27,7 +27,7 @@ enum Icons {
         case .reset:            return "Reset"
         case .movieIcon:        return "MovieIcon"
         case .zipperIcon:       return "ZipperIcon"
-            
+        case .zipperThumb:      return "ZipperThumb" // 30x30
         case .bubbleEmpty:      return "BubbleEmpty"
         case .bubbleSelected:   return "BubbleSelected"
             

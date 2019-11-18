@@ -55,14 +55,6 @@ class ModeToggleButton: CustomButton {
     private func activateButton(bool: Bool) {
         isOn = bool
         
-//        print(bool)
-//
-//        let trueState: String = "True"
-//        let falseState: String = "False"
-//        
-//        let message = bool ? trueState : falseState
-//        print("Button state:\(message)")
-        
         let lightModeIcon = UIImage(named: Icons.lightModeIcon.image)?.withRenderingMode(.alwaysOriginal)
         let darkModeIcon = UIImage(named: Icons.darkModeIcon.image)?.withRenderingMode(.alwaysTemplate)
         let image = bool ? darkModeIcon : lightModeIcon
@@ -73,31 +65,3 @@ class ModeToggleButton: CustomButton {
     }
 }
 
-
-class CustomButton: UIButton {
-    var isOn = false
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupButton()
-        addObservers()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupButton()
-        addObservers()
-    }
-    
-    func setupButton() {
-
-    }
-    
-    func addObservers() {
-        
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-}

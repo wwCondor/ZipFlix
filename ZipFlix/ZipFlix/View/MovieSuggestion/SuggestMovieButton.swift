@@ -18,7 +18,7 @@ class SuggestMovieButton: CustomButton {
         setImage(image, for: .normal)
         imageView?.contentMode = .scaleAspectFit
         contentMode = .center
-        backgroundColor = UIColor(named: Colors.sideMenuView.color)
+        backgroundColor = UIColor(named: Colors.objectBG.color)
         let inset: CGFloat = Constants.movieIconInset
         imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
         layer.masksToBounds = false

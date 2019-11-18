@@ -9,7 +9,7 @@
 import UIKit
 
 class LogoImageView: UIImageView {
-    var isOn = false
+//    var isOn = false
     
 //    let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)
 //    let darkModeNotification = Notification.Name(rawValue: Constants.darkModeNotificationKey)

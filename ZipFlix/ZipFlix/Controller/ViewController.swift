@@ -24,24 +24,7 @@ class ViewController: UIViewController {
 
     var style: UIStatusBarStyle = .lightContent // default setting for statusBar
     
-    var genres = [Genre]()
-    var people = [Person]()
     var movies = [Movie]()
-    
-//    func getPeople() {
-//        PeopleDataManager.fetchPopularPeople { (people, error) in
-//            DispatchQueue.main.async {
-//                guard let people = people else {
-//                    print()
-//                    return
-//                }
-//
-//                self.people = people
-//                print(self.people)
-//
-//            }
-//        }
-//    }
     
     func discoverMovies() {
         MovieDataManager.discoverMovies { (movies, error) in
@@ -60,7 +43,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        getPeople()
 //        discoverMovies()
             
         setupTopButtonBar()
@@ -82,7 +64,7 @@ class ViewController: UIViewController {
     
     lazy var statusBarView: UIView = {
         let statusBarView = UIView()
-        statusBarView.backgroundColor = UIColor(named: Colors.dmNavBar.color)
+        statusBarView.backgroundColor = UIColor(named: Colors.objectBG.color)
         statusBarView.translatesAutoresizingMaskIntoConstraints = false
         return statusBarView
     }()

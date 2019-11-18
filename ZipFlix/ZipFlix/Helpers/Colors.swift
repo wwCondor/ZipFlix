@@ -10,58 +10,22 @@ import Foundation
 
 enum Colors {
     case dmBackground
-    case dmNavBar
-    
     case lmBackground
-    case lmNavBar
-    
-    case lmStatusBar
-    
-    case sideMenuView
+    case objectBG
     case zipper
     case border
-    case sideButton
     
     var color: String {
         switch self {
         case .dmBackground:     return "DMBackground"
-        case .dmNavBar:         return "DMNavBar"
-            
         case .lmBackground:     return "LMBackground"
-        case .lmNavBar:         return "LMNavBar"
-            
-        case .lmStatusBar:      return "LMStatusBar"
-            
-        case .sideMenuView:     return "SideMenuView"
+        case .objectBG:         return "ObjectBackground"
         case .zipper:           return "Zipper"
         case .border:           return "Border"
-        case .sideButton:       return "SideButton"
         }
     }
 }
 
-
-// Migth be useful for some future feature 
-enum TriStateSwitch {
-    case off
-    case low
-    case high
-    mutating func next() {
-        switch self {
-            case .off:
-                self = .low
-            case .low:
-                self = .high
-            case .high:
-            self = .off
-        }
-    }
-}
-
-//var ovenLight = TriStateSwitch.off
-//ovenLight.next() // ovenLight is now equal to .low
-//ovenLight.next() // ovenLight is now equal to .high
-//ovenLight.next() // ovenLight is now equal to .off again
 
 
 

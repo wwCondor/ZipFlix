@@ -63,11 +63,9 @@ class GenreDataManager {
 //                            print(genres)
                             completion(genres, nil)
 
-                        } catch let error {
+                        } catch { //} let error {
                             print("Error Exit 1")
-                            completion(nil, error)
-
-//                            completion(nil, MovieDBError.jsonDecodingFailure)
+                            completion(nil, MovieDBError.jsonDecodingFailure)
                         }
 
                     } else {

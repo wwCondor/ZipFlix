@@ -79,7 +79,7 @@ class LeftNavigator: Navigator {
 
 class Navigator: UIView {
     
-    let navigatorColor = UIColor(named: Colors.sideMenuView.color)!
+    let navigatorColor = UIColor(named: Colors.objectBG.color)!
 
     override init(frame: CGRect) {
         super.init(frame: frame)

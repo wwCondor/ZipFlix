@@ -10,48 +10,33 @@ import UIKit
 
 class LeftSelectionMenu: SelectionMenu {
     
-    let cellId = "leftSelectionMenuId"
+    override var cellId: String {
+        return super.cellId + "leftSelectionMenuId"
+    }
     
     var leftSideHasSelectedGenres = false
     var leftSideHasSelectedPeople = false
-        
-    let emptyBubbleImage = Icons.bubbleEmpty.image
-    let selectedBubbleImage = Icons.bubbleSelected.image
+    var leftSideHasSelectedRating = false
         
     var imageNames: [String] {
-        var imageArray: [String] = [String]()
+        var imageArray: [String] = [emptyBubbleImage, emptyBubbleImage, emptyBubbleImage]
 
         if leftSideHasSelectedGenres == false {
-            imageArray = [emptyBubbleImage, emptyBubbleImage, emptyBubbleImage]
+            imageArray[0] = emptyBubbleImage
         } else if leftSideHasSelectedGenres == true {
-            imageArray = [selectedBubbleImage, emptyBubbleImage, emptyBubbleImage]
+            imageArray[0] = selectedBubbleImage
+        }
+        if leftSideHasSelectedPeople == false {
+            imageArray[1] = emptyBubbleImage
+        } else if leftSideHasSelectedPeople == true {
+            imageArray[1] = selectedBubbleImage
+        }
+        if leftSideHasSelectedRating == false {
+            imageArray[2] = emptyBubbleImage
+        } else if leftSideHasSelectedRating == true {
+            imageArray[2] = selectedBubbleImage
         }
         return imageArray
-    }
-    
-    lazy var selectionMenu: UICollectionView = {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        let selectionMenu = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        selectionMenu.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
-        selectionMenu.dataSource = self
-        selectionMenu.delegate = self
-        return selectionMenu
-    }()
-    
-    override func setupView() {
-        backgroundColor = UIColor(named:Colors.sideMenuView.color)
-        translatesAutoresizingMaskIntoConstraints = false
-        addSubview(selectionMenu)
-        selectionMenu.isScrollEnabled = false
-    }
-    
-    override func setupConstraints() {
-        let padding = 10
-        
-        addConstraintsWithFormat("H:|[v0]|", views: selectionMenu)
-        addConstraintsWithFormat("V:|-\(padding)-[v0]-\(padding)-|", views: selectionMenu)
     }
     
     override func layoutSubviews() {
@@ -60,99 +45,66 @@ class LeftSelectionMenu: SelectionMenu {
     }
 }
 
-extension LeftSelectionMenu: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    // Sets the amount of cells
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
-    }
+extension LeftSelectionMenu { 
     
     // Sets up cell content
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = selectionMenu.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
         let inset: CGFloat = -40
+        
+        var cellImage: UIImage {
+            var image: UIImage = UIImage(named: imageNames[indexPath.item])!
+            if modeSelected == .lightMode {
+                image = UIImage(named: imageNames[indexPath.item])!
+            } else if modeSelected == .darkMode {
+                image = UIImage(named: imageNames[indexPath.item])!.alpha(0.5)
+            }
+            return image
+        }
+
         let edgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset - 20, right: inset)
-        cell.imageView.image = UIImage(named: imageNames[indexPath.item])!.withAlignmentRectInsets(edgeInsets)
+        cell.imageView.image = cellImage.withAlignmentRectInsets(edgeInsets)
 
         return cell
     }
     
-    // Sets up size of the cells
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width, height: frame.height / 3)
-    }
-    
-    // Sets up spacing between posts
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
     // Sets up what to do when a cell gets tapped
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.row == 0 {
-            GenreDataManager.fetchGenres { (genres, error) in
-                DispatchQueue.main.async {
-                    guard genres != nil else {
-                        print("GenreError: Unable to obtain genres") // MARK: throw alert
-                        return
-                    }
-                    self.genreMenuManager.presentOptions(direction: .fromRight)
+        // Check if we have an internet connection
+        if Reachability.checkReachable() == true {
+            if indexPath.row == 0 {
+                self.genreMenuManager.presentOptions(direction: .fromRight)
+
+                if leftSideHasSelectedGenres == false {
+                    leftSideHasSelectedGenres = true
+                    collectionView.reloadItems(at: [indexPath])
                 }
-            }
-            if leftSideHasSelectedGenres == false {
-                leftSideHasSelectedGenres = true
-                collectionView.reloadItems(at: [indexPath])
+                
+            } else if indexPath.row == 1 {
+                self.personMenuManager.presentOptions(direction: .fromRight)
+
+                if leftSideHasSelectedPeople == false {
+                    leftSideHasSelectedPeople = true
+                    collectionView.reloadItems(at: [indexPath])
+                }
+            } else if indexPath.row == 2 {
+                self.ratingSliderManager.presentSlider(direction: .fromRight)
+                
+                if leftSideHasSelectedRating == false {
+                    leftSideHasSelectedRating = true
+                    collectionView.reloadItems(at: [indexPath])
+                }
+            } else {
+                print("Button not connected")
             }
             
-            print("Launched genre selection menu")
-            
-        } else if indexPath.row == 1 {
-            PeopleDataManager.fetchPopularPeople { (people, error) in
-                DispatchQueue.main.async {
-                    guard people != nil else {
-                        print("GenreError: Unable to obtain genres") // MARK: throw alert
-                        return
-                    }
-                    self.personMenuManager.presentOptions(direction: .fromRight)
-                }
-            }
-            if leftSideHasSelectedPeople == false {
-                leftSideHasSelectedPeople = true
-                collectionView.reloadItems(at: [indexPath])
-            }
-        } else {
-            print("Launched 3th menu")
+        } else if Reachability.checkReachable() == false {
+            print("Internet Connection not Available!") // MARK: Alert
         }
+        
     }
 }
 
-class SelectionMenu: UIView {
-    
-    let genreMenuManager = GenreMenuManager()
-    let personMenuManager = PersonMenuManager()
+
  
-    //init from code
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-        setupConstraints()
-    }
-    
-    //init from storyboard
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupView()
-        setupConstraints()
-    }
-    
-    
-    
-    func setupView() {
-        
-    }
-    
-    func setupConstraints() {
-        
-    }
-}

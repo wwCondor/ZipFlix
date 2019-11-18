@@ -8,13 +8,6 @@
 
 import Foundation
 
-//struct PeoplePage: Codable {
-//    let page: Int?
-//    let totalResults: Int?
-//    let totalPages: Int?
-//    let results: [Person]?
-//}
-
 struct Person: Codable, Equatable {
     let popularity: Double?             // 26.359
     let knownForDepartment: String?  // "Acting"
@@ -22,7 +15,6 @@ struct Person: Codable, Equatable {
     let id: Int?                     // 1449329
     let profilePath: String?        // "/m436jpgrrxmBTUdKSiWPsVRLxpW.jpg"
     let adult: Bool?                 // false
-//    let knownFor: [Media]?
     let name: String?                // "Jack Bannon"
 }
 

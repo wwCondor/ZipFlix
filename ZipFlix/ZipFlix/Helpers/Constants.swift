@@ -41,6 +41,7 @@ struct Constants {
     static let menuCornerRadius: CGFloat = 15
     static let topOffset: CGFloat = 100 // space between top bar and side mnu top
     static let bottomOffset: CGFloat = -90 // space between menu botom and suggestMovieButton
+    static let sliderLabelCornerRadius: CGFloat = 10
     
     // dim alpha of zipper, suggestMovieButton and modeToggleButton
     static let dimAlpha: CGFloat = 0.5
