@@ -49,7 +49,7 @@ extension RightSelectionMenu {
     
     // Sets up cell content
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = selectionMenu.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
+        let cell = selectionMenu.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BubbleCell
         let inset: CGFloat = -40
         
         var cellImage: UIImage {
@@ -70,37 +70,41 @@ extension RightSelectionMenu {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        // Check if we have an internet connection
-        if Reachability.checkReachable() == true {
-            if indexPath.row == 0 {
-                self.genreMenuManager.presentOptions(direction: .fromLeft)
-
-                if rightSideHasSelectedGenres == false {
-                    rightSideHasSelectedGenres = true
-                    collectionView.reloadItems(at: [indexPath])
+        if APIKey.key == "" {
+            print(MovieDBError.missingKey.description)
+        } else {
+            // Check if we have an internet connection
+            if Reachability.checkReachable() == true {
+                if indexPath.row == 0 {
+                    self.genreMenuManager.presentOptions(direction: .fromLeft)
+                    
+                    if rightSideHasSelectedGenres == false {
+                        rightSideHasSelectedGenres = true
+                        collectionView.reloadItems(at: [indexPath])
+                    }
+                    
+                } else if indexPath.row == 1 {
+                    self.personMenuManager.presentOptions(direction: .fromLeft)
+                    
+                    if rightSideHasSelectedPeople == false {
+                        rightSideHasSelectedPeople = true
+                        collectionView.reloadItems(at: [indexPath])
+                    }
+                } else if indexPath.row == 2 {
+                    self.ratingSliderManager.presentSlider(direction: .fromLeft)
+                    
+                    if rightSideHasSelectedRating == false {
+                        rightSideHasSelectedRating = true
+                        collectionView.reloadItems(at: [indexPath])
+                    }
+                } else {
+                    print("Button not connected")
                 }
                 
-            } else if indexPath.row == 1 {
-                self.personMenuManager.presentOptions(direction: .fromLeft)
-
-                if rightSideHasSelectedPeople == false {
-                    rightSideHasSelectedPeople = true
-                    collectionView.reloadItems(at: [indexPath])
-                }
-            } else if indexPath.row == 2 {
-                self.ratingSliderManager.presentSlider(direction: .fromLeft)
-                
-                if rightSideHasSelectedRating == false {
-                    rightSideHasSelectedRating = true
-                    collectionView.reloadItems(at: [indexPath])
-                }
-            } else {
-                print("Button not connected")
+            } else if Reachability.checkReachable() == false {
+                print("Internet Connection not Available!") // MARK: Alert
             }
-            
-        } else if Reachability.checkReachable() == false {
-            print("Internet Connection not Available!") // MARK: Alert
         }
-        
+
     }
 }

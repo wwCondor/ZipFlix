@@ -20,7 +20,7 @@ class OptionsMenu: UIView {
     
     lazy var options: UITableView = {
         let options = UITableView()
-        options.register(CustomCell.self, forCellReuseIdentifier: cellId)
+        options.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         options.dataSource = self
         options.delegate = self
         options.backgroundColor = UIColor.clear
@@ -74,24 +74,4 @@ extension OptionsMenu: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
-}
-
-
-// do we need this?
-class CustomCell: UITableViewCell {
-    
-    func setupCell() {
-        textLabel?.textColor = UIColor.black
-    }
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupCell()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupCell()
-    }
-    
 }

@@ -41,10 +41,17 @@ class ViewController: UIViewController {
         }
     }
     
+    func addObserver() {
+        // MARK: Build This
+        // In here need clearInput observer - when user dismisses discovery screen
+        // 
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        discoverMovies()
             
+        addObserver()
         setupTopButtonBar()
         setupLeftSelectionMenu()
         setupRightSelectionMenu()
@@ -136,33 +143,33 @@ class ViewController: UIViewController {
         return zipper
     }()
     
-    lazy var rightZipperOne: RigthSideZipper = {
-        let zipper = RigthSideZipper()
+    lazy var rightZipperOne: RightSideZipper = {
+        let zipper = RightSideZipper()
         return zipper
     }()
     
-    lazy var rightZipperTwo: RigthSideZipper = {
-        let zipper = RigthSideZipper()
+    lazy var rightZipperTwo: RightSideZipper = {
+        let zipper = RightSideZipper()
         return zipper
     }()
     
-    lazy var rightZipperThree: RigthSideZipper = {
-        let zipper = RigthSideZipper()
+    lazy var rightZipperThree: RightSideZipper = {
+        let zipper = RightSideZipper()
         return zipper
     }()
     
-    lazy var rightZipperFour: RigthSideZipper = {
-        let zipper = RigthSideZipper()
+    lazy var rightZipperFour: RightSideZipper = {
+        let zipper = RightSideZipper()
         return zipper
     }()
     
-    lazy var rightZipperFive: RigthSideZipper = {
-        let zipper = RigthSideZipper()
+    lazy var rightZipperFive: RightSideZipper = {
+        let zipper = RightSideZipper()
         return zipper
     }()
     
-    lazy var rightZipperSix: RigthSideZipper = {
-        let zipper = RigthSideZipper()
+    lazy var rightZipperSix: RightSideZipper = {
+        let zipper = RightSideZipper()
         return zipper
     }()
 

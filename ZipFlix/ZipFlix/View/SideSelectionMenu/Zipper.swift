@@ -45,7 +45,7 @@ class LeftSideZipper: Zipper {
     }
 }
 
-class RigthSideZipper: Zipper {
+class RightSideZipper: Zipper {
     
     override func draw(_ rect: CGRect) {
         let width = self.bounds.size.width

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B73945D237493AE0087C95F /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73945C237493AE0087C95F /* MenuCell.swift */; };
+		0B73945D237493AE0087C95F /* BubbleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73945C237493AE0087C95F /* BubbleCell.swift */; };
 		0B73946823774B000087C95F /* MovieSuggestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73946723774B000087C95F /* MovieSuggestionManager.swift */; };
 		0B73946B23783C350087C95F /* MovieNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73946A23783C350087C95F /* MovieNavigator.swift */; };
 		0B73946D237842C00087C95F /* MovieSuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73946C237842C00087C95F /* MovieSuggestionsView.swift */; };
@@ -33,6 +33,8 @@
 		0B7394B82382DC690087C95F /* SelectionMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7394B72382DC690087C95F /* SelectionMenu.swift */; };
 		0B7394BB2382DFF30087C95F /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7394BA2382DFF30087C95F /* CustomButton.swift */; };
 		0B7394BD2382E0A60087C95F /* OptionsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7394BC2382E0A60087C95F /* OptionsMenu.swift */; };
+		0B7394BF238316BF0087C95F /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7394BE238316BF0087C95F /* OptionCell.swift */; };
+		0B7394C123831BCB0087C95F /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7394C023831BCB0087C95F /* Alert.swift */; };
 		0B7ABD0C2370190000EF16B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD0B2370190000EF16B0 /* AppDelegate.swift */; };
 		0B7ABD0E2370190000EF16B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD0D2370190000EF16B0 /* SceneDelegate.swift */; };
 		0B7ABD102370190000EF16B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD0F2370190000EF16B0 /* ViewController.swift */; };
@@ -57,7 +59,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0B73945C237493AE0087C95F /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		0B73945C237493AE0087C95F /* BubbleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCell.swift; sourceTree = "<group>"; };
 		0B73946723774B000087C95F /* MovieSuggestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSuggestionManager.swift; sourceTree = "<group>"; };
 		0B73946A23783C350087C95F /* MovieNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieNavigator.swift; sourceTree = "<group>"; };
 		0B73946C237842C00087C95F /* MovieSuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSuggestionsView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,8 @@
 		0B7394B72382DC690087C95F /* SelectionMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMenu.swift; sourceTree = "<group>"; };
 		0B7394BA2382DFF30087C95F /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		0B7394BC2382E0A60087C95F /* OptionsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsMenu.swift; sourceTree = "<group>"; };
+		0B7394BE238316BF0087C95F /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
+		0B7394C023831BCB0087C95F /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		0B7ABD082370190000EF16B0 /* ZipFlix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZipFlix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7ABD0B2370190000EF16B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B7ABD0D2370190000EF16B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,7 +129,7 @@
 				0B7ABD382371BC6000EF16B0 /* LeftSelectionMenu.swift */,
 				0B7ABD3E2371C83A00EF16B0 /* RighSelectionMenu.swift */,
 				0B7394B72382DC690087C95F /* SelectionMenu.swift */,
-				0B73945C237493AE0087C95F /* MenuCell.swift */,
+				0B73945C237493AE0087C95F /* BubbleCell.swift */,
 				0B7ABD442372B5B600EF16B0 /* Zipper.swift */,
 			);
 			path = SideSelectionMenu;
@@ -136,7 +140,6 @@
 			children = (
 				0B7ABD3A2371C75E00EF16B0 /* SuggestMovieButton.swift */,
 				0B7394BA2382DFF30087C95F /* CustomButton.swift */,
-				0B73946723774B000087C95F /* MovieSuggestionManager.swift */,
 				0B73946C237842C00087C95F /* MovieSuggestionsView.swift */,
 				0B73946A23783C350087C95F /* MovieNavigator.swift */,
 			);
@@ -164,6 +167,7 @@
 				0B7394782379AC4B0087C95F /* GenreOptionsMenu.swift */,
 				0B7394A3238169AF0087C95F /* PersonOptionsMenu.swift */,
 				0B7394BC2382E0A60087C95F /* OptionsMenu.swift */,
+				0B7394BE238316BF0087C95F /* OptionCell.swift */,
 				0B7394B52382A3B80087C95F /* RatingSlider.swift */,
 			);
 			path = SelectionMenu;
@@ -183,6 +187,7 @@
 				0B7394762379AA550087C95F /* GenreMenuManager.swift */,
 				0B7394A5238169C80087C95F /* PersonMenuManager.swift */,
 				0B7394B32382A3970087C95F /* RatingSliderManager.swift */,
+				0B73946723774B000087C95F /* MovieSuggestionManager.swift */,
 			);
 			path = ObjectManager;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 				0B7ABD0F2370190000EF16B0 /* ViewController.swift */,
 				0B7ABD362371B3B700EF16B0 /* ViewControllerMethods.swift */,
 				0B7ABD462372F2B400EF16B0 /* ZipperAnimations.swift */,
+				0B7394C023831BCB0087C95F /* Alert.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -384,6 +390,7 @@
 				0B739499237DD4230087C95F /* APIKey.swift in Sources */,
 				0B73947523799A150087C95F /* GenreDataManager.swift in Sources */,
 				0B739484237ADC120087C95F /* Movie.swift in Sources */,
+				0B7394C123831BCB0087C95F /* Alert.swift in Sources */,
 				0B739486237AEE090087C95F /* StateEnums.swift in Sources */,
 				0B7394BB2382DFF30087C95F /* CustomButton.swift in Sources */,
 				0B73947E237AD33C0087C95F /* Page.swift in Sources */,
@@ -393,10 +400,11 @@
 				0B7ABD0E2370190000EF16B0 /* SceneDelegate.swift in Sources */,
 				0B7394BD2382E0A60087C95F /* OptionsMenu.swift in Sources */,
 				0B7ABD392371BC6000EF16B0 /* LeftSelectionMenu.swift in Sources */,
+				0B7394BF238316BF0087C95F /* OptionCell.swift in Sources */,
 				0B7394B223829CDF0087C95F /* Reachability.swift in Sources */,
 				0B7394A6238169C80087C95F /* PersonMenuManager.swift in Sources */,
 				0B7ABD3B2371C75E00EF16B0 /* SuggestMovieButton.swift in Sources */,
-				0B73945D237493AE0087C95F /* MenuCell.swift in Sources */,
+				0B73945D237493AE0087C95F /* BubbleCell.swift in Sources */,
 				0B7ABD2A23703B9700EF16B0 /* Extensions.swift in Sources */,
 				0B739482237AD5B60087C95F /* Error.swift in Sources */,
 				0B7ABD452372B5B600EF16B0 /* Zipper.swift in Sources */,

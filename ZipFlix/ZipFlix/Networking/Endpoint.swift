@@ -4,7 +4,7 @@
 //
 //  Created by Wouter Willebrands on 12/11/2019.
 //  Copyright © 2019 Studio Willebrands. All rights reserved.
-//  https://api.themoviedb.org/3/person/popular?api_key=ed3e128599234a1dca2c7d4787238741&page=1
+//
 
 import Foundation
 
@@ -39,6 +39,24 @@ enum Endpoint {
             return components!.url!
         }
     }
+    
+    /*
+    Example APi Call
+     - https://api.themoviedb.org/3/discover/movie
+     - ?api_key=ed3e128599234a1dca2c7d4787238741
+     - &language=en                                 // optional
+     - &sort_by=popularity.desc                     // optional - can do this afterwards in some user options
+     - &include_adult=false                         // optional
+     - &page=1
+     - &vote_average.gte=5.0
+     - &with_people=1449329
+     - &with_genres=28%2C%2018
+     https://api.themoviedb.org/3/discover/movie?api_key=ed3e128599234a1dca2c7d4787238741&language=en&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&vote_average.gte=5.0&with_people=1449329&with_genres=28%2C%2018
+     */
+ 
+
+
+
     
 //    static func getGenres(for someArray: [Genre]) -> String {
 //        var returnedString = ""

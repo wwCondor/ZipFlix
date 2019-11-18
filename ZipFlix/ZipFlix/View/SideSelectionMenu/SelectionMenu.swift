@@ -28,7 +28,7 @@ class SelectionMenu: UIView {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         let selectionMenu = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        selectionMenu.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
+        selectionMenu.register(BubbleCell.self, forCellWithReuseIdentifier: cellId)
         selectionMenu.dataSource = self
         selectionMenu.delegate = self
         return selectionMenu
@@ -72,7 +72,7 @@ extension SelectionMenu: UICollectionViewDataSource, UICollectionViewDelegate, U
     
     // Sets up cell content
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = selectionMenu.dequeueReusableCell(withReuseIdentifier: "", for: indexPath) as! MenuCell
+        let cell = selectionMenu.dequeueReusableCell(withReuseIdentifier: "", for: indexPath) as! BubbleCell
         return cell
     }
     
