@@ -42,9 +42,8 @@ class ViewController: UIViewController {
     }
     
     func addObserver() {
-        // MARK: Build This
-        // In here need clearInput observer - when user dismisses discovery screen
-        // 
+        // Listens for clearInputNotification posted by movie suggesiton when dismissed and opens zipper
+        NotificationCenter.default.addObserver(self, selector: #selector(openZipper(sender:)), name: clearInputNotification, object: nil)
     }
     
     override func viewDidLoad() {

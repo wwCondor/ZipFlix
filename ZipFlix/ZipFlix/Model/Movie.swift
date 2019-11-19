@@ -9,74 +9,75 @@
 import Foundation
 
 struct Movie: Codable, Equatable {
-    let releaseDate: String?
-    let id: Int?
-    let voteCount: Int?
-    let video: Bool?
-    let mediaType: String?
-    let voteAverage: Double?
-    let title: String?
-    let genreIds: [Int]? //probably
-    let originalTitle: String?
-    let originalLanguage: String?
-    let adult: Bool? // maybe
-    let backdropPath: String?
-    let overview: String
-    let posterPath: String? //dimension: 500x750
-
 //    let popularity: Int? //maybe?
-    
+//    let voteCount: Int?
+//    let video: Bool?
+    let posterPath: String? //dimension: 500x750
+//    let id: Int?
+//    let adult: Bool? // maybe
+//    let backdropPath: String?
+    let originalLanguage: String?
+//    let originalTitle: String?
+    let genreIds: [Int]? //probably
+    let title: String?
+    let voteAverage: Double?
+    let overview: String
+    let releaseDate: String?
+}
+
+struct TestMovie {
+    let posterPath: String?
+    let originalLanguage: String?
+    let genreIds: [Int]?
+    let title: String?
+    let voteAverage: Double?
+    let overview: String
+    let releaseDate: String?
 }
 
 /*
  {
-     "release_date": "2014-11-14",
-     "id": 205596,
-     "vote_count": 11053,
-     "video": false,
-     "media_type": "movie",
-     "vote_average": 8.1,
-     "title": "The Imitation Game",
-     "genre_ids": [
-         18,
-         36,
-         53,
-         10752
-     ],
-     "original_title": "The Imitation Game",
-     "original_language": "en",
-     "adult": false,
-     "backdrop_path": "/qcb6z1HpokTOKdjqDTsnjJk0Xvg.jpg",
-     "overview": "Based on the real life story of legendary cryptanalyst Alan Turing, the film portrays the nail-biting race against time by Turing and his brilliant team of code-breakers at Britain's top-secret Government Code and Cypher School at Bletchley Park, during the darkest days of World War II.",
-     "poster_path": "/noUp0XOqIcmgefRnRZa1nhtRvWO.jpg"
+   "popularity": 37.11,
+   "vote_count": 7096,
+   "video": false,
+   "poster_path": "/fa4PxEPRKWRyjzYje1jM4m30qzd.jpg",
+   "id": 228150,
+   "adult": false,
+   "backdrop_path": "/pKawqrtCBMmxarft7o1LbEynys7.jpg",
+   "original_language": "en",
+   "original_title": "Fury",
+   "genre_ids": [
+     28,
+     18,
+     10752
+   ],
+   "title": "Fury",
+   "vote_average": 7.4,
+   "overview": "In the last months of World War II, as the Allies make their final push in the European theatre, a battle-hardened U.S. Army sergeant named 'Wardaddy' commands a Sherman tank called 'Fury' and its five-man crew on a deadly mission behind enemy lines. Outnumbered and outgunned, Wardaddy and his men face overwhelming odds in their heroic attempts to strike at the heart of Nazi Germany.",
+   "release_date": "2014-10-15"
+ }
+ 
+ {
+   "popularity": 39.823,
+   "vote_count": 10469,
+   "video": false,
+   "poster_path": "/eFnGmj63QPUpK7QUWSOUhypIQOT.jpg",
+   "id": 109445,
+   "adult": false,
+   "backdrop_path": "/cN9Nbwh66TRcj2gBE8cSEZulsx3.jpg",
+   "original_language": "en",
+   "original_title": "Frozen",
+   "genre_ids": [
+     12,
+     16,
+     10751
+   ],
+   "title": "Frozen",
+   "vote_average": 7.3,
+   "overview": "Young princess Anna of Arendelle dreams about finding true love at her sister Elsa’s coronation. Fate takes her on a dangerous journey in an attempt to end the eternal winter that has fallen over the kingdom. She's accompanied by ice delivery man Kristoff, his reindeer Sven, and snowman Olaf. On an adventure where she will find out what friendship, courage, family, and true love really means.",
+   "release_date": "2013-11-27"
  }
  
  */
 
-//{
-//  "page": 5,
-//  "total_results": 10000,
-//  "total_pages": 500,
-//  "results": [
-//    {
-//      "popularity": 39.823,
-//      "vote_count": 10469,
-//      "video": false,
-//      "poster_path": "/eFnGmj63QPUpK7QUWSOUhypIQOT.jpg",
-//      "id": 109445,
-//      "adult": false,
-//      "backdrop_path": "/cN9Nbwh66TRcj2gBE8cSEZulsx3.jpg",
-//      "original_language": "en",
-//      "original_title": "Frozen",
-//      "genre_ids": [
-//        12,
-//        16,
-//        10751
-//      ],
-//      "title": "Frozen",
-//      "vote_average": 7.3,
-//      "overview": "Young princess Anna of Arendelle dreams about finding true love at her sister Elsa’s coronation. Fate takes her on a dangerous journey in an attempt to end the eternal winter that has fallen over the kingdom. She's accompanied by ice delivery man Kristoff, his reindeer Sven, and snowman Olaf. On an adventure where she will find out what friendship, courage, family, and true love really means.",
-//      "release_date": "2013-11-27"
-//    }
-//  ]
-//}
+

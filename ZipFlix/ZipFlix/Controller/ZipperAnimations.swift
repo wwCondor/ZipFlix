@@ -12,6 +12,7 @@ extension ViewController {
     
     func closeZipper() {
         let dimmerNotification = Notification.Name(rawValue: Constants.dimNotificationKey)
+        let zipperNotification = Notification.Name(rawValue: Constants.zipperNotificationKey)
         
         let zipDistance = leftZipperFour.bounds.width * (3/4) - 12
         let zipDuration: TimeInterval = 0.20
@@ -19,6 +20,7 @@ extension ViewController {
         
         if zipperState == .open {
             print("Closing Zipper")
+            NotificationCenter.default.post(name: zipperNotification, object: nil)
             NotificationCenter.default.post(name: dimmerNotification, object: nil)
             clearInputButton.isEnabled = false // prevents starting open zipper animation during animation
             modeToggleButton.isEnabled = false // prevents switching modes during animation (and thereby resetting animation)
@@ -71,9 +73,9 @@ extension ViewController {
                             self.rightZipperOne.center.x -= zipDistance
             },
                            completion: { _ in
-                            self.animationCompleted()
+                            self.openZipperAnimationCompleted()
                             self.clearInputButton.isEnabled = true
-                            self.movieSuggestionsManager.presentSuggestions()
+                            NotificationCenter.default.post(name: zipperNotification, object: nil)
                                 })
                             })
                         })
@@ -85,8 +87,9 @@ extension ViewController {
         }
     }
     
-    func openZipper() {
+    @objc func openZipper(sender: Notification) {
         let cancelDimmerNotification = Notification.Name(rawValue: Constants.cancelDimNotificationKey)
+        let zipperNotification = Notification.Name(rawValue: Constants.zipperNotificationKey)
 
         let zipDistance = leftZipperFour.bounds.width * (3/4) - 12
         let zipDuration: TimeInterval = 0.20
@@ -96,6 +99,7 @@ extension ViewController {
             print("Opening Zipper")
             suggestMovieButton.isEnabled = false
             zipperState = .open
+            NotificationCenter.default.post(name: zipperNotification, object: nil)
             UIView.animate(withDuration: zipDuration,
                            delay: 0.0,
                            options: [.curveEaseIn],
@@ -144,10 +148,11 @@ extension ViewController {
                             self.rightZipperSix.center.x += zipDistance
             },
                              completion: { _ in
-                            self.animationCompleted()
+                            self.closeZipperAnimationCompleted()
                             self.suggestMovieButton.isEnabled = true
                             self.modeToggleButton.isEnabled = true
                             NotificationCenter.default.post(name: cancelDimmerNotification, object: nil)
+                            NotificationCenter.default.post(name: zipperNotification, object: nil)
                               })
                            })
                        })
@@ -159,7 +164,17 @@ extension ViewController {
         }
     }
     
-    private func animationCompleted() {
-        print("Done")
+    private func openZipperAnimationCompleted() {
+        if Reachability.checkReachable() == true {
+            movieSuggestionsManager.presentSuggestions()
+        } else {
+            closeZipper()
+            Alert.presentAlert(description: MovieDBError.noReachability.description, viewController: self)
+        }
     }
+    
+    private func closeZipperAnimationCompleted() {
+        resetSelections()
+    }
+    
 }

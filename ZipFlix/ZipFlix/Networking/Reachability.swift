@@ -11,7 +11,7 @@ import SystemConfiguration
 // Object that check wether we have internet connection
 struct Reachability {
     
-    private static let reachability = SCNetworkReachabilityCreateWithName( kCFAllocatorDefault, "www.wouterwillebrands.com")
+    private static let reachability = SCNetworkReachabilityCreateWithName( kCFAllocatorDefault, "https://www.themoviedb.org/")
     
     static func checkReachable() -> Bool {
         var flags = SCNetworkReachabilityFlags()

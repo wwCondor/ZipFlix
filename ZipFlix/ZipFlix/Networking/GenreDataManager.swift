@@ -10,10 +10,6 @@ import Foundation
 
 class GenreDataManager {
 
-//    static let baseUrl: URL = {
-//        return URL(string:"https://api.themoviedb.org/3/")!
-//    }()
-
     static let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -56,7 +52,7 @@ class GenreDataManager {
                     }
 
                     if 200...299 ~= httpResponse.statusCode {
-                        print("Status Code: \(httpResponse.statusCode)")
+//                        print("Status Code: \(httpResponse.statusCode)")
 
                         do {
                             let genres = try GenreDataManager.decoder.decode(Genres.self, from: data)
@@ -64,7 +60,7 @@ class GenreDataManager {
                             completion(genres, nil)
 
                         } catch { //} let error {
-                            print("Error Exit 1")
+//                            print("Error Exit 1")
                             completion(nil, MovieDBError.jsonDecodingFailure)
                         }
 
@@ -73,7 +69,7 @@ class GenreDataManager {
                     }
 
                 } else if let error = error {
-                    print("Error exit 2")
+//                    print("Error exit 2")
                     completion(nil, error)
                 }
             }
@@ -81,21 +77,3 @@ class GenreDataManager {
         task.resume()
     }
 }
-
-
-/*
-Example response for genres
- {
-     "genres": [
-         {
-             "id": 28,
-             "name": "Action"
-         },
-         {
-             "id": 16,
-             "name": "Animation"
-         }
-    ]
- }
- */
-

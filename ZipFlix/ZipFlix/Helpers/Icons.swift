@@ -18,6 +18,8 @@ enum Icons {
     case bubbleEmpty
     case bubbleSelected
     
+    case poster
+    
     var image: String {
         switch self {
         case .darkModeIcon:     return "DarkMode"
@@ -28,6 +30,8 @@ enum Icons {
         case .zipperThumb:      return "ZipperThumb" // 30x30
         case .bubbleEmpty:      return "BubbleEmpty"
         case .bubbleSelected:   return "BubbleSelected"
+            
+        case .poster: return "TestPoster"
         }
     }
     

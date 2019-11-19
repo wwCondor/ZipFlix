@@ -10,6 +10,8 @@ import UIKit
 
 class SelectionMenu: UIView {
     
+    let zipperNotification = Notification.Name(rawValue: Constants.zipperNotificationKey)
+    
     let genreMenuManager = GenreMenuManager()
     let personMenuManager = PersonMenuManager()
     let ratingSliderManager = RatingSliderManager()
@@ -18,6 +20,10 @@ class SelectionMenu: UIView {
     let selectedBubbleImage = Icons.bubbleSelected.image
     
     var modeSelected: ModeSelected = .lightMode
+    
+    var isOn = false
+    
+    var zipperIsAnimating: Bool = false
     
     var cellId: String {
         return ""
@@ -37,6 +43,7 @@ class SelectionMenu: UIView {
     //init from code
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addObserver()
         setupView()
         setupConstraints()
     }
@@ -44,8 +51,26 @@ class SelectionMenu: UIView {
     //init from storyboard
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        addObserver()
         setupView()
         setupConstraints()
+    }
+    
+    func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(toggleState), name: zipperNotification, object: nil)
+    }
+    
+    @objc private func toggleState(notification: NSNotification) {
+        activateButton(bool: !isOn)
+    }
+    
+    private func activateButton(bool: Bool) {
+        isOn = bool
+        
+        let zipperAnimating: Bool = true
+        let zipperNotAnimating: Bool = false
+        zipperIsAnimating = bool ? zipperAnimating : zipperNotAnimating
+        print("Zipper animating: \(zipperIsAnimating)")
     }
   
     func setupView() {
@@ -60,6 +85,10 @@ class SelectionMenu: UIView {
         
         addConstraintsWithFormat("H:|[v0]|", views: selectionMenu)
         addConstraintsWithFormat("V:|-\(padding)-[v0]-\(padding)-|", views: selectionMenu)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 

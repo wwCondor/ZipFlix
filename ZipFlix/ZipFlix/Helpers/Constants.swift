@@ -13,10 +13,11 @@ struct Constants {
     static let lightModeNotificationKey = "lightMode"
     static let darkModeNotificationKey = "darkMode"
     
-    static let dimNotificationKey = "dimmedMode"
+    static let dimNotificationKey = "dimmedMode" 
     static let cancelDimNotificationKey = "cancelDimmedMode"
     
-    static let clearInputNotificationKey = "clearInput"
+    static let clearInputNotificationKey = "clearInput" // Option selections content and slider reset
+    static let zipperNotificationKey = "zipper"
     
     // topBar
     static let topBarHeigth: CGFloat = 58

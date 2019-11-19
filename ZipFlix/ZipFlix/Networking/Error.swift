@@ -17,6 +17,7 @@ enum MovieDBError: Error {
     case jsonDecodingFailure
     case invalidUrl
     case missingKey
+    case noReachability
 }
 
 extension MovieDBError: LocalizedError {
@@ -30,6 +31,7 @@ extension MovieDBError: LocalizedError {
         case .jsonDecodingFailure:   return "JSON Decoding Failure"
         case .invalidUrl:            return "Invalid URL"
         case .missingKey:            return "Please set your key in APIkey.swift"
+        case .noReachability:        return "Check connection and try again"
         }
     }
 }
@@ -43,9 +45,9 @@ enum UserSelectionError: Error {
 extension UserSelectionError: LocalizedError {
     var description: String {
         switch self {
-            case .genreSelection:   return "Left and/or right user still needs to select at least one genre"
-            case .personSelection:  return "Left and/or right user still needs to select one person"
-            case .ratingSelection:    return "Left and/or right user still needs to select a minimum rating"
+            case .genreSelection:   return "Please select at least one genre for both sides"
+            case .personSelection:  return "Please select a person for both sides"
+            case .ratingSelection:  return "Please select a minimum rating for both sides"
         }
 
     }

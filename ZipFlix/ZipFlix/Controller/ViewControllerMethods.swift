@@ -11,12 +11,11 @@ import UIKit
 extension ViewController {
     
     @objc func clearInput(sender: UIButton) {
-        openZipper()
-        
-        // When button is pressed we should reset selection data
-        // First we post notification for observers of object who need to reset something
         NotificationCenter.default.post(name: clearInputNotification, object: nil)
-
+        resetSelections()
+    }
+    
+    func resetSelections() {
         leftSelectionMenu.leftSideHasSelectedGenres = false
         leftSelectionMenu.leftSideHasSelectedPeople = false
         leftSelectionMenu.leftSideHasSelectedRating = false
@@ -26,10 +25,10 @@ extension ViewController {
         rightSelectionMenu.rightSideHasSelectedPeople = false
         rightSelectionMenu.rightSideHasSelectedRating = false
         rightSelectionMenu.selectionMenu.reloadData()
-
+        
         print("Cleared Input")
-
     }
+    
     
     
     
@@ -73,20 +72,22 @@ extension ViewController {
     }
     
     @objc func suggestMovie(sender: UIButton) {
-        if leftSelectionMenu.leftSideHasSelectedGenres == true && rightSelectionMenu.rightSideHasSelectedGenres == true && leftSelectionMenu.leftSideHasSelectedPeople == true && rightSelectionMenu.rightSideHasSelectedPeople == true && leftSelectionMenu.leftSideHasSelectedRating == true && rightSelectionMenu.rightSideHasSelectedRating == true {
-            
-            closeZipper()
-            print("Start Loading")
-            print("Present Movie Suggestion")
-            print("Stop Loading")
-            
-        } else if leftSelectionMenu.leftSideHasSelectedGenres == false || rightSelectionMenu.rightSideHasSelectedGenres == false {
-            Alert.presentAlert(description: UserSelectionError.genreSelection.description, viewController: self)
-        } else if leftSelectionMenu.leftSideHasSelectedPeople == false || rightSelectionMenu.rightSideHasSelectedPeople == false {
-            Alert.presentAlert(description: UserSelectionError.personSelection.description, viewController: self)
-        } else if leftSelectionMenu.leftSideHasSelectedRating == false || rightSelectionMenu.rightSideHasSelectedRating == false {
-            Alert.presentAlert(description: UserSelectionError.ratingSelection.description, viewController: self)
-        }
+        closeZipper() // MARK: Delete and uncomment
+
+//        if leftSelectionMenu.leftSideHasSelectedGenres == true && rightSelectionMenu.rightSideHasSelectedGenres == true && leftSelectionMenu.leftSideHasSelectedPeople == true && rightSelectionMenu.rightSideHasSelectedPeople == true && leftSelectionMenu.leftSideHasSelectedRating == true && rightSelectionMenu.rightSideHasSelectedRating == true {
+//
+//            closeZipper()
+//            print("Start Loading")
+//            print("Present Movie Suggestion")
+//            print("Stop Loading")
+//
+//        } else if leftSelectionMenu.leftSideHasSelectedGenres == false || rightSelectionMenu.rightSideHasSelectedGenres == false {
+//            Alert.presentAlert(description: UserSelectionError.genreSelection.description, viewController: self)
+//        } else if leftSelectionMenu.leftSideHasSelectedPeople == false || rightSelectionMenu.rightSideHasSelectedPeople == false {
+//            Alert.presentAlert(description: UserSelectionError.personSelection.description, viewController: self)
+//        } else if leftSelectionMenu.leftSideHasSelectedRating == false || rightSelectionMenu.rightSideHasSelectedRating == false {
+//            Alert.presentAlert(description: UserSelectionError.ratingSelection.description, viewController: self)
+//        }
     }
     
 }

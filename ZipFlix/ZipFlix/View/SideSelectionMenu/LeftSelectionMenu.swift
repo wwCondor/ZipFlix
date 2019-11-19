@@ -70,41 +70,44 @@ extension LeftSelectionMenu {
     
     // Sets up what to do when a cell gets tapped
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if APIKey.key == "" {
-            print(MovieDBError.missingKey.description) // Only used during development/peer reviews
-        } else {
-            // Check if we have an internet connection
-            if Reachability.checkReachable() == true {
-                if indexPath.row == 0 {
-                    self.genreMenuManager.presentOptions(direction: .fromRight)
+        if zipperIsAnimating == false {
+            if APIKey.key == "" {
+                print(MovieDBError.missingKey.description) // Only used during development/peer reviews
+            } else {
+                // Check if we have an internet connection
+                if Reachability.checkReachable() == true {
+                    if indexPath.row == 0 {
+                        self.genreMenuManager.presentOptions(direction: .fromRight)
 
-                    if leftSideHasSelectedGenres == false {
-                        leftSideHasSelectedGenres = true
-                        collectionView.reloadItems(at: [indexPath])
+                        if leftSideHasSelectedGenres == false {
+                            leftSideHasSelectedGenres = true
+                            collectionView.reloadItems(at: [indexPath])
+                        }
+                        
+                    } else if indexPath.row == 1 {
+                        self.personMenuManager.presentOptions(direction: .fromRight)
+
+                        if leftSideHasSelectedPeople == false {
+                            leftSideHasSelectedPeople = true
+                            collectionView.reloadItems(at: [indexPath])
+                        }
+                    } else if indexPath.row == 2 {
+                        self.ratingSliderManager.presentSlider(direction: .fromRight)
+                        
+                        if leftSideHasSelectedRating == false {
+                            leftSideHasSelectedRating = true
+                            collectionView.reloadItems(at: [indexPath])
+                        }
+                    } else {
+                        print("Button not connected")
                     }
                     
-                } else if indexPath.row == 1 {
-                    self.personMenuManager.presentOptions(direction: .fromRight)
-
-                    if leftSideHasSelectedPeople == false {
-                        leftSideHasSelectedPeople = true
-                        collectionView.reloadItems(at: [indexPath])
-                    }
-                } else if indexPath.row == 2 {
-                    self.ratingSliderManager.presentSlider(direction: .fromRight)
-                    
-                    if leftSideHasSelectedRating == false {
-                        leftSideHasSelectedRating = true
-                        collectionView.reloadItems(at: [indexPath])
-                    }
-                } else {
-                    print("Button not connected")
+                } else if Reachability.checkReachable() == false {
+                    print("Internet Connection not Available!") // MARK: Alert
                 }
-                
-            } else if Reachability.checkReachable() == false {
-                print("Internet Connection not Available!") // MARK: Alert
             }
+        } else if zipperIsAnimating == true {
+            print("Zipper is animating, selection menu disabled")
         }
         
     }
