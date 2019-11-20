@@ -21,7 +21,7 @@ struct Movie: Codable, Equatable {
     let genreIds: [Int]? //probably
     let title: String?
     let voteAverage: Double?
-    let overview: String
+    let overview: String?
     let releaseDate: String?
 }
 

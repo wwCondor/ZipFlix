@@ -11,7 +11,8 @@ import Foundation
 enum Endpoint {
     case genres
     case people
-    case discover
+    case discover1
+    case discover2
     
     private var baseURL: URL {
         return URL(string: "https://api.themoviedb.org/3/")!
@@ -27,17 +28,28 @@ enum Endpoint {
             var components = URLComponents(url: baseURL.appendingPathComponent("person/popular"), resolvingAgainstBaseURL: false)
             components?.queryItems = [URLQueryItem(name: "api_key", value: "\(APIKey.key)"), URLQueryItem(name: "page", value: String(describing: page))]
             return components!.url!
-        case .discover:
+        case .discover1:
             var components = URLComponents(url: baseURL.appendingPathComponent("discover/movie"), resolvingAgainstBaseURL: false)
 
             // These depend on user selection
-            let genresSelected = "28" + "18"
-            let actorsSelected = "1449329"
-            let voteAverage = "vote_average.gte"
+            let genresSelected = User.getGenreIds()
+            let actorsSelected = User.getPersons(for: User.leftUser)
+            let voteAverage = User.getAverageRating()
 
             components?.queryItems = [URLQueryItem(name: "api_key", value: "\(APIKey.key)"), URLQueryItem(name: "with_genres", value: "\(genresSelected)"), URLQueryItem(name: "with_people", value: "\(actorsSelected)"), URLQueryItem(name: "vote_average.gte", value: "\(voteAverage)"), URLQueryItem(name: "page", value: String(describing: page))]
             return components!.url!
+        case .discover2:
+        var components = URLComponents(url: baseURL.appendingPathComponent("discover/movie"), resolvingAgainstBaseURL: false)
+
+        // These depend on user selection
+        let genresSelected = User.getGenreIds() // "10770"
+        let actorsSelected = User.getPersons(for: User.rightUser) // "8602"
+        let voteAverage = User.getAverageRating()
+
+        components?.queryItems = [URLQueryItem(name: "api_key", value: "\(APIKey.key)"), URLQueryItem(name: "with_genres", value: "\(genresSelected)"), URLQueryItem(name: "with_people", value: "\(actorsSelected)"), URLQueryItem(name: "vote_average.gte", value: "\(voteAverage)"), URLQueryItem(name: "page", value: String(describing: page))]
+        return components!.url!
         }
+        
     }
     
     /*

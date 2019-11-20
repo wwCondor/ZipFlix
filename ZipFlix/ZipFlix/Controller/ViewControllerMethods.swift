@@ -26,11 +26,16 @@ extension ViewController {
         rightSelectionMenu.rightSideHasSelectedRating = false
         rightSelectionMenu.selectionMenu.reloadData()
         
+        User.leftUser.selectedGenres.removeAll()
+        User.leftUser.selectedPersons.removeAll()
+        User.leftUser.selectedRating = 0.0
+        
+        User.rightUser.selectedGenres.removeAll()
+        User.rightUser.selectedPersons.removeAll()
+        User.rightUser.selectedRating = 0.0
+        
         print("Cleared Input")
     }
-    
-    
-    
     
     @objc func switchMode(sender: UIButton) {
         let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)

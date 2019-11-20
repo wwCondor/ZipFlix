@@ -167,6 +167,7 @@ extension ViewController {
     private func openZipperAnimationCompleted() {
         if Reachability.checkReachable() == true {
             movieSuggestionsManager.presentSuggestions()
+//            movieSuggestionsManager.makeDiscovery() 
         } else {
             closeZipper()
             Alert.presentAlert(description: MovieDBError.noReachability.description, viewController: self)

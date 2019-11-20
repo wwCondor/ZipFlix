@@ -67,8 +67,10 @@ class PageHandler {
 //                            print(results)
                             completion(results, nil)
                             
-                        } catch { // let error {
+                        } catch let error {
                             print("Error Exit 4")
+//                            print(data)
+                            print(error)
                             completion(nil, MovieDBError.jsonDecodingFailure)
                         }
 

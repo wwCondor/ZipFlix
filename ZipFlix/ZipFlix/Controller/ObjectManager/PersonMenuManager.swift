@@ -113,6 +113,11 @@ class PersonMenuManager: ObjectManager {
                 
     @objc private func dismissOptionsToRight(sender: UISwipeGestureRecognizer) {
         if peopleOptionsMenu.leftSideSelectedPeople.count != 0 {
+            for person in peopleOptionsMenu.leftSideSelectedPeople {
+                User.leftUser.selectedPersons.removeAll() // make sure its empty before storing
+                User.leftUser.selectedPersons.append(person)
+                print("Stored: \(peopleOptionsMenu.leftSideSelectedPeople.count)")
+            }
             // If we have 1 or more items in selection we are allowed to dismiss
             UIView.animate(
                 withDuration: 0.5,
@@ -130,6 +135,11 @@ class PersonMenuManager: ObjectManager {
     
     @objc private func dismissOptionsToLeft(sender: UISwipeGestureRecognizer) {
         if peopleOptionsMenu.rightSideSelectedPeople.count != 0 {
+            for person in peopleOptionsMenu.rightSideSelectedPeople {
+                User.rightUser.selectedPersons.removeAll() // make sure its empty before storing
+                User.rightUser.selectedPersons.append(person)
+                print("Stored: \(peopleOptionsMenu.rightSideSelectedPeople.count)")
+            }
             UIView.animate(
                 withDuration: 0.5,
                 delay: 0,

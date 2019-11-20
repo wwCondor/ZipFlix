@@ -20,6 +20,10 @@ class MovieSuggestionManager: ObjectManager {
         return movieSuggestions
     }()
     
+    let selectedGenres: [Genre] = [Genre]()
+    let selectedPersons: [Person] = [Person]()
+    let selectedRatings: [Float] = [Float]()
+    
     lazy var touchScreen: UIView = {
         let touchscreen = UIView()
         let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(navigateSuggestionsBySwipe(sender:)))
@@ -32,10 +36,19 @@ class MovieSuggestionManager: ObjectManager {
         return touchscreen
     }()
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = UIColor.white
+        activityIndicator.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        return activityIndicator
+    }()
+    
     lazy var posterView: UIImageView = {
-        let image = UIImage(named: Icons.poster.image)?.withRenderingMode(.alwaysOriginal)
+        let image = UIImage(named: Icons.poster.image)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor.systemYellow)
         let posterView = UIImageView(image: image)
-        posterView.backgroundColor = UIColor.yellow
+        posterView.backgroundColor = UIColor.clear
         return posterView
     }()
     
@@ -78,25 +91,25 @@ class MovieSuggestionManager: ObjectManager {
     // Right side labels
     lazy var originalLanguageInfoLabel: RightSideLabel = {
         let label = RightSideLabel()
-        label.text = "en"
+        label.text = "-"
         return label
     }()
 
     lazy var genreInfoLabel: RightSideLabel = {
         let label = RightSideLabel()
-        label.text = "14"
+        label.text = "-"
         return label
     }()
     
     lazy var averageVoteInfoLabel: RightSideLabel = {
         let label = RightSideLabel()
-        label.text = "5.0"
+        label.text = "-"
         return label
     }()
 
     lazy var releaseDataInfoLabel: RightSideLabel = {
         let label = RightSideLabel()
-        label.text = "14.23.2134"
+        label.text = "-"
         return label
     }()
     
@@ -129,9 +142,9 @@ class MovieSuggestionManager: ObjectManager {
     override func activateButton(bool: Bool) {
         isOn = bool
         
-        let lightMode = UIColor(named: Colors.lmBackground.color)
-        let darkMode = UIColor(named: Colors.dmBackground.color)
-        movieSuggestions.contentView.backgroundColor = bool ? darkMode : lightMode
+        let lightModeBG = UIColor(named: Colors.lmBackground.color)
+        let darkModeBG = UIColor(named: Colors.dmBackground.color)
+        movieSuggestions.contentView.backgroundColor = bool ? darkModeBG : lightModeBG
     }
     
     func createTestContent() {
@@ -139,9 +152,78 @@ class MovieSuggestionManager: ObjectManager {
         movies.append(TestMovie(posterPath: Icons.poster.image, originalLanguage: "en", genreIds: [2, 2, 2], title: "b", voteAverage: 2.2, overview: "2", releaseDate: "2014-11-14"))
         movies.append(TestMovie(posterPath: Icons.poster.image, originalLanguage: "en", genreIds: [3, 3, 3], title: "c", voteAverage: 3.3, overview: "3", releaseDate: "2014-11-14"))
     }
+    
+    
+    var allMovies: [Movie] = [Movie]()
+    
+    func discoverMovies() {
+        activityIndicator.startAnimating()
+        MovieDataManager.discoverLeftMovies { (movies, error) in
+            DispatchQueue.main.async {
+                guard let movies = movies else {
+                    print("We have made no discovery")
+                    return
+                }
+                
+                self.allMovies = movies
+                print(self.allMovies)
+                
+                if self.allMovies.count != 0 {
+                    guard let image = self.allMovies[0].posterPath else {
+                        // MARK: Image
+                        return
+                    }
+                    guard let title = self.allMovies[0].title else {
+                        self.titleLabel.text = "No results"
+                        return
+                    }
+                    guard let vote = self.allMovies[0].voteAverage else {
+                        self.averageVoteInfoLabel.text = "?"
+                        return
+                    }
+                    guard let genres = self.allMovies[0].genreIds else {
+                        self.genreInfoLabel.text = "?"
+                        return
+                    }
+                    guard let language = self.allMovies[0].originalLanguage else {
+                        self.originalLanguageInfoLabel.text = "?"
+                        return
+                    }
+                    guard let date = self.allMovies[0].releaseDate else {
+                        self.releaseDataInfoLabel.text = "?"
+                        return
+                    }
+                    guard let movieDiscription = self.allMovies[0].overview else {
+                        self.movieOverview.text = "The selections made have not resulted in any "
+                        return
+                    }
+                    // MARK: Overview
+                    // set
+                    self.posterView.image = UIImage(named: Icons.poster.image)
+                    self.titleLabel.text = "\(title)"
+                    self.averageVoteInfoLabel.text = "\(vote)"
+                    self.genreInfoLabel.text = "\(genres)"
+                    self.originalLanguageInfoLabel.text = "\(language)"
+                    self.releaseDataInfoLabel.text = "\(date)"
+                    self.movieOverview.text = "\(movieDiscription)"
+                } else {
+                    print("We have no results")
+                }
+                
+                self.activityIndicator.stopAnimating()
+            }
+        }
+    }
+
+    func setUpLabels() {
+        
+    }
         
     func presentSuggestions() {
-        createTestContent()
+        discoverMovies()
+//        activityIndicator.startAnimating()
+
+//        createTestContent()
          
         let window = UIApplication.shared.windows.first { $0.isKeyWindow } // handles deprecated warning for multiple screens
 
@@ -166,6 +248,7 @@ class MovieSuggestionManager: ObjectManager {
             window.addSubview(originalLanguageInfoLabel)
             window.addSubview(releaseDataInfoLabel)
             
+            window.addSubview(activityIndicator)
             window.addSubview(touchScreen)
             window.addSubview(movieOverview)
 
@@ -200,6 +283,9 @@ class MovieSuggestionManager: ObjectManager {
             let spacing = labelHeigth / 5
             
             NSLayoutConstraint.activate([
+                activityIndicator.centerXAnchor.constraint(equalTo: movieSuggestions.centerXAnchor),
+                activityIndicator.centerYAnchor.constraint(equalTo: movieSuggestions.centerYAnchor),
+                
                 titleLabel.topAnchor.constraint(equalTo: posterView.bottomAnchor, constant: spacing),
                 titleLabel.centerXAnchor.constraint(equalTo: movieSuggestions.centerXAnchor),
                 titleLabel.heightAnchor.constraint(equalToConstant: labelHeigth),
@@ -271,7 +357,7 @@ class MovieSuggestionManager: ObjectManager {
                 rightNavigator.leadingAnchor.constraint(equalTo: movieSuggestions.trailingAnchor, constant: -offset),
                 rightNavigator.centerYAnchor.constraint(equalTo: movieSuggestions.centerYAnchor)
             ])
-
+            
             UIView.animate(
                 withDuration: 0.5,
                 delay: 0,
@@ -283,7 +369,16 @@ class MovieSuggestionManager: ObjectManager {
                     self.rightNavigator.alpha = 1.0
                     self.posterView.alpha = 1.0
                     self.titleLabel.alpha = 1.0
-
+                    self.averageVoteLabel.alpha = 1.0
+                    self.averageVoteInfoLabel.alpha = 1.0
+                    self.genreLabel.alpha = 1.0
+                    self.genreInfoLabel.alpha = 1.0
+                    self.originalLanguageLabel.alpha = 1.0
+                    self.originalLanguageInfoLabel.alpha = 1.0
+                    self.releaseDataLabel.alpha = 1.0
+                    self.releaseDataInfoLabel.alpha = 1.0
+                    self.movieOverview.alpha = 1.0
+                    self.activityIndicator.alpha = 1.0
             },
                 completion: nil)
         }
@@ -301,7 +396,16 @@ class MovieSuggestionManager: ObjectManager {
                 self.rightNavigator.alpha = 0
                 self.posterView.alpha = 0
                 self.titleLabel.alpha = 0
-
+                self.averageVoteLabel.alpha = 0
+                self.averageVoteInfoLabel.alpha = 0
+                self.genreLabel.alpha = 0
+                self.genreInfoLabel.alpha = 0
+                self.originalLanguageLabel.alpha = 0
+                self.originalLanguageInfoLabel.alpha = 0
+                self.releaseDataLabel.alpha = 0
+                self.releaseDataInfoLabel.alpha = 0
+                self.movieOverview.alpha = 0
+                self.activityIndicator.alpha = 0
         },
             completion: { _ in
                 NotificationCenter.default.post(name: self.clearInputNotification, object: nil) // Resets selections and slider. Opens Zipper

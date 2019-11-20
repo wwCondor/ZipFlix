@@ -113,6 +113,8 @@ class RatingSliderManager: ObjectManager {
                 
     @objc private func dismissSliderToRight(sender: UISwipeGestureRecognizer) {
         if ratingSliderMenu.minimumRating >= 0 {
+            User.rightUser.selectedRating = ratingSliderMenu.minimumRating
+            print("Stored: \(ratingSliderMenu.minimumRating)")
             // If we have 1 or more items in selection we are allowed to dismiss
             UIView.animate(
                 withDuration: 0.5,
@@ -130,6 +132,8 @@ class RatingSliderManager: ObjectManager {
     
     @objc private func dismissSliderToLeft(sender: UISwipeGestureRecognizer) {
         if ratingSliderMenu.minimumRating >= 0 {
+            User.leftUser.selectedRating = ratingSliderMenu.minimumRating
+            print("Stored: \(ratingSliderMenu.minimumRating)")
             UIView.animate(
                 withDuration: 0.5,
                 delay: 0,
