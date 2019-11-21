@@ -30,6 +30,7 @@ struct User {
                 allGenres.append(genre)
             }
         }
+        print("Combined genres: \(allGenres)")
         return allGenres
     }
     
@@ -43,21 +44,28 @@ struct User {
         
         for genre in genres {
             if currentGenre != maxGenresReturned || currentGenre != genres.count {
-                genreIds += String(describing: genre.id) + "|"
+                guard let genreId = genre.id else {
+                    return ""
+                }
+                genreIds += String(describing: genreId) + "|"
                 currentGenre += 1
             } else {
                 print("Max genres reached or only 2 available")
             }
         }
-        
+        print("GenreIds: \(genreIds)")
         return genreIds
     }
     
     static func getPersons(for user: User) -> String {
         var personIds = ""
         for person in user.selectedPersons {
-            personIds += String(describing: person.id) + "|"
+            guard let personId = person.id else {
+                return ""
+            }
+            personIds += String(describing: personId) + "|"
         }
+        print("PersonId: \(personIds)")
         return personIds
     }
     
@@ -65,6 +73,7 @@ struct User {
         let leftUserRating = User.leftUser.selectedRating
         let rightUserRating = User.rightUser.selectedRating
         
+        print((leftUserRating + rightUserRating)/2)
         return (leftUserRating + rightUserRating)/2
     }
 }

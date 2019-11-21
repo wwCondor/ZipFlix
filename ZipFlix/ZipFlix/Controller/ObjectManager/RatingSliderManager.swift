@@ -26,6 +26,7 @@ class RatingSliderManager: ObjectManager {
     }
         
     func presentSlider(direction: LaunchDirection) {
+        ratingSliderMenu.minimumRating = 5.0
         
         let window = UIApplication.shared.windows.first { $0.isKeyWindow } // handles deprecated warning for multiple screens
 

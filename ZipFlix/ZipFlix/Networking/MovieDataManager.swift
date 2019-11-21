@@ -22,7 +22,7 @@ class MovieDataManager {
     
     static func discoverLeftMovies(completion: @escaping MovieCompletionHandler) {
         var allMovies = [Movie]()
-        getLeftMoviePages { (moviePages, error) in
+        getRightMoviePages { (moviePages, error) in
             if let moviePages = moviePages {
                 for moviePage in moviePages {
                     guard let movieArray = moviePage.results else {

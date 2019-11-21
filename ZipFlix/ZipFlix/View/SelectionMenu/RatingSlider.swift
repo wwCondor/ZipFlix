@@ -70,7 +70,7 @@ class RatingSlider: OptionsMenu {
     
     override func removeSelection(sender: Notification) {
         slider.setValue(5.0, animated: false)
-        ratingLabel.text = "\(minimumRating)"
+        ratingLabel.text = "5.0"
     }
 
     override func setupConstraints() {
@@ -88,6 +88,7 @@ class RatingSlider: OptionsMenu {
     @objc func changeRating(_ sender: UISlider) {
         let voteAverage = Float(sender.value)
         ratingLabel.text = String(format: "%.1f", voteAverage)
+        minimumRating = Double(round(voteAverage * 10))/10 // make sure we have 1 decimal
     }
     
 }

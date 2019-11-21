@@ -13,6 +13,8 @@ class MovieSuggestionManager: ObjectManager {
     let clearInputNotification = Notification.Name(rawValue: Constants.clearInputNotificationKey)
     
     var movies: [TestMovie] = [TestMovie]()
+    
+    var currentMovie: Int = 0
 
     lazy var movieSuggestions: MovieSuggestionsView = {
         let movieSuggestions = MovieSuggestionsView()
@@ -46,7 +48,7 @@ class MovieSuggestionManager: ObjectManager {
     }()
     
     lazy var posterView: UIImageView = {
-        let image = UIImage(named: Icons.poster.image)?.withRenderingMode(.alwaysTemplate).withTintColor(UIColor.systemYellow)
+        let image = UIImage(named: Icons.noPoster.image)//
         let posterView = UIImageView(image: image)
         posterView.backgroundColor = UIColor.clear
         return posterView
@@ -147,83 +149,130 @@ class MovieSuggestionManager: ObjectManager {
         movieSuggestions.contentView.backgroundColor = bool ? darkModeBG : lightModeBG
     }
     
-    func createTestContent() {
-        movies.append(TestMovie(posterPath: Icons.poster.image, originalLanguage: "en", genreIds: [1, 1, 1], title: "a", voteAverage: 1.1, overview: "1", releaseDate: "2014-11-14"))
-        movies.append(TestMovie(posterPath: Icons.poster.image, originalLanguage: "en", genreIds: [2, 2, 2], title: "b", voteAverage: 2.2, overview: "2", releaseDate: "2014-11-14"))
-        movies.append(TestMovie(posterPath: Icons.poster.image, originalLanguage: "en", genreIds: [3, 3, 3], title: "c", voteAverage: 3.3, overview: "3", releaseDate: "2014-11-14"))
-    }
-    
-    
     var allMovies: [Movie] = [Movie]()
     
     func discoverMovies() {
-        activityIndicator.startAnimating()
         MovieDataManager.discoverLeftMovies { (movies, error) in
+            self.activityIndicator.startAnimating()
             DispatchQueue.main.async {
                 guard let movies = movies else {
-                    print("We have made no discovery")
+                    print("Left side gave no results")
                     return
                 }
-                
-                self.allMovies = movies
-                print(self.allMovies)
-                
-                if self.allMovies.count != 0 {
-                    guard let image = self.allMovies[0].posterPath else {
-                        // MARK: Image
-                        return
+                for movie in movies {
+                    if !self.allMovies.contains(movie) {
+                        self.allMovies.append(movie)
                     }
-                    guard let title = self.allMovies[0].title else {
-                        self.titleLabel.text = "No results"
-                        return
-                    }
-                    guard let vote = self.allMovies[0].voteAverage else {
-                        self.averageVoteInfoLabel.text = "?"
-                        return
-                    }
-                    guard let genres = self.allMovies[0].genreIds else {
-                        self.genreInfoLabel.text = "?"
-                        return
-                    }
-                    guard let language = self.allMovies[0].originalLanguage else {
-                        self.originalLanguageInfoLabel.text = "?"
-                        return
-                    }
-                    guard let date = self.allMovies[0].releaseDate else {
-                        self.releaseDataInfoLabel.text = "?"
-                        return
-                    }
-                    guard let movieDiscription = self.allMovies[0].overview else {
-                        self.movieOverview.text = "The selections made have not resulted in any "
-                        return
-                    }
-                    // MARK: Overview
-                    // set
-                    self.posterView.image = UIImage(named: Icons.poster.image)
-                    self.titleLabel.text = "\(title)"
-                    self.averageVoteInfoLabel.text = "\(vote)"
-                    self.genreInfoLabel.text = "\(genres)"
-                    self.originalLanguageInfoLabel.text = "\(language)"
-                    self.releaseDataInfoLabel.text = "\(date)"
-                    self.movieOverview.text = "\(movieDiscription)"
-                } else {
-                    print("We have no results")
                 }
                 
+                print(self.allMovies.count)
+                
+                self.setUpLabels(for: self.currentMovie)
                 self.activityIndicator.stopAnimating()
+
+            }
+        }
+        
+        MovieDataManager.discoverRightMovies { (movies, error) in
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+            guard let movies = movies else {
+                print("Right side gave no results")
+                return
+            }
+            
+            for movie in movies {
+                if !self.allMovies.contains(movie) {
+                    self.allMovies.append(movie)
+                }
+            }
+            
+            print(self.allMovies.count)
+            
+            self.activityIndicator.stopAnimating()
             }
         }
     }
 
-    func setUpLabels() {
+    func setUpLabels(for movie: Int) {
+        if allMovies.count != 0 {
+            
+            guard let posterPath = allMovies[currentMovie].posterPath else {
+                self.posterView.image = UIImage(named: Icons.noPoster.image)
+                return
+            }
+            guard let title = allMovies[currentMovie].title else {
+                self.titleLabel.text = "No results"
+                return
+            }
+            guard let vote = allMovies[currentMovie].voteAverage else {
+                self.averageVoteInfoLabel.text = "?"
+                return
+            }
+            guard let genreIds = allMovies[currentMovie].genreIds else {
+                self.genreInfoLabel.text = "?"
+                return
+            }
+            guard let language = allMovies[currentMovie].originalLanguage else {
+                self.originalLanguageInfoLabel.text = "?"
+                return
+            }
+            guard let date = allMovies[currentMovie].releaseDate else {
+                self.releaseDataInfoLabel.text = "?"
+                return
+            }
+            guard let movieDiscription = allMovies[currentMovie].overview else {
+                self.movieOverview.text = "The selections made have not resulted in any"
+                return
+            }
+            
+            let url = URL(string: posterPath, relativeTo: PosterImageHandler.imageBaseURl)!
+            PosterImageHandler.getData(from: url) { data, response, error in
+                guard let data = data, error == nil else { return }
+                DispatchQueue.main.async() {
+                    self.posterView.image = UIImage(data: data)
+                }
+            }
+            
+//            posterView.download(from: posterPath)
+            titleLabel.text = "\(title)"
+            averageVoteInfoLabel.text = "\(vote)"
+            let genreNames = getGenreNames(for: genreIds) // MARK: Does not work?
+            genreInfoLabel.text = "\(genreNames)"
+            originalLanguageInfoLabel.text = "\(language)"
+            releaseDataInfoLabel.text = "\(date)"
+            movieOverview.text = "\(movieDiscription)"
+        } else {
+            print("We have no results")
+        }
+    }
+    
+    func getGenreNames(for ids: [Int]) -> [String] {
+        var genreNames: [String] = []
+        let genres = selectedGenres
         
+        if genres.count != 0 {
+            for id in ids {
+                for genre in genres {
+                    guard let genreId = genre.id, let genreName = genre.name else {
+                        print("Hmmmm")
+                        return ["Woops"]
+                    }
+                    if genreId == id {
+                        genreNames.append(genreName)
+                    } else {
+                        genreNames.append("")
+                    }
+                }
+            }
+        } else {
+            return genreNames
+        }
+        return genreNames
     }
         
     func presentSuggestions() {
         discoverMovies()
-//        activityIndicator.startAnimating()
-
-//        createTestContent()
          
         let window = UIApplication.shared.windows.first { $0.isKeyWindow } // handles deprecated warning for multiple screens
 
@@ -379,12 +428,14 @@ class MovieSuggestionManager: ObjectManager {
                     self.releaseDataInfoLabel.alpha = 1.0
                     self.movieOverview.alpha = 1.0
                     self.activityIndicator.alpha = 1.0
+                    self.touchScreen.alpha = 1.0
             },
                 completion: nil)
         }
     }
         
     @objc private func dismissSuggestions(sender: UISwipeGestureRecognizer) {
+        allMovies.removeAll()
         UIView.animate(
             withDuration: 0.5,
             delay: 0,
@@ -406,6 +457,7 @@ class MovieSuggestionManager: ObjectManager {
                 self.releaseDataInfoLabel.alpha = 0
                 self.movieOverview.alpha = 0
                 self.activityIndicator.alpha = 0
+                self.touchScreen.alpha = 0
         },
             completion: { _ in
                 NotificationCenter.default.post(name: self.clearInputNotification, object: nil) // Resets selections and slider. Opens Zipper
@@ -426,11 +478,34 @@ class MovieSuggestionManager: ObjectManager {
     }
     
     @objc func showPreviousSuggestion() {
-        print("Showing previous suggestion")
+        if allMovies.count != 0 {
+            if currentMovie > 0 {
+                currentMovie -= 1
+                setUpLabels(for: currentMovie)
+            } else if currentMovie == 0 {
+                currentMovie = allMovies.count - 1
+                setUpLabels(for: currentMovie)
+            }
+        } else {
+            print("we have no results")
+        }
+        print("Movie number: \(currentMovie)/\(allMovies.count - 1)")
+
     }
     
     @objc func showNextSuggestion() {
-        print("Showing next suggestion")
+        if allMovies.count != 0 {
+            if currentMovie != allMovies.count - 1 {
+                currentMovie += 1
+                setUpLabels(for: currentMovie)
+            } else {
+                currentMovie = 0
+                setUpLabels(for: currentMovie)
+            }
+        } else {
+            print("we have no results")
+        }
+        print("Movie number: \(currentMovie)/\(allMovies.count - 1)")
     }
     
 }
