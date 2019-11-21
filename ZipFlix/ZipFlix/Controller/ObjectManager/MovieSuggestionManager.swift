@@ -225,16 +225,16 @@ class MovieSuggestionManager: ObjectManager {
                 self.movieOverview.text = "The selections made have not resulted in any"
                 return
             }
+            print(posterPath)
+//            let url = URL(string: posterPath, relativeTo: PosterImageHandler.imageBaseURl)!
+//            PosterImageHandler.getData(from: url) { data, response, error in
+//                guard let data = data, error == nil else { return }
+//                DispatchQueue.main.async() {
+//                    self.posterView.image = UIImage(data: data)
+//                }
+//            }
             
-            let url = URL(string: posterPath, relativeTo: PosterImageHandler.imageBaseURl)!
-            PosterImageHandler.getData(from: url) { data, response, error in
-                guard let data = data, error == nil else { return }
-                DispatchQueue.main.async() {
-                    self.posterView.image = UIImage(data: data)
-                }
-            }
-            
-//            posterView.download(from: posterPath)
+            posterView.downloaded(from: posterPath, contentMode: .scaleAspectFit)
             titleLabel.text = "\(title)"
             averageVoteInfoLabel.text = "\(vote)"
             let genreNames = getGenreNames(for: genreIds) // MARK: Does not work?
