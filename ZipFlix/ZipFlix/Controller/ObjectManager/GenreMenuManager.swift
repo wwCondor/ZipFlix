@@ -114,8 +114,9 @@ class GenreMenuManager: ObjectManager {
     @objc private func dismissOptionsToRight(sender: UISwipeGestureRecognizer) {
         if genreOptionsMenu.leftSideSelectedGenres.count != 0 {
             // If we have 1 or more items in selection we are allowed to dismiss
+            
+            User.leftUser.selectedGenres.removeAll() // make sure its empty before storing
             for genre in genreOptionsMenu.leftSideSelectedGenres {
-                User.leftUser.selectedGenres.removeAll() // make sure its empty before storing
                 User.leftUser.selectedGenres.append(genre)
                 print("Stored: \(genreOptionsMenu.leftSideSelectedGenres.count)")
             }
@@ -137,8 +138,8 @@ class GenreMenuManager: ObjectManager {
     @objc private func dismissOptionsToLeft(sender: UISwipeGestureRecognizer) {
         if genreOptionsMenu.rightSideSelectedGenres.count != 0 {
             
+            User.rightUser.selectedGenres.removeAll()
             for genre in genreOptionsMenu.rightSideSelectedGenres {
-                User.rightUser.selectedGenres.removeAll()
                 User.rightUser.selectedGenres.append(genre)
                 print("Stored: \(genreOptionsMenu.rightSideSelectedGenres.count)")
             }

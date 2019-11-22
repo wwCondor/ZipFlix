@@ -53,7 +53,7 @@ class PersonOptionsMenu: OptionsMenu {
                 })
                 self.people = sortedPeople
                 self.options.reloadData()
-                print(self.people)
+//                print(self.people)
             }
         }
     }

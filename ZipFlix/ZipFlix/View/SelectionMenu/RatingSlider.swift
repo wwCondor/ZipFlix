@@ -23,7 +23,7 @@ class RatingSlider: OptionsMenu {
         label.textAlignment = .center
         label.font.withSize(18)
 //        label.numberOfLines = 2
-        label.text = "Average Rating"
+        label.text = "Minimum Rating"
         return label
     }()
     

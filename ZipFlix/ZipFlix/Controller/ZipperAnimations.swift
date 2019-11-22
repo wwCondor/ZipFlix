@@ -19,7 +19,7 @@ extension ViewController {
         let zipDelay: TimeInterval = -0.2
         
         if zipperState == .open {
-            print("Closing Zipper")
+//            print("Closing Zipper")
             NotificationCenter.default.post(name: zipperNotification, object: nil)
             NotificationCenter.default.post(name: dimmerNotification, object: nil)
             clearInputButton.isEnabled = false // prevents starting open zipper animation during animation
@@ -96,7 +96,7 @@ extension ViewController {
         let zipDelay: TimeInterval = -0.2
         
         if zipperState == .closed {
-            print("Opening Zipper")
+//            print("Opening Zipper")
             suggestMovieButton.isEnabled = false
             zipperState = .open
             NotificationCenter.default.post(name: zipperNotification, object: nil)

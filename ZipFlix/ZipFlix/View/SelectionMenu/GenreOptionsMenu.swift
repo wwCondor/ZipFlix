@@ -47,7 +47,7 @@ class GenreOptionMenu: OptionsMenu {
                 }
                 self.genres = genres
                 self.options.reloadData()
-                print(self.genres)
+//                print(self.genres)
             }
         }
     }

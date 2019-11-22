@@ -69,11 +69,12 @@ struct User {
         return personIds
     }
     
+    // Should we round this as well
     static func getAverageRating() -> Double {
         let leftUserRating = User.leftUser.selectedRating
         let rightUserRating = User.rightUser.selectedRating
-        
-        print((leftUserRating + rightUserRating)/2)
-        return (leftUserRating + rightUserRating)/2
+        let roundedAverage = Double(round((leftUserRating + rightUserRating)/2 * 10))/10
+        print("Average rating: \(roundedAverage)")
+        return roundedAverage
     }
 }

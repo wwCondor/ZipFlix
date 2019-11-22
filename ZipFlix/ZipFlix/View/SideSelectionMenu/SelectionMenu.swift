@@ -70,7 +70,7 @@ class SelectionMenu: UIView {
         let zipperAnimating: Bool = true
         let zipperNotAnimating: Bool = false
         zipperIsAnimating = bool ? zipperAnimating : zipperNotAnimating
-        print("Zipper animating: \(zipperIsAnimating)")
+//        print("Zipper animating: \(zipperIsAnimating)")
     }
   
     func setupView() {
