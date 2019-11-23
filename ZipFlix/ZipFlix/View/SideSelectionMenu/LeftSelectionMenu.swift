@@ -74,8 +74,9 @@ extension LeftSelectionMenu {
             if APIKey.key == "" {
                 print(MovieDBError.missingKey.description) // Only used during development/peer reviews
             } else {
+                let connectionAvailable = Reachability.checkReachable()
                 // Check if we have an internet connection
-                if Reachability.checkReachable() == true {
+                if connectionAvailable == true {
                     if indexPath.row == 0 {
                         self.genreMenuManager.presentOptions(direction: .fromRight)
 
@@ -102,7 +103,7 @@ extension LeftSelectionMenu {
                         print("Button not connected") // for possible additional future selection critera
                     }
                     
-                } else if Reachability.checkReachable() == false {
+                } else if connectionAvailable == false {
                     Alert.presentAlertFromNSObject(description: MovieDBError.noReachability.description)
                 }
             }

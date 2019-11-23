@@ -69,12 +69,12 @@ extension RightSelectionMenu {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         if APIKey.key == "" {
             print(MovieDBError.missingKey.description)
         } else {
+            let connectionAvailable = Reachability.checkReachable()
             // Check if we have an internet connection
-            if Reachability.checkReachable() == true {
+            if connectionAvailable == true {
                 if indexPath.row == 0 {
                     self.genreMenuManager.presentOptions(direction: .fromLeft)
                     
@@ -101,7 +101,7 @@ extension RightSelectionMenu {
                     print("Button not connected") // for possible additional future selection critera 
                 }
                 
-            } else if Reachability.checkReachable() == false {
+            } else if connectionAvailable == false {
                 Alert.presentAlertFromNSObject(description: MovieDBError.noReachability.description)
             }
         }
