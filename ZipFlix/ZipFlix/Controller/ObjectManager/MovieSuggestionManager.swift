@@ -166,8 +166,9 @@ class MovieSuggestionManager: ObjectManager {
                 self.leftSideFinishedLoading = true
                 if self.leftSideFinishedLoading == true && self.rightSideFinishedLoading == true {
                     self.filterNilMovies() // filter rare 'Nil'-cases
-//                    self.allMovies.shuffle() // preventing discoveries to be ordered by actor
+                    self.allMovies.shuffle() // preventing discoveries to be ordered by actor
                     self.setLabels(for: self.currentMovie) // Whichever completes last triggers setupLabels
+                    self.setPosterImage(for: self.currentMovie)
                     print("All movies: \(self.allMovies), total \(self.allMovies.count)")
                 }
             }
@@ -190,8 +191,9 @@ class MovieSuggestionManager: ObjectManager {
                 self.rightSideFinishedLoading = true
                 if self.leftSideFinishedLoading == true && self.rightSideFinishedLoading == true {
                     self.filterNilMovies()
-//                    self.allMovies.shuffle()
+                    self.allMovies.shuffle()
                     self.setLabels(for: self.currentMovie)
+                    self.setPosterImage(for: self.currentMovie)
                     print("All movies: \(self.allMovies), total \(self.allMovies.count)")
                 }
             }
@@ -228,16 +230,26 @@ class MovieSuggestionManager: ObjectManager {
             }
         }
     }
+    
+    private func setPosterImage(for movie: Int) {
+        let connectionPossible = Reachability.checkReachable()
+        if connectionPossible == true {
+            guard let posterPath = allMovies[currentMovie].posterPath else {
+                return
+            }
+            posterView.downloaded(from: posterPath, contentMode: .scaleAspectFit)
+        } else if connectionPossible == false {
+            print("No connection. Could not obtain image yet")
+            posterView.image = UIImage(named: Icons.noPoster.image)
+        }
+    }
 
     private func setLabels(for movie: Int) {
         if allMovies.count != 0 {
             let numberOfMovies = allMovies.count
             infoLabel.text = "\(currentMovie + 1) / \(numberOfMovies)"
             activityIndicator.startAnimating()
-            guard let posterPath = allMovies[currentMovie].posterPath else {
-                self.posterView.image = UIImage(named: Icons.noPoster.image)
-                return
-            }
+
             guard let title = allMovies[currentMovie].title else {
                 self.titleLabel.text = "No results"
                 return
@@ -262,12 +274,6 @@ class MovieSuggestionManager: ObjectManager {
                 self.movieOverview.text = "The selections made have not resulted in any"
                 return
             }
-
-            if Reachability.checkReachable() == true {
-                posterView.downloaded(from: posterPath, contentMode: .scaleAspectFit)
-            } else {
-                posterView.image = UIImage(named: Icons.noPoster.image)
-            }
             titleLabel.text = "\(title)"
             averageVoteInfoLabel.text = "\(vote)"
             let genreNames = getGenreNames(for: genreIds)
@@ -279,7 +285,6 @@ class MovieSuggestionManager: ObjectManager {
             activityIndicator.stopAnimating()
         } else {
             infoLabel.text = "0 / 0"
-            posterView.image = UIImage(named: Icons.noPoster.image)
             titleLabel.text = "No Results"
             averageVoteInfoLabel.text = ""
             genreInfoLabel.text = ""
@@ -314,7 +319,6 @@ class MovieSuggestionManager: ObjectManager {
         return genreArray
     }
 
-        
     func presentSuggestions() {
         currentMovie = 0
         fetchGenres()
@@ -546,6 +550,7 @@ class MovieSuggestionManager: ObjectManager {
                 currentMovie = allMovies.count - 1
             }
             setLabels(for: currentMovie)
+            setPosterImage(for: self.currentMovie)
         }
     }
     
@@ -557,6 +562,7 @@ class MovieSuggestionManager: ObjectManager {
                 currentMovie = 0
             }
             setLabels(for: currentMovie)
+            setPosterImage(for: self.currentMovie)
         }
     }
     

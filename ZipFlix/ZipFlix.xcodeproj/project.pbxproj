@@ -177,14 +177,6 @@
 			path = SelectionMenu;
 			sourceTree = "<group>";
 		};
-		0B73948F237D521C0087C95F /* Delete? */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Delete?";
-			path = "Networking/Delete?";
-			sourceTree = "<group>";
-		};
 		0B7394B92382DF0E0087C95F /* ObjectManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,7 +214,6 @@
 				0B7ABD222370208E00EF16B0 /* View */,
 				0B7ABD212370208C00EF16B0 /* Controller */,
 				0B7394732379999D0087C95F /* Networking */,
-				0B73948F237D521C0087C95F /* Delete? */,
 				0B7ABD142370190200EF16B0 /* Assets.xcassets */,
 				0B7ABD0B2370190000EF16B0 /* AppDelegate.swift */,
 				0B7ABD0D2370190000EF16B0 /* SceneDelegate.swift */,

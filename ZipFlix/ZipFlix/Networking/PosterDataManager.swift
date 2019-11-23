@@ -19,26 +19,25 @@ extension UIImageView {
         let url = URL(string: "\(imageBaseURl)\(path)")!
         contentMode = mode
         URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let httpResponse = response as? HTTPURLResponse else {
-                return
-            }
-            if httpResponse.statusCode == 200 {
-                guard let data = data else {
+            DispatchQueue.main.async() {
+                guard let httpResponse = response as? HTTPURLResponse else {
                     return
                 }
-                guard error == nil else {
-                    return
-                }
-                guard let image = UIImage(data: data) else {
-                    return
-                }
-                DispatchQueue.main.async() {
+                if httpResponse.statusCode == 200 {
+                    guard let data = data else {
+                        return
+                    }
+                    guard error == nil else {
+                        return
+                    }
+                    guard let image = UIImage(data: data) else {
+                        return
+                    }
                     self.image = image
+                } else {
+                    print("Status Code: \(httpResponse.statusCode)")
                 }
-            } else {
-                print("Status Code: \(httpResponse.statusCode)")
             }
-
         }.resume()
     }
 }
