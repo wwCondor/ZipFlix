@@ -8,9 +8,8 @@
 
 import UIKit
 
-// Superclass for objects that mange present/present of selection menus
+// Superclass for objects that present/dismiss a selection menu
 class ObjectManager: NSObject {
-    
     
     var isOn = false
     
@@ -18,6 +17,18 @@ class ObjectManager: NSObject {
 
     let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)
     let darkModeNotification = Notification.Name(rawValue: Constants.darkModeNotificationKey)
+    
+    lazy var infoLabel: UILabel = {
+        let infoLabel = UILabel()
+        infoLabel.backgroundColor = UIColor(named: Colors.objectBG.color)
+        infoLabel.translatesAutoresizingMaskIntoConstraints = false
+        infoLabel.textAlignment = .center
+        infoLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        infoLabel.textColor = UIColor.white
+        infoLabel.layer.cornerRadius = Constants.menuCornerRadius
+        infoLabel.layer.masksToBounds = true
+        return infoLabel
+    }()
     
     override init() {
         super.init()

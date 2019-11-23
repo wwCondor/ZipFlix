@@ -28,12 +28,15 @@ class RatingSliderManager: ObjectManager {
     func presentSlider(direction: LaunchDirection) {
         ratingSliderMenu.minimumRating = 5.0
         
+        infoLabel.text = "Set minimum rating"
+        
         let window = UIApplication.shared.windows.first { $0.isKeyWindow } // handles deprecated warning for multiple screens
 
         if let window = window {
             
             window.addSubview(fadeBackgroundView)
             window.addSubview(ratingSliderMenu)
+            window.addSubview(infoLabel)
 
             fadeBackgroundView.frame = window.frame
             fadeBackgroundView.alpha = 0
@@ -43,6 +46,13 @@ class RatingSliderManager: ObjectManager {
             let screenHeight = window.frame.height
             let topBarHeight = screenHeight / 14
             let padding = (3 * screenHeight) / 14
+            
+            NSLayoutConstraint.activate([
+            infoLabel.centerXAnchor.constraint(equalTo: ratingSliderMenu.centerXAnchor),
+            infoLabel.widthAnchor.constraint(equalToConstant: topBarHeight * 3),
+            infoLabel.heightAnchor.constraint(equalToConstant: topBarHeight / 2),
+            infoLabel.centerYAnchor.constraint(equalTo: ratingSliderMenu.topAnchor)
+                ])
             
             if direction == .fromRight {
     
@@ -72,6 +82,7 @@ class RatingSliderManager: ObjectManager {
                     options: .curveEaseOut,
                     animations: {
                         self.fadeBackgroundView.alpha = 0.4
+                        self.infoLabel.center.x -= self.ratingSliderMenu.bounds.width
                         self.ratingSliderMenu.center.x -= self.ratingSliderMenu.bounds.width
                 },
                     completion: nil)
@@ -104,6 +115,7 @@ class RatingSliderManager: ObjectManager {
                     options: .curveEaseOut,
                     animations: {
                         self.fadeBackgroundView.alpha = 0.4
+                        self.infoLabel.center.x += self.ratingSliderMenu.bounds.width
                         self.ratingSliderMenu.center.x += self.ratingSliderMenu.bounds.width
                 },
                     completion: nil)
@@ -115,14 +127,14 @@ class RatingSliderManager: ObjectManager {
     @objc private func dismissSliderToRight(sender: UISwipeGestureRecognizer) {
         if ratingSliderMenu.minimumRating >= 0 {
             User.rightUser.selectedRating = ratingSliderMenu.minimumRating
-            print("Stored: \(ratingSliderMenu.minimumRating)")
-            // If we have 1 or more items in selection we are allowed to dismiss
+//            print("Stored: \(ratingSliderMenu.minimumRating)")
             UIView.animate(
                 withDuration: 0.5,
                 delay: 0,
                 options: .curveEaseIn,
                 animations: {
                     self.fadeBackgroundView.alpha = 0
+                    self.infoLabel.center.x += self.ratingSliderMenu.bounds.width
                     self.ratingSliderMenu.center.x += self.ratingSliderMenu.bounds.width
             },
                 completion: nil)
@@ -134,13 +146,13 @@ class RatingSliderManager: ObjectManager {
     @objc private func dismissSliderToLeft(sender: UISwipeGestureRecognizer) {
         if ratingSliderMenu.minimumRating >= 0 {
             User.leftUser.selectedRating = ratingSliderMenu.minimumRating
-            print("Stored: \(ratingSliderMenu.minimumRating)")
             UIView.animate(
                 withDuration: 0.5,
                 delay: 0,
                 options: .curveEaseIn,
                 animations: {
                     self.fadeBackgroundView.alpha = 0
+                    self.infoLabel.center.x -= self.ratingSliderMenu.bounds.width
                     self.ratingSliderMenu.center.x -= self.ratingSliderMenu.bounds.width
             },
                 completion: nil)

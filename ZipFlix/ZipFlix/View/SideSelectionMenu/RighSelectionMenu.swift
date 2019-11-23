@@ -98,11 +98,11 @@ extension RightSelectionMenu {
                         collectionView.reloadItems(at: [indexPath])
                     }
                 } else {
-                    print("Button not connected")
+                    print("Button not connected") // for possible additional future selection critera 
                 }
                 
             } else if Reachability.checkReachable() == false {
-                print("Internet Connection not Available!") // MARK: Alert
+                Alert.presentAlertFromNSObject(description: MovieDBError.noReachability.description)
             }
         }
 

@@ -20,22 +20,17 @@ extension UIImageView {
         contentMode = mode
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse else {
-                print(MovieDBError.requestFailed)
                 return
             }
             if httpResponse.statusCode == 200 {
                 guard let data = data else {
-                    print(MovieDBError.invalidData)
                     return
                 }
                 guard error == nil else {
-                    print("Image handling error")
                     return
                 }
                 guard let image = UIImage(data: data) else {
-                    print("No Image")
                     return
-                    
                 }
                 DispatchQueue.main.async() {
                     self.image = image

@@ -149,11 +149,11 @@ class MovieSuggestionManager: ObjectManager {
     }
         
     private func discoverMovies() {
+        self.allMovies.removeAll() // Make sure it is empty
         MovieDataManager.discoverLeftMovies { (movies, error) in
             self.activityIndicator.startAnimating()
             DispatchQueue.main.async {
                 guard let movies = movies else {
-                    print("Left side gave no results")
                     self.leftSideFinishedLoading = true
                     return
                 }
@@ -162,13 +162,13 @@ class MovieSuggestionManager: ObjectManager {
                         self.allMovies.append(movie)
                     }
                 }
-                
-//                print(self.allMovies.count)
                 self.activityIndicator.stopAnimating()
                 self.leftSideFinishedLoading = true
                 if self.leftSideFinishedLoading == true && self.rightSideFinishedLoading == true {
-                    self.setUpLabels(for: self.currentMovie) // Whichever completes last triggers setupLabels
-                    print(self.allMovies.count)
+                    self.filterNilMovies() // filter rare 'Nil'-cases
+//                    self.allMovies.shuffle() // preventing discoveries to be ordered by actor
+                    self.setLabels(for: self.currentMovie) // Whichever completes last triggers setupLabels
+                    print("All movies: \(self.allMovies), total \(self.allMovies.count)")
                 }
             }
         }
@@ -177,7 +177,6 @@ class MovieSuggestionManager: ObjectManager {
             DispatchQueue.main.async {
                 self.activityIndicator.startAnimating()
                 guard let movies = movies else {
-                    print("Right side gave no results")
                     self.rightSideFinishedLoading = true
                     return
                 }
@@ -187,14 +186,34 @@ class MovieSuggestionManager: ObjectManager {
                         self.allMovies.append(movie)
                     }
                 }
-                
-//                print(self.allMovies.count)
                 self.activityIndicator.stopAnimating()
                 self.rightSideFinishedLoading = true
                 if self.leftSideFinishedLoading == true && self.rightSideFinishedLoading == true {
-                    self.setUpLabels(for: self.currentMovie)
-                    print(self.allMovies.count)
+                    self.filterNilMovies()
+//                    self.allMovies.shuffle()
+                    self.setLabels(for: self.currentMovie)
+                    print("All movies: \(self.allMovies), total \(self.allMovies.count)")
                 }
+            }
+        }
+    }
+    
+    private func findIndex(for selected: Movie, in array: [Movie]) -> Int? {
+        for (index, item) in array.enumerated() {
+            if item == selected {
+                return index
+            }
+        }
+        return nil
+    }
+    
+    private func filterNilMovies() {
+        for movie in allMovies {
+            if movie.title == nil || movie.posterPath == nil {
+                guard let index = findIndex(for: movie, in: allMovies) else {
+                    return
+                }
+                allMovies.remove(at: index)
             }
         }
     }
@@ -206,13 +225,14 @@ class MovieSuggestionManager: ObjectManager {
                     return
                 }
                 self.allGenres = genres
-                print(self.allGenres)
             }
         }
     }
 
-    private func setUpLabels(for movie: Int) {
+    private func setLabels(for movie: Int) {
         if allMovies.count != 0 {
+            let numberOfMovies = allMovies.count
+            infoLabel.text = "\(currentMovie + 1) / \(numberOfMovies)"
             activityIndicator.startAnimating()
             guard let posterPath = allMovies[currentMovie].posterPath else {
                 self.posterView.image = UIImage(named: Icons.noPoster.image)
@@ -243,7 +263,11 @@ class MovieSuggestionManager: ObjectManager {
                 return
             }
 
-            posterView.downloaded(from: posterPath, contentMode: .scaleAspectFit)
+            if Reachability.checkReachable() == true {
+                posterView.downloaded(from: posterPath, contentMode: .scaleAspectFit)
+            } else {
+                posterView.image = UIImage(named: Icons.noPoster.image)
+            }
             titleLabel.text = "\(title)"
             averageVoteInfoLabel.text = "\(vote)"
             let genreNames = getGenreNames(for: genreIds)
@@ -254,6 +278,7 @@ class MovieSuggestionManager: ObjectManager {
             
             activityIndicator.stopAnimating()
         } else {
+            infoLabel.text = "0 / 0"
             posterView.image = UIImage(named: Icons.noPoster.image)
             titleLabel.text = "No Results"
             averageVoteInfoLabel.text = ""
@@ -264,10 +289,9 @@ class MovieSuggestionManager: ObjectManager {
         }
     }
     
+    // MARK: Convert Movie Genre IDs
     private func getGenreNames(for ids: [Int]) -> String {
         let genres = allGenres
-//        print("All genres: \(genres)")
-//        print("Ids: \(ids)")
         var genreArray = ""
         
         if genres.count != 0 {
@@ -287,8 +311,6 @@ class MovieSuggestionManager: ObjectManager {
         } else {
             return ""
         }
-
-//        print("GenreArray obtained: \(genreArray)")
         return genreArray
     }
 
@@ -301,7 +323,7 @@ class MovieSuggestionManager: ObjectManager {
         let window = UIApplication.shared.windows.first { $0.isKeyWindow } // handles deprecated warning for multiple screens
 
         if let window = window {
-            
+                        
             window.addSubview(fadeBackgroundView)
             window.addSubview(leftNavigator)
             window.addSubview(rightNavigator)
@@ -322,6 +344,7 @@ class MovieSuggestionManager: ObjectManager {
             window.addSubview(releaseDataInfoLabel)
             
             window.addSubview(activityIndicator)
+            window.addSubview(infoLabel)
             window.addSubview(touchScreen)
             window.addSubview(movieOverview)
 
@@ -330,12 +353,15 @@ class MovieSuggestionManager: ObjectManager {
             fadeBackgroundView.backgroundColor = UIColor.black
             fadeBackgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissSuggestions(sender:))))
             
+            infoLabel.backgroundColor = UIColor(named: Colors.border.color)
+            
             movieSuggestions.alpha = 0
             leftNavigator.alpha = 0
             rightNavigator.alpha = 0
             
             let windowWidth = window.frame.width
             let windowHeight = window.frame.height
+            let infoLabelSize = windowHeight / 14
             let movieSuggestionsWidth = windowWidth * (7.22/9)
             let movieSuggestionsHeigth = windowHeight * (5/7)
             let xOffset = (windowWidth - movieSuggestionsWidth) / 2
@@ -358,6 +384,11 @@ class MovieSuggestionManager: ObjectManager {
             NSLayoutConstraint.activate([
                 activityIndicator.centerXAnchor.constraint(equalTo: movieSuggestions.centerXAnchor),
                 activityIndicator.centerYAnchor.constraint(equalTo: movieSuggestions.centerYAnchor),
+                
+                infoLabel.centerXAnchor.constraint(equalTo: movieSuggestions.centerXAnchor),
+                infoLabel.widthAnchor.constraint(equalToConstant: infoLabelSize),
+                infoLabel.heightAnchor.constraint(equalToConstant: infoLabelSize / 2 ),
+                infoLabel.centerYAnchor.constraint(equalTo: movieSuggestions.topAnchor, constant: padding/4),
                 
                 titleLabel.topAnchor.constraint(equalTo: posterView.bottomAnchor, constant: spacing),
                 titleLabel.centerXAnchor.constraint(equalTo: movieSuggestions.centerXAnchor),
@@ -453,6 +484,7 @@ class MovieSuggestionManager: ObjectManager {
                     self.movieOverview.alpha = 1.0
                     self.activityIndicator.alpha = 1.0
                     self.touchScreen.alpha = 1.0
+                    self.infoLabel.alpha = 1.0
             },
                 completion: nil)
         }
@@ -462,6 +494,7 @@ class MovieSuggestionManager: ObjectManager {
         allMovies.removeAll()
         leftSideFinishedLoading = false
         rightSideFinishedLoading = false
+        posterView.image = UIImage(named: Icons.noPoster.image)
         UIView.animate(
             withDuration: 0.5,
             delay: 0,
@@ -484,6 +517,7 @@ class MovieSuggestionManager: ObjectManager {
                 self.movieOverview.alpha = 0
                 self.activityIndicator.alpha = 0
                 self.touchScreen.alpha = 0
+                self.infoLabel.alpha = 0
         },
             completion: { _ in
                 NotificationCenter.default.post(name: self.clearInputNotification, object: nil) // Resets selections and slider. Opens Zipper
@@ -496,45 +530,34 @@ class MovieSuggestionManager: ObjectManager {
         }
         switch sender.direction {
 
-        case .left: showNextSuggestion() // In here we should go to index + 1, e.g move right along suggestions array
-        case .right: showPreviousSuggestion() // In here index - 1, e.g. move left along suggestions array
+        case .left: showNextSuggestion()
+        case .right: showPreviousSuggestion()
         default:
             print("This does not work")
         }
     }
     
+    // MARK: Navigation
     @objc private func showPreviousSuggestion() {
-        if allMovies.count == 0 {
-            print("we have no results")
-        } else if allMovies.count == 1 {
-            print("we have only 1 results")
-        } else if allMovies.count > 1 {
-            if currentMovie == 0 {
-                currentMovie = allMovies.count - 1
-                setUpLabels(for: currentMovie)
-            } else if currentMovie != 0 {
+        if allMovies.count > 1 {
+            if currentMovie != 0 {
                 currentMovie -= 1
-                setUpLabels(for: currentMovie)
+            } else {
+                currentMovie = allMovies.count - 1
             }
+            setLabels(for: currentMovie)
         }
-        print("Movie number: \(currentMovie + 1)/\(allMovies.count)")
     }
     
     @objc private func showNextSuggestion() {
-        if allMovies.count == 0 {
-            print("we have no results")
-        } else if allMovies.count == 1 {
-            print("we have only 1 results")
-        } else if allMovies.count > 1 {
-            if currentMovie == allMovies.count - 1 {
-                currentMovie = 0
-                setUpLabels(for: currentMovie)
-            } else if currentMovie != allMovies.count - 1 {
+        if allMovies.count > 1 {
+            if currentMovie != allMovies.count - 1 {
                 currentMovie += 1
-                setUpLabels(for: currentMovie)
+            } else {
+                currentMovie = 0
             }
+            setLabels(for: currentMovie)
         }
-        print("Movie number: \(currentMovie + 1)/\(allMovies.count)")
     }
     
 }
@@ -552,16 +575,13 @@ class MovieLabel: UILabel {
         setupAdditionalProperties()
     }
 
-    // settings similar for all labels
     func setupProperties() {
         backgroundColor = UIColor.clear
         translatesAutoresizingMaskIntoConstraints = false
         textColor = UIColor.white
     }
     
-    func setupAdditionalProperties() {
-        
-    }
+    func setupAdditionalProperties() { }
 
 }
 

@@ -37,7 +37,6 @@ class PageHandler {
                 } else {
                     let nextPage = currentPage + 1
                     let nextUrl = Endpoint.people.url(page: nextPage)
-                    print(nextPage)
                     PageHandler.getPages(url: nextUrl, pages: allpages, completion: completion)
                 }
             } else if let error = error {
@@ -58,28 +57,23 @@ class PageHandler {
                 }
                 
                 if 200...299 ~= httpResponse.statusCode {
-//                    print("Status Code: \(httpResponse.statusCode)")
                     if let data = data {
-//                        print(data)
                         
                         do {
                             let results = try self.decoder.decode(Page<T>.self, from: data)
-//                            print(results)
                             completion(results, nil)
                             
-                        } catch let error {
-                            print("Error Exit 4")
+                        } catch { // let error {
+//                            print("Error Exit 4")
 //                            print(data)
-                            print(error)
+//                            print(error)
                             completion(nil, MovieDBError.jsonDecodingFailure)
                         }
 
                     } else if let error = error {
-                        print("Error Exit 5")
                         completion(nil, error)
                     }
                 } else {
-                    print("Status Code: \(httpResponse.statusCode)")
                     completion(nil, MovieDBError.invalidData)
                 }
             }

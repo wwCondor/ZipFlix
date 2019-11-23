@@ -22,7 +22,6 @@ class RatingSlider: OptionsMenu {
         label.textColor = UIColor.white
         label.textAlignment = .center
         label.font.withSize(18)
-//        label.numberOfLines = 2
         label.text = "Minimum Rating"
         return label
     }()

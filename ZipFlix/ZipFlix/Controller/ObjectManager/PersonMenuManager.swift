@@ -27,12 +27,15 @@ class PersonMenuManager: ObjectManager {
         
     func presentOptions(direction: LaunchDirection) {
         
+        infoLabel.text = "Select a person"
+        
         let window = UIApplication.shared.windows.first { $0.isKeyWindow } // handles deprecated warning for multiple screens
 
         if let window = window {
             
             window.addSubview(fadeBackgroundView)
             window.addSubview(peopleOptionsMenu)
+            window.addSubview(infoLabel)
 
             fadeBackgroundView.frame = window.frame
             fadeBackgroundView.alpha = 0
@@ -42,6 +45,13 @@ class PersonMenuManager: ObjectManager {
             let screenHeight = window.frame.height
             let topBarHeight = screenHeight / 14
             let padding = (3 * screenHeight) / 14
+            
+            NSLayoutConstraint.activate([
+            infoLabel.centerXAnchor.constraint(equalTo: peopleOptionsMenu.centerXAnchor),
+            infoLabel.widthAnchor.constraint(equalToConstant: topBarHeight * 3),
+            infoLabel.heightAnchor.constraint(equalToConstant: topBarHeight / 2),
+            infoLabel.centerYAnchor.constraint(equalTo: peopleOptionsMenu.topAnchor)
+                ])
             
             if direction == .fromRight {
     
@@ -71,6 +81,7 @@ class PersonMenuManager: ObjectManager {
                     options: .curveEaseOut,
                     animations: {
                         self.fadeBackgroundView.alpha = 0.4
+                        self.infoLabel.center.x -= self.peopleOptionsMenu.bounds.width
                         self.peopleOptionsMenu.center.x -= self.peopleOptionsMenu.bounds.width
                 },
                     completion: nil)
@@ -103,6 +114,7 @@ class PersonMenuManager: ObjectManager {
                     options: .curveEaseOut,
                     animations: {
                         self.fadeBackgroundView.alpha = 0.4
+                        self.infoLabel.center.x += self.peopleOptionsMenu.bounds.width
                         self.peopleOptionsMenu.center.x += self.peopleOptionsMenu.bounds.width
                 },
                     completion: nil)
@@ -113,10 +125,10 @@ class PersonMenuManager: ObjectManager {
                 
     @objc private func dismissOptionsToRight(sender: UISwipeGestureRecognizer) {
         if peopleOptionsMenu.leftSideSelectedPeople.count != 0 {
+            User.leftUser.selectedPersons.removeAll() // make sure its empty before storing
             for person in peopleOptionsMenu.leftSideSelectedPeople {
-                User.leftUser.selectedPersons.removeAll() // make sure its empty before storing
                 User.leftUser.selectedPersons.append(person)
-                print("Stored: \(peopleOptionsMenu.leftSideSelectedPeople.count)")
+//                print("Stored: \(peopleOptionsMenu.leftSideSelectedPeople.count)")
             }
             // If we have 1 or more items in selection we are allowed to dismiss
             UIView.animate(
@@ -125,6 +137,7 @@ class PersonMenuManager: ObjectManager {
                 options: .curveEaseIn,
                 animations: {
                     self.fadeBackgroundView.alpha = 0
+                    self.infoLabel.center.x += self.peopleOptionsMenu.bounds.width
                     self.peopleOptionsMenu.center.x += self.peopleOptionsMenu.bounds.width
             },
                 completion: nil)
@@ -135,10 +148,9 @@ class PersonMenuManager: ObjectManager {
     
     @objc private func dismissOptionsToLeft(sender: UISwipeGestureRecognizer) {
         if peopleOptionsMenu.rightSideSelectedPeople.count != 0 {
+            User.rightUser.selectedPersons.removeAll() // make sure its empty before storing
             for person in peopleOptionsMenu.rightSideSelectedPeople {
-                User.rightUser.selectedPersons.removeAll() // make sure its empty before storing
                 User.rightUser.selectedPersons.append(person)
-                print("Stored: \(peopleOptionsMenu.rightSideSelectedPeople.count)")
             }
             UIView.animate(
                 withDuration: 0.5,
@@ -146,6 +158,7 @@ class PersonMenuManager: ObjectManager {
                 options: .curveEaseIn,
                 animations: {
                     self.fadeBackgroundView.alpha = 0
+                    self.infoLabel.center.x -= self.peopleOptionsMenu.bounds.width
                     self.peopleOptionsMenu.center.x -= self.peopleOptionsMenu.bounds.width
             },
                 completion: nil)

@@ -21,8 +21,8 @@ class MovieDataManager {
     typealias MovieCompletionHandler = ([Movie]?, Error?) -> Void
     
     static func discoverLeftMovies(completion: @escaping MovieCompletionHandler) {
-        var allMovies = [Movie]()
-        getRightMoviePages { (moviePages, error) in
+        var allMovies: [Movie] = []
+        getLeftMoviePages { (moviePages, error) in
             if let moviePages = moviePages {
                 for moviePage in moviePages {
                     guard let movieArray = moviePage.results else {
@@ -50,7 +50,7 @@ class MovieDataManager {
     }
     
     static func discoverRightMovies(completion: @escaping MovieCompletionHandler) {
-        var allMovies = [Movie]()
+        var allMovies: [Movie] = []
         getRightMoviePages { (moviePages, error) in
             if let moviePages = moviePages {
                 for moviePage in moviePages {
@@ -82,7 +82,6 @@ class MovieDataManager {
     
     static func getLeftMoviePages(completion: @escaping MoviePagesCompletionHandler) {
         let url = Endpoint.discover1.url(page: 1)
-        print(url)
         let allpages = [Page<Movie>]()
         
         PageHandler.getPages(url: url, pages: allpages, completion: completion)

@@ -73,26 +73,26 @@ extension ViewController {
 
     @objc func runAnimation(tapGestureRecognizer: UITapGestureRecognizer) {
         // Animation method for logo (optional)
-        print("Animation started")
+        print("Animation started. This feature is coming soon!")
     }
     
     @objc func suggestMovie(sender: UIButton) {
-        closeZipper() // MARK: Delete and uncomment
+        if Reachability.checkReachable() == true {
+            if leftSelectionMenu.leftSideHasSelectedGenres == true && rightSelectionMenu.rightSideHasSelectedGenres == true && leftSelectionMenu.leftSideHasSelectedPeople == true && rightSelectionMenu.rightSideHasSelectedPeople == true && leftSelectionMenu.leftSideHasSelectedRating == true && rightSelectionMenu.rightSideHasSelectedRating == true {
 
-//        if leftSelectionMenu.leftSideHasSelectedGenres == true && rightSelectionMenu.rightSideHasSelectedGenres == true && leftSelectionMenu.leftSideHasSelectedPeople == true && rightSelectionMenu.rightSideHasSelectedPeople == true && leftSelectionMenu.leftSideHasSelectedRating == true && rightSelectionMenu.rightSideHasSelectedRating == true {
-//
-//            closeZipper()
-//            print("Start Loading")
-//            print("Present Movie Suggestion")
-//            print("Stop Loading")
-//
-//        } else if leftSelectionMenu.leftSideHasSelectedGenres == false || rightSelectionMenu.rightSideHasSelectedGenres == false {
-//            Alert.presentAlert(description: UserSelectionError.genreSelection.description, viewController: self)
-//        } else if leftSelectionMenu.leftSideHasSelectedPeople == false || rightSelectionMenu.rightSideHasSelectedPeople == false {
-//            Alert.presentAlert(description: UserSelectionError.personSelection.description, viewController: self)
-//        } else if leftSelectionMenu.leftSideHasSelectedRating == false || rightSelectionMenu.rightSideHasSelectedRating == false {
-//            Alert.presentAlert(description: UserSelectionError.ratingSelection.description, viewController: self)
-//        }
+                closeZipper()
+
+            } else if leftSelectionMenu.leftSideHasSelectedGenres == false || rightSelectionMenu.rightSideHasSelectedGenres == false {
+                Alert.presentAlert(description: UserSelectionError.genreSelection.description, viewController: self)
+            } else if leftSelectionMenu.leftSideHasSelectedPeople == false || rightSelectionMenu.rightSideHasSelectedPeople == false {
+                Alert.presentAlert(description: UserSelectionError.personSelection.description, viewController: self)
+            } else if leftSelectionMenu.leftSideHasSelectedRating == false || rightSelectionMenu.rightSideHasSelectedRating == false {
+                Alert.presentAlert(description: UserSelectionError.ratingSelection.description, viewController: self)
+            }
+        } else {
+            Alert.presentAlert(description: MovieDBError.noReachability.description, viewController: self)
+        }
+
     }
     
 }

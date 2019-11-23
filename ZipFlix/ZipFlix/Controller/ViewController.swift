@@ -23,32 +23,14 @@ class ViewController: UIViewController {
     }
 
     var style: UIStatusBarStyle = .lightContent // default setting for statusBar
-    
-    var movies = [Movie]()
-
-//    func discoverMovies() {
-//        MovieDataManager.discoverLeftMovies { (movies, error) in
-//            DispatchQueue.main.async {
-//                guard let movies = movies else {
-//                    print()
-//                    return
-//                }
-//
-//                self.movies = movies
-//                print(self.movies)
-//
-//            }
-//        }
-//    }
-    
+        
     func addObserver() {
-        // Listens for clearInputNotification posted by movie suggesiton when dismissed and opens zipper
+        // Listens for clearInputNotification posted by movie suggestion when dismissed, and opens zipper
         NotificationCenter.default.addObserver(self, selector: #selector(openZipper(sender:)), name: clearInputNotification, object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        discoverMovies()
             
         addObserver()
         setupTopButtonBar()

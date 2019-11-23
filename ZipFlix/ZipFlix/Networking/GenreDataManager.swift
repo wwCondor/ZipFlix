@@ -52,15 +52,12 @@ class GenreDataManager {
                     }
 
                     if 200...299 ~= httpResponse.statusCode {
-//                        print("Status Code: \(httpResponse.statusCode)")
 
                         do {
                             let genres = try GenreDataManager.decoder.decode(Genres.self, from: data)
-//                            print(genres)
                             completion(genres, nil)
 
-                        } catch { //} let error {
-//                            print("Error Exit 1")
+                        } catch {
                             completion(nil, MovieDBError.jsonDecodingFailure)
                         }
 
@@ -69,7 +66,6 @@ class GenreDataManager {
                     }
 
                 } else if let error = error {
-//                    print("Error exit 2")
                     completion(nil, error)
                 }
             }

@@ -44,6 +44,7 @@ extension UIImage {
     }
 }
 
+// Below is for future reference
 // MARK: Untested
 extension UIView {
     // Used to apply border(s) for views at the indicated sides

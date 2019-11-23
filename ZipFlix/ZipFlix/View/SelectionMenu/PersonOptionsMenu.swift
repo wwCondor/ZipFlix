@@ -53,7 +53,6 @@ class PersonOptionsMenu: OptionsMenu {
                 })
                 self.people = sortedPeople
                 self.options.reloadData()
-//                print(self.people)
             }
         }
     }
@@ -78,17 +77,17 @@ extension PersonOptionsMenu {
             if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.black {
                 if leftSideSelectedPeople.count <= 0 {
                     leftSideSelectedPeople.append(selectedPerson)
-                    print("Total: \(leftSideSelectedPeople.count)")
+//                    print("Total: \(leftSideSelectedPeople.count)")
                     tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.white
                 } else {
                     print("Already at max (1) selection")
                 }
             } else if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.white {
-                let genreToRemove = selectedPerson
-                guard let index = findIndex(for: genreToRemove, in: leftSideSelectedPeople) else { return }
+//                let genreToRemove = selectedPerson
+                guard let index = findIndex(for: selectedPerson, in: leftSideSelectedPeople) else { return }
                 leftSideSelectedPeople.remove(at: index)
-                print("Removed: \(genreToRemove)")
-                print("Total: \(leftSideSelectedPeople.count)")
+//                print("Removed: \(genreToRemove)")
+//                print("Total: \(leftSideSelectedPeople.count)")
                 tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.black
             }
             
@@ -96,17 +95,17 @@ extension PersonOptionsMenu {
             if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.black {
                 if rightSideSelectedPeople.count <= 0 {
                     rightSideSelectedPeople.append(selectedPerson)
-                    print("Total: \(rightSideSelectedPeople.count)")
+//                    print("Total: \(rightSideSelectedPeople.count)")
                     tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.white
                 } else {
                     print("Already at max (1) selection")
                 }
             } else if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.white {
-                let genreToRemove = selectedPerson
-                guard let index = findIndex(for: genreToRemove, in: rightSideSelectedPeople) else { return }
+//                let genreToRemove = selectedPerson
+                guard let index = findIndex(for: selectedPerson, in: rightSideSelectedPeople) else { return }
                 rightSideSelectedPeople.remove(at: index)
-                print("Removed: \(genreToRemove)")
-                print("Total: \(rightSideSelectedPeople.count)")
+//                print("Removed: \(genreToRemove)")
+//                print("Total: \(rightSideSelectedPeople.count)")
                 tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.black
             }
         }
@@ -128,7 +127,7 @@ extension PersonOptionsMenu {
         cell.backgroundColor = UIColor.clear
         
         if people.count == 0 {
-            cell.textLabel!.text = "loading genre data..."
+            cell.textLabel!.text = "loading data..."
         } else {
             let person = people[indexPath.row]
             cell.textLabel!.text = person.name

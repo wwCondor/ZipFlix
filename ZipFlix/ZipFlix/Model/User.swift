@@ -43,7 +43,7 @@ struct User {
         var genreIds = ""
         
         for genre in genres {
-            if currentGenre != maxGenresReturned || currentGenre != genres.count {
+            if currentGenre != maxGenresReturned && currentGenre != genres.count {
                 guard let genreId = genre.id else {
                     return ""
                 }
@@ -69,7 +69,6 @@ struct User {
         return personIds
     }
     
-    // Should we round this as well
     static func getAverageRating() -> Double {
         let leftUserRating = User.leftUser.selectedRating
         let rightUserRating = User.rightUser.selectedRating

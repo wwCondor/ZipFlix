@@ -12,6 +12,7 @@ enum Icons {
     case darkModeIcon
     case lightModeIcon
     case reset
+    case emptyBucket
     case movieIcon
     case zipperIcon
     case zipperThumb
@@ -24,6 +25,7 @@ enum Icons {
         case .darkModeIcon:     return "DarkMode"
         case .lightModeIcon:    return "LightMode"
         case .reset:            return "Reset"
+        case .emptyBucket:      return "EmptyBucket"
         case .movieIcon:        return "MovieIcon"
         case .zipperIcon:       return "ZipperIcon"
         case .zipperThumb:      return "ZipperThumb" // 30x30

@@ -13,7 +13,7 @@ class GenreOptionMenu: OptionsMenu {
     var genres: [Genre] = [Genre]() // genres from TheMovieDB
     var leftSideSelectedGenres: [Genre] = [Genre]() // Left side genre selections
     var rightSideSelectedGenres: [Genre] = [Genre]() // Right side genre selections
-        
+            
     override var cellId: String {
         return super.cellId + "genreId"
     }
@@ -47,7 +47,6 @@ class GenreOptionMenu: OptionsMenu {
                 }
                 self.genres = genres
                 self.options.reloadData()
-//                print(self.genres)
             }
         }
     }
@@ -63,26 +62,26 @@ class GenreOptionMenu: OptionsMenu {
     
 }
 
-extension GenreOptionMenu { //}: UITableViewDataSource, UITableViewDelegate {
+extension GenreOptionMenu { 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedGenre = genres[indexPath.row] // Cell selected
-        
+                
         if launchDirection == .fromRight {
             if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.black {
                 if leftSideSelectedGenres.count <= 2 {
                     leftSideSelectedGenres.append(selectedGenre)
-                    print("Total: \(leftSideSelectedGenres.count)")
+//                    print("Total: \(leftSideSelectedGenres.count)")
                     tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.white
                 } else {
-                    print("Already at max (3) selections") // MARK: Alert
+//                    print("Already at max (3) selections") // MARK: Alert?
                 }
             } else if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.white {
-                let genreToRemove = selectedGenre
+//                let genreToRemove = selectedGenre
                 guard let index = findIndex(for: selectedGenre, in: leftSideSelectedGenres) else { return }
                 leftSideSelectedGenres.remove(at: index)
-                print("Removed: \(genreToRemove)")
-                print("Total: \(leftSideSelectedGenres.count)")
+//                print("Removed: \(genreToRemove)")
+//                print("Total: \(leftSideSelectedGenres.count)")
                 tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.black
             }
 
@@ -90,21 +89,20 @@ extension GenreOptionMenu { //}: UITableViewDataSource, UITableViewDelegate {
             if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.black {
                 if rightSideSelectedGenres.count <= 2 {
                     rightSideSelectedGenres.append(selectedGenre)
-                    print("Total: \(rightSideSelectedGenres.count)")
+//                    print("Total: \(rightSideSelectedGenres.count)")
                     tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.white
                 } else {
-                    print("Already at max (3) selections")  // MARK: Alert
+//                    print("Already at max (3) selections")  // MARK: Alert?
                 }
             } else if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.white {
-                let genreToRemove = selectedGenre
-                guard let index = findIndex(for: genreToRemove, in: rightSideSelectedGenres) else { return }
+//                let genreToRemove = selectedGenre
+                guard let index = findIndex(for: selectedGenre, in: rightSideSelectedGenres) else { return }
                 rightSideSelectedGenres.remove(at: index)
-                print("Removed: \(genreToRemove)")
-                print("Total: \(rightSideSelectedGenres.count)")
+//                print("Removed: \(genreToRemove)")
+//                print("Total: \(rightSideSelectedGenres.count)")
                 tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.black
             }
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -121,7 +119,7 @@ extension GenreOptionMenu { //}: UITableViewDataSource, UITableViewDelegate {
         cell.backgroundColor = UIColor.clear
         
         if genres.count == 0 {
-            cell.textLabel!.text = "loading genre data..."  // MARK: Alert?
+            cell.textLabel!.text = "loading data..."  // MARK: Alert?
         } else {
             let genre = genres[indexPath.row]
             cell.textLabel!.text = genre.name

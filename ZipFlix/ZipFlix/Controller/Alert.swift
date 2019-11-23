@@ -25,4 +25,25 @@ struct Alert {
         alert.addAction(confirmation)
         viewController.present(alert, animated: true, completion: nil)
     }
+    
+    static func presentAlertFromNSObject(description: String) {
+        
+        let alert = UIAlertController(title: nil, message: description, preferredStyle: .alert)
+        
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor(named: Colors.zipper.color)
+        alert.view.tintColor = UIColor.white
+        
+        let confirmation = UIAlertAction(title: "OK", style: .default) {
+            (action) in alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(confirmation)
+        
+        let window = UIApplication.shared.windows.first { $0.isKeyWindow } // handles deprecated warning for multiple screens
+
+        if let window = window {
+            window.rootViewController?.present(alert, animated: true, completion: nil)
+        }
+
+    }
 }

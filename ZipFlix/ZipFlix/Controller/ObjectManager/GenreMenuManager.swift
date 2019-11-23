@@ -27,12 +27,15 @@ class GenreMenuManager: ObjectManager {
         
     func presentOptions(direction: LaunchDirection) {
         
+        infoLabel.text = "Select max 3 genres"
+        
         let window = UIApplication.shared.windows.first { $0.isKeyWindow } // handles deprecated warning for multiple screens
 
         if let window = window {
             
             window.addSubview(fadeBackgroundView)
             window.addSubview(genreOptionsMenu)
+            window.addSubview(infoLabel)
 
             fadeBackgroundView.frame = window.frame
             fadeBackgroundView.alpha = 0
@@ -42,6 +45,13 @@ class GenreMenuManager: ObjectManager {
             let screenHeight = window.frame.height
             let topBarHeight = screenHeight / 14
             let padding = (3 * screenHeight) / 14
+            
+            NSLayoutConstraint.activate([
+            infoLabel.centerXAnchor.constraint(equalTo: genreOptionsMenu.centerXAnchor),
+            infoLabel.widthAnchor.constraint(equalToConstant: topBarHeight * 3),
+            infoLabel.heightAnchor.constraint(equalToConstant: topBarHeight / 2),
+            infoLabel.centerYAnchor.constraint(equalTo: genreOptionsMenu.topAnchor)
+                ])
             
             if direction == .fromRight {
     
@@ -71,6 +81,7 @@ class GenreMenuManager: ObjectManager {
                     options: .curveEaseOut,
                     animations: {
                         self.fadeBackgroundView.alpha = 0.4
+                        self.infoLabel.center.x -= self.genreOptionsMenu.bounds.width
                         self.genreOptionsMenu.center.x -= self.genreOptionsMenu.bounds.width
                 },
                     completion: nil)
@@ -103,6 +114,7 @@ class GenreMenuManager: ObjectManager {
                     options: .curveEaseOut,
                     animations: {
                         self.fadeBackgroundView.alpha = 0.4
+                        self.infoLabel.center.x += self.genreOptionsMenu.bounds.width
                         self.genreOptionsMenu.center.x += self.genreOptionsMenu.bounds.width
                 },
                     completion: nil)
@@ -114,11 +126,10 @@ class GenreMenuManager: ObjectManager {
     @objc private func dismissOptionsToRight(sender: UISwipeGestureRecognizer) {
         if genreOptionsMenu.leftSideSelectedGenres.count != 0 {
             // If we have 1 or more items in selection we are allowed to dismiss
-            
             User.leftUser.selectedGenres.removeAll() // make sure its empty before storing
             for genre in genreOptionsMenu.leftSideSelectedGenres {
                 User.leftUser.selectedGenres.append(genre)
-                print("Stored: \(genreOptionsMenu.leftSideSelectedGenres.count)")
+//                print("Stored: \(genreOptionsMenu.leftSideSelectedGenres.count)")
             }
             
             UIView.animate(
@@ -127,6 +138,7 @@ class GenreMenuManager: ObjectManager {
                 options: .curveEaseIn,
                 animations: {
                     self.fadeBackgroundView.alpha = 0
+                    self.infoLabel.center.x += self.genreOptionsMenu.bounds.width
                     self.genreOptionsMenu.center.x += self.genreOptionsMenu.bounds.width
             },
                 completion: nil)
@@ -137,11 +149,9 @@ class GenreMenuManager: ObjectManager {
     
     @objc private func dismissOptionsToLeft(sender: UISwipeGestureRecognizer) {
         if genreOptionsMenu.rightSideSelectedGenres.count != 0 {
-            
             User.rightUser.selectedGenres.removeAll()
             for genre in genreOptionsMenu.rightSideSelectedGenres {
                 User.rightUser.selectedGenres.append(genre)
-                print("Stored: \(genreOptionsMenu.rightSideSelectedGenres.count)")
             }
             
             UIView.animate(
@@ -150,6 +160,7 @@ class GenreMenuManager: ObjectManager {
                 options: .curveEaseIn,
                 animations: {
                     self.fadeBackgroundView.alpha = 0
+                    self.infoLabel.center.x -= self.genreOptionsMenu.bounds.width
                     self.genreOptionsMenu.center.x -= self.genreOptionsMenu.bounds.width
             },
                 completion: nil)

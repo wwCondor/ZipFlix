@@ -6,11 +6,6 @@
 //  Copyright © 2019 Studio Willebrands. All rights reserved.
 //
 
-//"page": 1,
-//"total_results": 4,
-//"total_pages": 1,
-//"results": []
-
 import Foundation
 
 struct Page<T: Codable>: Codable {
@@ -19,10 +14,3 @@ struct Page<T: Codable>: Codable {
     let totalPages: Int?
     let results: [T]?
 }
-
-//    init(page: Int, totalResults: Int, totalPages: Int, results: [T]) {
-//        self.page = page
-//        self.totalResults = totalResults
-//        self.totalPages = totalPages
-//        self.results = results
-//    }

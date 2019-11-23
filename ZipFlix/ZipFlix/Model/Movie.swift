@@ -56,28 +56,6 @@ struct TestMovie {
    "overview": "In the last months of World War II, as the Allies make their final push in the European theatre, a battle-hardened U.S. Army sergeant named 'Wardaddy' commands a Sherman tank called 'Fury' and its five-man crew on a deadly mission behind enemy lines. Outnumbered and outgunned, Wardaddy and his men face overwhelming odds in their heroic attempts to strike at the heart of Nazi Germany.",
    "release_date": "2014-10-15"
  }
- 
- {
-   "popularity": 39.823,
-   "vote_count": 10469,
-   "video": false,
-   "poster_path": "/eFnGmj63QPUpK7QUWSOUhypIQOT.jpg",
-   "id": 109445,
-   "adult": false,
-   "backdrop_path": "/cN9Nbwh66TRcj2gBE8cSEZulsx3.jpg",
-   "original_language": "en",
-   "original_title": "Frozen",
-   "genre_ids": [
-     12,
-     16,
-     10751
-   ],
-   "title": "Frozen",
-   "vote_average": 7.3,
-   "overview": "Young princess Anna of Arendelle dreams about finding true love at her sister Elsa’s coronation. Fate takes her on a dangerous journey in an attempt to end the eternal winter that has fallen over the kingdom. She's accompanied by ice delivery man Kristoff, his reindeer Sven, and snowman Olaf. On an adventure where she will find out what friendship, courage, family, and true love really means.",
-   "release_date": "2013-11-27"
- }
- 
  */
 
 
