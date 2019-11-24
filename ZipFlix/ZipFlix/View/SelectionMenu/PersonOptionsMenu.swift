@@ -77,17 +77,13 @@ extension PersonOptionsMenu {
             if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.black {
                 if leftSideSelectedPeople.count <= 0 {
                     leftSideSelectedPeople.append(selectedPerson)
-//                    print("Total: \(leftSideSelectedPeople.count)")
                     tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.white
                 } else {
                     print("Already at max (1) selection")
                 }
             } else if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.white {
-//                let genreToRemove = selectedPerson
                 guard let index = findIndex(for: selectedPerson, in: leftSideSelectedPeople) else { return }
                 leftSideSelectedPeople.remove(at: index)
-//                print("Removed: \(genreToRemove)")
-//                print("Total: \(leftSideSelectedPeople.count)")
                 tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.black
             }
             

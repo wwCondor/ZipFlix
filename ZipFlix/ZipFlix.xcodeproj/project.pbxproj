@@ -208,7 +208,6 @@
 		0B7ABD0A2370190000EF16B0 /* ZipFlix */ = {
 			isa = PBXGroup;
 			children = (
-				0B7ABD332371611400EF16B0 /* Delete? */,
 				0B7ABD24237020B800EF16B0 /* Helpers */,
 				0B7ABD232370209000EF16B0 /* Model */,
 				0B7ABD222370208E00EF16B0 /* View */,
@@ -270,13 +269,6 @@
 				0B739485237AEE090087C95F /* StateEnums.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		0B7ABD332371611400EF16B0 /* Delete? */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Delete?";
 			sourceTree = "<group>";
 		};
 		0B7ABD3C2371C77100EF16B0 /* TopButtonBar */ = {

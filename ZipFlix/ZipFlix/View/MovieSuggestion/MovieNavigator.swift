@@ -76,7 +76,6 @@ class LeftNavigator: Navigator {
     }
 }
 
-
 class Navigator: UIView {
     
     let navigatorColor = UIColor(named: Colors.objectBG.color)!
@@ -100,5 +99,4 @@ class Navigator: UIView {
         isUserInteractionEnabled = true
         translatesAutoresizingMaskIntoConstraints = false
     }
-  
 }

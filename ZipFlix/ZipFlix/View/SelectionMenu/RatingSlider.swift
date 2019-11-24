@@ -91,5 +91,3 @@ class RatingSlider: OptionsMenu {
     }
     
 }
-
-

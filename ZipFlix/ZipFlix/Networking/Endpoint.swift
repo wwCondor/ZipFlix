@@ -8,9 +8,6 @@
 
 import Foundation
 
-// https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg // image URL for movie for poster_path
-
-
 enum Endpoint {
     case genres
     case people

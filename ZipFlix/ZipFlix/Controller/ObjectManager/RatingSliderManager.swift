@@ -127,7 +127,6 @@ class RatingSliderManager: ObjectManager {
     @objc private func dismissSliderToRight(sender: UISwipeGestureRecognizer) {
         if ratingSliderMenu.minimumRating >= 0 {
             User.rightUser.selectedRating = ratingSliderMenu.minimumRating
-//            print("Stored: \(ratingSliderMenu.minimumRating)")
             UIView.animate(
                 withDuration: 0.5,
                 delay: 0,

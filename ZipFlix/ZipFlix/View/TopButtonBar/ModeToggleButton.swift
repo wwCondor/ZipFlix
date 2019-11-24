@@ -64,4 +64,3 @@ class ModeToggleButton: CustomButton {
         tintColor = bool ? darkModeTint : nil
     }
 }
-

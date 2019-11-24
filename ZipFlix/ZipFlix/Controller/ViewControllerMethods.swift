@@ -92,9 +92,6 @@ extension ViewController {
         } else {
             Alert.presentAlert(description: MovieDBError.noReachability.description, viewController: self)
         }
-
     }
     
 }
-
-

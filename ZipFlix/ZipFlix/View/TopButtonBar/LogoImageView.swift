@@ -29,5 +29,4 @@ class LogoImageView: UIImageView {
         contentMode = .scaleToFill
         isUserInteractionEnabled = true // Only needed if when implementing animation/sound
     }
-
 }

@@ -170,6 +170,3 @@ class GenreMenuManager: ObjectManager {
     }
     
 }
-
-
-

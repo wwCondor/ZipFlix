@@ -63,8 +63,6 @@ class MovieDataManager {
                         var movieDuplicates = [Movie]()
                         if !allMovies.contains(movie) {
                             allMovies.append(movie)
-//                            print("***")
-//                            print("\(String(describing: movie.title)) added to array; total: \(allMovies.count)")
                         } else {
                             movieDuplicates.append(movie)
                         }

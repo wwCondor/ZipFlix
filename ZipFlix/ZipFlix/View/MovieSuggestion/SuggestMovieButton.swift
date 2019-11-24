@@ -45,6 +45,3 @@ class SuggestMovieButton: CustomButton {
         setImage(image, for: .normal)
     }
 }
-
-
-

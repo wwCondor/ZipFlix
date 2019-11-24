@@ -47,4 +47,3 @@ struct Constants {
     // darkMode alpha for all dimmable objects
     static let dimAlpha: CGFloat = 0.5
 }
-

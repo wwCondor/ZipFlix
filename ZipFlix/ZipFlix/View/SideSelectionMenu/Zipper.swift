@@ -82,7 +82,6 @@ class RightSideZipper: Zipper {
     }
 }
 
-
 class Zipper: UIView {
     
     var zipperColor = UIColor(named: Colors.zipper.color)! {

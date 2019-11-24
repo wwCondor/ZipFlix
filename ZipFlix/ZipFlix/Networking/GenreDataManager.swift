@@ -52,7 +52,6 @@ class GenreDataManager {
                     }
 
                     if 200...299 ~= httpResponse.statusCode {
-
                         do {
                             let genres = try GenreDataManager.decoder.decode(Genres.self, from: data)
                             completion(genres, nil)

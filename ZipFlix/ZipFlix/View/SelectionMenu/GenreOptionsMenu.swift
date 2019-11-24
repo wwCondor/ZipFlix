@@ -71,17 +71,13 @@ extension GenreOptionMenu {
             if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.black {
                 if leftSideSelectedGenres.count <= 2 {
                     leftSideSelectedGenres.append(selectedGenre)
-//                    print("Total: \(leftSideSelectedGenres.count)")
                     tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.white
                 } else {
-//                    print("Already at max (3) selections") // MARK: Alert?
+                    
                 }
             } else if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.white {
-//                let genreToRemove = selectedGenre
                 guard let index = findIndex(for: selectedGenre, in: leftSideSelectedGenres) else { return }
                 leftSideSelectedGenres.remove(at: index)
-//                print("Removed: \(genreToRemove)")
-//                print("Total: \(leftSideSelectedGenres.count)")
                 tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.black
             }
 
@@ -89,17 +85,13 @@ extension GenreOptionMenu {
             if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.black {
                 if rightSideSelectedGenres.count <= 2 {
                     rightSideSelectedGenres.append(selectedGenre)
-//                    print("Total: \(rightSideSelectedGenres.count)")
                     tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.white
                 } else {
 //                    print("Already at max (3) selections")  // MARK: Alert?
                 }
             } else if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.white {
-//                let genreToRemove = selectedGenre
                 guard let index = findIndex(for: selectedGenre, in: rightSideSelectedGenres) else { return }
                 rightSideSelectedGenres.remove(at: index)
-//                print("Removed: \(genreToRemove)")
-//                print("Total: \(rightSideSelectedGenres.count)")
                 tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.black
             }
         }
@@ -141,13 +133,3 @@ extension GenreOptionMenu {
     }
 
 }
-
-
-
-
-
-
-
-
-
-

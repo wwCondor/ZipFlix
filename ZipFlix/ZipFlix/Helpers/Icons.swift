@@ -34,5 +34,4 @@ enum Icons {
         case .noPoster:         return "NoPoster"
         }
     }
-    
 }

@@ -30,8 +30,6 @@ class PeopleDataManager {
                                 var peopleDuplicates = [Person]()
                                 if !allPeople.contains(person) {
                                     allPeople.append(person)
-//                                    print("***")
-//                                    print("\(String(describing: person.name)) added to array; total: \(allPeople.count)")
                                 } else {
                                     peopleDuplicates.append(person)
                                 }

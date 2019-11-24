@@ -28,9 +28,6 @@ class TopButtonBar: UIView {
         layer.shadowOpacity = 0.8
         layer.shadowOffset = CGSize(width: 0, height: 3.0)
         layer.shadowRadius = 15
-        
     }
     
 }
-
-

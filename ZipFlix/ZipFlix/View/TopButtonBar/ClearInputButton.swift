@@ -42,4 +42,3 @@ class ClearInputButton: CustomButton {
         tintColor = bool ? darkModeTint : lightModeTint
     }
 }
-

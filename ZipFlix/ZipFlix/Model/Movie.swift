@@ -57,5 +57,3 @@ struct TestMovie {
    "release_date": "2014-10-15"
  }
  */
-
-
