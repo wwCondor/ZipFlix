@@ -21,8 +21,7 @@ class PeopleDataManager {
                         // If we have pages we check for each page if it contains results
                         for peoplePage in peoplePages {
                             guard let peopleArray = peoplePage.results else {
-                                print("Unable to obtain people array from pages")
-                                completion(nil, error)
+                                completion(nil, MovieDBError.noResults)
                                 return
                             }
                             // If it does, each character inside results will be added to an array
@@ -37,7 +36,6 @@ class PeopleDataManager {
                             completion(allPeople, nil)
                         }
                     } else if let error = error {
-                        print(error)
                         completion(nil, error)
                     }
                 }

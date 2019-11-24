@@ -26,16 +26,13 @@ class MovieDataManager {
             if let moviePages = moviePages {
                 for moviePage in moviePages {
                     guard let movieArray = moviePage.results else {
-                        print("Unable to obtain people array from pages")
-                        completion(nil, error)
+                        completion(nil, MovieDBError.noResults)
                         return
                     }
                     for movie in movieArray {
                         var movieDuplicates = [Movie]()
                         if !allMovies.contains(movie) {
                             allMovies.append(movie)
-//                            print("***")
-//                            print("\(String(describing: movie.title)) added to array; total: \(allMovies.count)")
                         } else {
                             movieDuplicates.append(movie)
                         }
@@ -43,7 +40,6 @@ class MovieDataManager {
                     completion(allMovies, nil)
                 }
             } else if let error = error {
-                print(error)
                 completion(nil, error)
             }
         }
@@ -55,8 +51,7 @@ class MovieDataManager {
             if let moviePages = moviePages {
                 for moviePage in moviePages {
                     guard let movieArray = moviePage.results else {
-                        print("Unable to obtain people array from pages")
-                        completion(nil, error)
+                        completion(nil, MovieDBError.noResults)
                         return
                     }
                     for movie in movieArray {
@@ -70,7 +65,6 @@ class MovieDataManager {
                     completion(allMovies, nil)
                 }
             } else if let error = error {
-                print(error)
                 completion(nil, error)
             }
         }

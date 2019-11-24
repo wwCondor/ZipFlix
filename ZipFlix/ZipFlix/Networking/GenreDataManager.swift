@@ -24,15 +24,14 @@ class GenreDataManager {
     static func fetchGenres(completion: @escaping GenreItemsCompletionHandler) {
         var allGenres = [Genre]()
         getGenres { (genreObject, error) in
-            
             guard let genres = genreObject?.genres else {
-                completion(nil, error)
+                completion(nil, MovieDBError.noResults)
                 return
             }
             for genre in genres {
                 allGenres.append(genre)
             }
-            completion(allGenres, error)
+            completion(allGenres, nil)
         }
     }
 
@@ -45,27 +44,22 @@ class GenreDataManager {
         let task = GenreDataManager.session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 if let data = data {
-
                     guard let httpResponse = response as? HTTPURLResponse else {
                         completion(nil, MovieDBError.requestFailed)
                         return
                     }
-
                     if 200...299 ~= httpResponse.statusCode {
                         do {
                             let genres = try GenreDataManager.decoder.decode(Genres.self, from: data)
                             completion(genres, nil)
-
                         } catch {
                             completion(nil, MovieDBError.jsonDecodingFailure)
                         }
-
                     } else {
                         completion(nil, MovieDBError.responseUnsuccessful)
                     }
-
-                } else if let error = error {
-                    completion(nil, error)
+                } else {
+                    completion(nil, MovieDBError.noData)
                 }
             }
         }
