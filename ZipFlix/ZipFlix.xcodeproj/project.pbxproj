@@ -58,7 +58,6 @@
 		0B7ABD412371FEA800EF16B0 /* TopButtonBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD402371FEA800EF16B0 /* TopButtonBar.swift */; };
 		0B7ABD452372B5B600EF16B0 /* Zipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD442372B5B600EF16B0 /* Zipper.swift */; };
 		0B7ABD472372F2B400EF16B0 /* ZipperAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD462372F2B400EF16B0 /* ZipperAnimations.swift */; };
-		0B7ABD4923732CCC00EF16B0 /* IconLegalStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ABD4823732CCC00EF16B0 /* IconLegalStuff.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,7 +114,6 @@
 		0B7ABD402371FEA800EF16B0 /* TopButtonBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButtonBar.swift; sourceTree = "<group>"; };
 		0B7ABD442372B5B600EF16B0 /* Zipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zipper.swift; sourceTree = "<group>"; };
 		0B7ABD462372F2B400EF16B0 /* ZipperAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipperAnimations.swift; sourceTree = "<group>"; };
-		0B7ABD4823732CCC00EF16B0 /* IconLegalStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconLegalStuff.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,7 +220,6 @@
 				0B7ABD112370190000EF16B0 /* Main.storyboard */,
 				0B7ABD162370190200EF16B0 /* LaunchScreen.storyboard */,
 				0B7ABD192370190200EF16B0 /* Info.plist */,
-				0B7ABD4823732CCC00EF16B0 /* IconLegalStuff.swift */,
 			);
 			path = ZipFlix;
 			sourceTree = "<group>";
@@ -381,7 +378,6 @@
 				0B7394B62382A3B80087C95F /* RatingSlider.swift in Sources */,
 				0B73946D237842C00087C95F /* MovieSuggestionsView.swift in Sources */,
 				0B7ABD2023701FD700EF16B0 /* Colors.swift in Sources */,
-				0B7ABD4923732CCC00EF16B0 /* IconLegalStuff.swift in Sources */,
 				0B739499237DD4230087C95F /* APIKey.swift in Sources */,
 				0B73947523799A150087C95F /* GenreDataManager.swift in Sources */,
 				0B739484237ADC120087C95F /* Movie.swift in Sources */,
