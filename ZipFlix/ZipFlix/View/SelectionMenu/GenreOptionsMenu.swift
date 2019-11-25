@@ -24,6 +24,7 @@ class GenreOptionMenu: OptionsMenu {
         addObserver()
     }
     
+    // Called on movieSuggestionView dismiss or clearInputButton tap
     override func removeSelection(sender: Notification) {
         // Remove selected color state
         if let indexes = options.indexPathsForSelectedRows {
@@ -38,12 +39,13 @@ class GenreOptionMenu: OptionsMenu {
         options.reloadData()
     }
     
+    // Gets genres
     func getGenres() {
         GenreDataManager.fetchGenres { (genres, error) in
             DispatchQueue.main.async {
                 guard let genres = genres else {
-                    print("GenreError: Unable to obtain genres") // MARK: Error Alert
-                    return
+                    Alert.presentAlertFromNSObject(description: MovieDBError.noGenres.description) // Unlikely that we end up here since we make a connectioncheck right before
+                    return 
                 }
                 self.genres = genres
                 self.options.reloadData()
@@ -95,6 +97,9 @@ extension GenreOptionMenu {
                 tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.black
             }
         }
+        
+        tableView.deselectRow(at: indexPath, animated: false)
+        tableView.reloadRows(at: [indexPath], with: .none) // Probably not needed?
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,7 +116,7 @@ extension GenreOptionMenu {
         cell.backgroundColor = UIColor.clear
         
         if genres.count == 0 {
-            cell.textLabel!.text = "loading data..."  // MARK: Alert?
+            cell.textLabel!.text = "loading data..." // Displays when still loading
         } else {
             let genre = genres[indexPath.row]
             cell.textLabel!.text = genre.name

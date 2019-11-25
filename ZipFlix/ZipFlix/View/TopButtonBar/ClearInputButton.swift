@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Allows for a selection input reset
 class ClearInputButton: CustomButton {
     
     let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)

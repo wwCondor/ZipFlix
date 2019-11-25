@@ -8,6 +8,7 @@
 
 import UIKit
 
+// To increase readability methods belonging to the viewController have been moved to this extension
 extension ViewController {
     
     @objc func clearInput(sender: UIButton) {

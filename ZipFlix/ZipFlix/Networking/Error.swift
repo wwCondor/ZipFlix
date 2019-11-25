@@ -20,6 +20,8 @@ enum MovieDBError: Error {
     case missingKey
     case noReachability
     case noResults
+    case noGenres
+    case noPersons
 }
 
 extension MovieDBError: LocalizedError {
@@ -36,6 +38,8 @@ extension MovieDBError: LocalizedError {
         case .missingKey:            return "Please set your key in APIkey.swift"
         case .noReachability:        return "Check connection and try again"
         case .noResults:             return "Page did not contain results"
+        case .noGenres:              return "Unable to obtain genres. Please check connection or API status"
+        case .noPersons:             return "Unable to obtain persons. Please check connection or API status"
         }
     }
 }

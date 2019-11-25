@@ -8,7 +8,7 @@
 
 import SystemConfiguration
 
-// Object that check wether we have internet connection
+// Object that checks internet connection
 struct Reachability {
     
     private static let reachability = SCNetworkReachabilityCreateWithName( kCFAllocatorDefault, "https://www.themoviedb.org/")

@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Handles presentations and dismiss of slider
 class RatingSliderManager: ObjectManager {
                 
     lazy var ratingSliderMenu: RatingSlider = {

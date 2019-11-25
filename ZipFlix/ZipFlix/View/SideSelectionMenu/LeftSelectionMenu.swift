@@ -8,7 +8,8 @@
 
 import UIKit
 
-class LeftSelectionMenu: SelectionMenu {
+// Left side menu that launches the selectionMenus
+class LeftSelectionMenuLauncher: SelectionMenu {
     
     override var cellId: String {
         return super.cellId + "leftSelectionMenuId"
@@ -46,7 +47,7 @@ class LeftSelectionMenu: SelectionMenu {
     
 }
 
-extension LeftSelectionMenu { 
+extension LeftSelectionMenuLauncher { 
     
     // Sets up cell content
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

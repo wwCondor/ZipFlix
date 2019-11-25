@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Handles presentations and dismiss of personMenu
 class PersonMenuManager: ObjectManager {
                 
     lazy var peopleOptionsMenu: PersonOptionsMenu = {

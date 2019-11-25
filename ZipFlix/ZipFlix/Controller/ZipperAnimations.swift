@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Methods handling the zipper animations
 extension ViewController {
     
     func closeZipper() {

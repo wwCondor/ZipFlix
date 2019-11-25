@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Handles presentations and dismiss of movieSuggestions
 class MovieSuggestionManager: ObjectManager {
     
     let clearInputNotification = Notification.Name(rawValue: Constants.clearInputNotificationKey)
@@ -181,7 +182,6 @@ class MovieSuggestionManager: ObjectManager {
                     self.rightSideFinishedLoading = true
                     return
                 }
-                
                 for movie in movies {
                     if !self.allMovies.contains(movie) {
                         self.allMovies.append(movie)
@@ -224,6 +224,7 @@ class MovieSuggestionManager: ObjectManager {
         GenreDataManager.fetchGenres { (genres, error) in
             DispatchQueue.main.async {
                 guard let genres = genres else {
+                    Alert.presentAlertFromNSObject(description: MovieDBError.noGenres.description)
                     return
                 }
                 self.allGenres = genres
@@ -273,7 +274,7 @@ class MovieSuggestionManager: ObjectManager {
                     return
                 }
                 guard let movieDiscription = self.allMovies[self.currentMovie].overview else {
-                    self.movieOverview.text = "The selections made have not resulted in any"
+                    self.movieOverview.text = ""
                     return
                 }
                 self.titleLabel.text = "\(title)"

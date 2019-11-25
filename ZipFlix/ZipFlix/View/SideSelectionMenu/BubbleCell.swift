@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Cell that holds the empty/filled bubble image for the selectionMenuLauncher
 class BubbleCell: BaseCell {
     
     lazy var imageView: UIImageView = {

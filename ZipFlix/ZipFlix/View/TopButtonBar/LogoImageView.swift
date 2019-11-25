@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Topbar logo image 
 class LogoImageView: UIImageView {
     
     override init(image: UIImage?) {

@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Base class for button that allows for a state toggle
 class CustomButton: UIButton {
     var isOn = false
     
@@ -23,13 +24,9 @@ class CustomButton: UIButton {
         addObservers()
     }
     
-    func setupButton() {
-
-    }
+    func setupButton() { }
     
-    func addObservers() {
-        
-    }
+    func addObservers() { }
     
     deinit {
         NotificationCenter.default.removeObserver(self)

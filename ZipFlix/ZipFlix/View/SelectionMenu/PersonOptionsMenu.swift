@@ -42,7 +42,7 @@ class PersonOptionsMenu: OptionsMenu {
         PeopleDataManager.fetchPopularPeople { (people, error) in
             DispatchQueue.main.async {
                 guard let people = people else {
-                    print("GenreError: Unable to obtain people") // MARK: Error Alert
+                    Alert.presentAlertFromNSObject(description: MovieDBError.noPersons.description)
                     return
                 }
                 // Sort people by name
@@ -105,8 +105,8 @@ extension PersonOptionsMenu {
                 tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.black
             }
         }
-        
-        tableView.reloadData()
+        tableView.deselectRow(at: indexPath, animated: false)
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

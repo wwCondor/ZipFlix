@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MovieLabels used for movieSuggestions screen
 class MovieLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)

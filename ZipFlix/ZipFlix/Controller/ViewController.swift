@@ -57,13 +57,13 @@ class ViewController: UIViewController {
         return statusBarView
     }()
     
-    lazy var leftSelectionMenu: LeftSelectionMenu = {
-        let leftSelectionMenu = LeftSelectionMenu()
+    lazy var leftSelectionMenu: LeftSelectionMenuLauncher = {
+        let leftSelectionMenu = LeftSelectionMenuLauncher()
         return leftSelectionMenu
     }()
         
-    lazy var rightSelectionMenu: RightSelectionMenu = {
-        let rightSelectionMenu = RightSelectionMenu()
+    lazy var rightSelectionMenu: RightSelectionMenuLauncher = {
+        let rightSelectionMenu = RightSelectionMenuLauncher()
         return rightSelectionMenu
     }()
     

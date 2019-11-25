@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Custom shape zipper objects used for animations
 class LeftSideZipper: Zipper {
     
     override func draw(_ rect: CGRect) {

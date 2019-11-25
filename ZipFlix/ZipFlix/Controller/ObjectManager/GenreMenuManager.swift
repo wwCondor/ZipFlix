@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Handles presentations and dismiss of genreMenu
 class GenreMenuManager: ObjectManager {
                 
     lazy var genreOptionsMenu: GenreOptionMenu = {

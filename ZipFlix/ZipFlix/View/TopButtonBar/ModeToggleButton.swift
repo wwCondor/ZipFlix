@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Allows toggle between light and dark mode
+// Since the app will likely be used in soft-light ir dark(ened) rooms a darkmode seems sensible
 class ModeToggleButton: CustomButton {
     
     var isDimmed = false

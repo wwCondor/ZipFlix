@@ -8,6 +8,7 @@
 
 import UIKit
 
+// When selection are made this launches movieSuggestions
 class SuggestMovieButton: CustomButton {
     
     let lightModeNotification = Notification.Name(rawValue: Constants.lightModeNotificationKey)

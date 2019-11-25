@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Custom buttons with triangle shapes and rounded corners
 class RightNavigator: Navigator {
     
     override func draw(_ rect: CGRect) {
