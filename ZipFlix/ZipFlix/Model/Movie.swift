@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Movie: Codable, Equatable {
+struct Movie: Codable, Equatable { // Lines commented out are for future reference
 //    let popularity: Int? //maybe?
 //    let voteCount: Int?
 //    let video: Bool?

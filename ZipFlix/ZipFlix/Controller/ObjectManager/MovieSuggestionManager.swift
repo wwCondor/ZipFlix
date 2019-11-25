@@ -151,8 +151,8 @@ class MovieSuggestionManager: ObjectManager {
     private func discoverMovies() {
         self.allMovies.removeAll() // Make sure it is empty
         MovieDataManager.discoverLeftMovies { (movies, error) in
-            self.activityIndicator.startAnimating()
             DispatchQueue.main.async {
+                self.activityIndicator.startAnimating()
                 guard let movies = movies else {
                     self.leftSideFinishedLoading = true
                     return
@@ -162,13 +162,13 @@ class MovieSuggestionManager: ObjectManager {
                         self.allMovies.append(movie)
                     }
                 }
-                self.activityIndicator.stopAnimating()
                 self.leftSideFinishedLoading = true
                 if self.leftSideFinishedLoading == true && self.rightSideFinishedLoading == true {
                     self.filterNilMovies() // filter rare 'Nil'-cases
-                    self.allMovies.shuffle() // preventing discoveries to be ordered by actor
+                    self.allMovies.shuffle() // prevents discoveries to be ordered by actor
                     self.setLabels(for: self.currentMovie) // Whichever completes last triggers setupLabels
                     self.setPosterImage(for: self.currentMovie)
+                    self.activityIndicator.stopAnimating()
                     print("All movies: \(self.allMovies), total \(self.allMovies.count)")
                 }
             }
@@ -187,13 +187,13 @@ class MovieSuggestionManager: ObjectManager {
                         self.allMovies.append(movie)
                     }
                 }
-                self.activityIndicator.stopAnimating()
                 self.rightSideFinishedLoading = true
                 if self.leftSideFinishedLoading == true && self.rightSideFinishedLoading == true {
                     self.filterNilMovies()
                     self.allMovies.shuffle()
                     self.setLabels(for: self.currentMovie)
                     self.setPosterImage(for: self.currentMovie)
+                    self.activityIndicator.stopAnimating()
                     print("All movies: \(self.allMovies), total \(self.allMovies.count)")
                 }
             }
@@ -232,65 +232,68 @@ class MovieSuggestionManager: ObjectManager {
     }
     
     private func setPosterImage(for movie: Int) {
-        let connectionPossible = Reachability.checkReachable()
-        if connectionPossible == true {
-            guard let posterPath = allMovies[currentMovie].posterPath else {
-                return
+        DispatchQueue.main.async {
+            let connectionPossible = Reachability.checkReachable()
+            if connectionPossible == true {
+                guard let posterPath = self.allMovies[self.currentMovie].posterPath else {
+                    return
+                }
+                self.posterView.downloaded(from: posterPath, contentMode: .scaleAspectFit)
+            } else if connectionPossible == false {
+                self.posterView.image = UIImage(named: Icons.noPoster.image)
             }
-            posterView.downloaded(from: posterPath, contentMode: .scaleAspectFit)
-        } else if connectionPossible == false {
-            print("No connection. Could not obtain image yet")
-            posterView.image = UIImage(named: Icons.noPoster.image)
         }
     }
 
     private func setLabels(for movie: Int) {
-        if allMovies.count != 0 {
-            let numberOfMovies = allMovies.count
-            infoLabel.text = "\(currentMovie + 1) / \(numberOfMovies)"
-            activityIndicator.startAnimating()
-
-            guard let title = allMovies[currentMovie].title else {
-                self.titleLabel.text = "No results"
-                return
+        DispatchQueue.main.async {
+            if self.allMovies.count != 0 {
+                let numberOfMovies = self.allMovies.count
+                self.infoLabel.text = "\(self.currentMovie + 1) / \(numberOfMovies)"
+                self.activityIndicator.startAnimating()
+                
+                guard let title = self.allMovies[self.self.currentMovie].title else {
+                    self.titleLabel.text = "No results"
+                    return
+                }
+                guard let vote = self.allMovies[self.currentMovie].voteAverage else {
+                    self.averageVoteInfoLabel.text = "?"
+                    return
+                }
+                guard let genreIds = self.allMovies[self.currentMovie].genreIds else {
+                    self.genreInfoLabel.text = "?"
+                    return
+                }
+                guard let language = self.allMovies[self.currentMovie].originalLanguage else {
+                    self.originalLanguageInfoLabel.text = "?"
+                    return
+                }
+                guard let date = self.allMovies[self.currentMovie].releaseDate else {
+                    self.releaseDataInfoLabel.text = "?"
+                    return
+                }
+                guard let movieDiscription = self.allMovies[self.currentMovie].overview else {
+                    self.movieOverview.text = "The selections made have not resulted in any"
+                    return
+                }
+                self.titleLabel.text = "\(title)"
+                self.averageVoteInfoLabel.text = "\(vote)"
+                let genreNames = self.getGenreNames(for: genreIds)
+                self.genreInfoLabel.text = "\(genreNames)"
+                self.originalLanguageInfoLabel.text = "\(language)"
+                self.releaseDataInfoLabel.text = "\(date)"
+                self.movieOverview.text = "\(movieDiscription)"
+                
+                self.activityIndicator.stopAnimating()
+            } else {
+                self.infoLabel.text = "0 / 0"
+                self.titleLabel.text = "No Results"
+                self.averageVoteInfoLabel.text = ""
+                self.genreInfoLabel.text = ""
+                self.originalLanguageInfoLabel.text = ""
+                self.releaseDataInfoLabel.text = ""
+                self.movieOverview.text = "The selections you have made did not lead to a discovery. Please try again with different selections."
             }
-            guard let vote = allMovies[currentMovie].voteAverage else {
-                self.averageVoteInfoLabel.text = "?"
-                return
-            }
-            guard let genreIds = allMovies[currentMovie].genreIds else {
-                self.genreInfoLabel.text = "?"
-                return
-            }
-            guard let language = allMovies[currentMovie].originalLanguage else {
-                self.originalLanguageInfoLabel.text = "?"
-                return
-            }
-            guard let date = allMovies[currentMovie].releaseDate else {
-                self.releaseDataInfoLabel.text = "?"
-                return
-            }
-            guard let movieDiscription = allMovies[currentMovie].overview else {
-                self.movieOverview.text = "The selections made have not resulted in any"
-                return
-            }
-            titleLabel.text = "\(title)"
-            averageVoteInfoLabel.text = "\(vote)"
-            let genreNames = getGenreNames(for: genreIds)
-            genreInfoLabel.text = "\(genreNames)"
-            originalLanguageInfoLabel.text = "\(language)"
-            releaseDataInfoLabel.text = "\(date)"
-            movieOverview.text = "\(movieDiscription)"
-            
-            activityIndicator.stopAnimating()
-        } else {
-            infoLabel.text = "0 / 0"
-            titleLabel.text = "No Results"
-            averageVoteInfoLabel.text = ""
-            genreInfoLabel.text = ""
-            originalLanguageInfoLabel.text = ""
-            releaseDataInfoLabel.text = ""
-            movieOverview.text = "The selections you have made did not lead to a discovery. Please try again with different selections."
         }
     }
     
@@ -526,7 +529,6 @@ class MovieSuggestionManager: ObjectManager {
             completion: { _ in
                 NotificationCenter.default.post(name: self.clearInputNotification, object: nil) // Resets selections and slider. Opens Zipper
               })
-
     }
     
     @objc private func navigateSuggestionsBySwipe(sender: UISwipeGestureRecognizer) {
@@ -566,41 +568,4 @@ class MovieSuggestionManager: ObjectManager {
         }
     }
     
-}
-
-class MovieLabel: UILabel {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupProperties()
-        setupAdditionalProperties()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupProperties()
-        setupAdditionalProperties()
-    }
-
-    func setupProperties() {
-        backgroundColor = UIColor.clear
-        translatesAutoresizingMaskIntoConstraints = false
-        textColor = UIColor.white
-    }
-    
-    func setupAdditionalProperties() { }
-
-}
-
-class LeftSideLabel: MovieLabel {
-    override func setupAdditionalProperties() {
-        textAlignment = .left
-        font = font.withSize(14)
-    }
-}
-
-class RightSideLabel: MovieLabel {
-    override func setupAdditionalProperties() {
-        textAlignment = .right
-        font = UIFont.boldSystemFont(ofSize: 14)
-    }
 }

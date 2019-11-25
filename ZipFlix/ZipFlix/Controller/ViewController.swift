@@ -192,7 +192,6 @@ class ViewController: UIViewController {
             logoImageView.widthAnchor.constraint(equalToConstant: barButtonLogo),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-
     }
     
     private func setupLeftSelectionMenu() {
@@ -252,7 +251,6 @@ class ViewController: UIViewController {
             leftZipperSix.topAnchor.constraint(equalTo: leftZipperFive.bottomAnchor, constant: zipperSpacing),
             leftZipperSix.centerXAnchor.constraint(equalTo: leftSelectionMenu.trailingAnchor, constant: -zipperXOffset)
         ])
-        
     }
     
     private func setupRightSelectionMenu() {
@@ -311,11 +309,9 @@ class ViewController: UIViewController {
             rightZipperSix.topAnchor.constraint(equalTo: rightZipperFive.bottomAnchor, constant: zipperSpacing),
             rightZipperSix.centerXAnchor.constraint(equalTo: rightSelectionMenu.leadingAnchor, constant: zipperXOffset)
         ])
-        
     }
     
     private func setupSuggestMovieButton() {
-        
         let height = view.bounds.height
         let movieButtonSize = ((3/14) * height) / 2
         
@@ -327,7 +323,6 @@ class ViewController: UIViewController {
         suggestMovieButton.widthAnchor.constraint(equalToConstant: movieButtonSize),
         suggestMovieButton.heightAnchor.constraint(equalToConstant: movieButtonSize)
         ])
-
     }
     
     deinit {

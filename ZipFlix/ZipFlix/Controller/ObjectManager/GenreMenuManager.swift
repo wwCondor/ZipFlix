@@ -119,7 +119,6 @@ class GenreMenuManager: ObjectManager {
                 },
                     completion: nil)
             }
-        
         }
     }
                 
@@ -129,7 +128,6 @@ class GenreMenuManager: ObjectManager {
             User.leftUser.selectedGenres.removeAll() // make sure its empty before storing
             for genre in genreOptionsMenu.leftSideSelectedGenres {
                 User.leftUser.selectedGenres.append(genre)
-//                print("Stored: \(genreOptionsMenu.leftSideSelectedGenres.count)")
             }
             
             UIView.animate(

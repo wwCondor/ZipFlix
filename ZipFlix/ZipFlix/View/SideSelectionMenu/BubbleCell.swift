@@ -39,6 +39,6 @@ class BaseCell: UICollectionViewCell {
         setupView()
     }
     
-    func setupView() {}
+    func setupView() { }
     
 }

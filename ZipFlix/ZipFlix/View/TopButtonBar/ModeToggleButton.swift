@@ -63,4 +63,5 @@ class ModeToggleButton: CustomButton {
         let darkModeTint = UIColor.black
         tintColor = bool ? darkModeTint : nil
     }
+    
 }

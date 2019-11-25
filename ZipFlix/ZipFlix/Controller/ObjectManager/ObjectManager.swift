@@ -44,11 +44,10 @@ class ObjectManager: NSObject {
         activateButton(bool: !isOn)
     }
     
-    func activateButton(bool: Bool) {
-
-    }
+    func activateButton(bool: Bool) { }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
 }

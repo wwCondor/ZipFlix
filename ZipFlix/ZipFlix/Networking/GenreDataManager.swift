@@ -42,7 +42,6 @@ class GenreDataManager {
         let request = URLRequest(url: genreUrl)
 
         let task = GenreDataManager.session.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
                 if let data = data {
                     guard let httpResponse = response as? HTTPURLResponse else {
                         completion(nil, MovieDBError.requestFailed)
@@ -61,7 +60,6 @@ class GenreDataManager {
                 } else {
                     completion(nil, MovieDBError.noData)
                 }
-            }
         }
         task.resume()
     }

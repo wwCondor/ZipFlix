@@ -43,6 +43,7 @@ class RightSelectionMenu: SelectionMenu {
         super.layoutSubviews()
         roundCorners(corners: [.topLeft, .bottomLeft], radius: Constants.menuCornerRadius)
     }
+    
 }
 
 extension RightSelectionMenu {
@@ -69,42 +70,46 @@ extension RightSelectionMenu {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if APIKey.key == "" {
-            print(MovieDBError.missingKey.description)
-        } else {
-            let connectionAvailable = Reachability.checkReachable()
-            // Check if we have an internet connection
-            if connectionAvailable == true {
-                if indexPath.row == 0 {
-                    self.genreMenuManager.presentOptions(direction: .fromLeft)
-                    
-                    if rightSideHasSelectedGenres == false {
-                        rightSideHasSelectedGenres = true
-                        collectionView.reloadItems(at: [indexPath])
+        if zipperIsAnimating == false {
+            if APIKey.key == "" {
+                print(MovieDBError.missingKey.description)
+            } else {
+                DispatchQueue.main.async {
+                    let connectionAvailable = Reachability.checkReachable()
+                    if connectionAvailable == true {
+                        if indexPath.row == 0 {
+                            self.genreMenuManager.presentOptions(direction: .fromLeft)
+                            
+                            if self.rightSideHasSelectedGenres == false {
+                                self.rightSideHasSelectedGenres = true
+                                collectionView.reloadItems(at: [indexPath])
+                            }
+                        } else if indexPath.row == 1 {
+                            self.personMenuManager.presentOptions(direction: .fromLeft)
+                            
+                            if self.rightSideHasSelectedPeople == false {
+                                self.rightSideHasSelectedPeople = true
+                                collectionView.reloadItems(at: [indexPath])
+                            }
+                        } else if indexPath.row == 2 {
+                            self.ratingSliderManager.presentSlider(direction: .fromLeft)
+                            
+                            if self.rightSideHasSelectedRating == false {
+                                self.rightSideHasSelectedRating = true
+                                collectionView.reloadItems(at: [indexPath])
+                            }
+                        } else {
+                            print("Button not connected") // for possible additional future selection critera
+                        }
+                        
+                    } else if connectionAvailable == false {
+                        Alert.presentAlertFromNSObject(description: MovieDBError.noReachability.description)
                     }
-                    
-                } else if indexPath.row == 1 {
-                    self.personMenuManager.presentOptions(direction: .fromLeft)
-                    
-                    if rightSideHasSelectedPeople == false {
-                        rightSideHasSelectedPeople = true
-                        collectionView.reloadItems(at: [indexPath])
-                    }
-                } else if indexPath.row == 2 {
-                    self.ratingSliderManager.presentSlider(direction: .fromLeft)
-                    
-                    if rightSideHasSelectedRating == false {
-                        rightSideHasSelectedRating = true
-                        collectionView.reloadItems(at: [indexPath])
-                    }
-                } else {
-                    print("Button not connected") // for possible additional future selection critera 
                 }
-                
-            } else if connectionAvailable == false {
-                Alert.presentAlertFromNSObject(description: MovieDBError.noReachability.description)
             }
+        } else if zipperIsAnimating == true {
+            print("Zipper is animating, selection menu disabled")
         }
-
     }
+    
 }

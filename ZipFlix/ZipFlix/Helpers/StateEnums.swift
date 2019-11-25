@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Handles dark and light mode
+// Handles dark and light mode (can be handled different now since assets allows for dm colors)
 enum ModeSelected {
     case lightMode
     case darkMode

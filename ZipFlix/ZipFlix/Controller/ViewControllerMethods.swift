@@ -72,7 +72,6 @@ extension ViewController {
     }
 
     @objc func runAnimation(tapGestureRecognizer: UITapGestureRecognizer) {
-        // Animation method for logo (optional)
         print("Animation started. This feature is coming soon!")
     }
     

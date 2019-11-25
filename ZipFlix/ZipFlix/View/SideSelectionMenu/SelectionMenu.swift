@@ -89,6 +89,7 @@ class SelectionMenu: UIView {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
 }
 
 extension SelectionMenu: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -116,4 +117,5 @@ extension SelectionMenu: UICollectionViewDataSource, UICollectionViewDelegate, U
     
     // Sets up what to do when a cell gets tapped
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) { }
+    
 }

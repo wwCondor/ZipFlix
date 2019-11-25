@@ -20,7 +20,6 @@ struct Alert {
         let confirmation = UIAlertAction(title: "OK", style: .default) {
             (action) in alert.dismiss(animated: true, completion: nil)
         }
-        
 //        alert.view.layoutIfNeeded() // MARK: Added
         alert.addAction(confirmation)
         viewController.present(alert, animated: true, completion: nil)
@@ -44,6 +43,6 @@ struct Alert {
         if let window = window {
             window.rootViewController?.present(alert, animated: true, completion: nil)
         }
-
     }
+    
 }

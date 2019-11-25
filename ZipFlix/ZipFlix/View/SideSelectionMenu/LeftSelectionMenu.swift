@@ -43,6 +43,7 @@ class LeftSelectionMenu: SelectionMenu {
         super.layoutSubviews()
         roundCorners(corners: [.topRight, .bottomRight], radius: Constants.menuCornerRadius)
     }
+    
 }
 
 extension LeftSelectionMenu { 
@@ -74,42 +75,42 @@ extension LeftSelectionMenu {
             if APIKey.key == "" {
                 print(MovieDBError.missingKey.description) // Only used during development/peer reviews
             } else {
-                let connectionAvailable = Reachability.checkReachable()
-                // Check if we have an internet connection
-                if connectionAvailable == true {
-                    if indexPath.row == 0 {
-                        self.genreMenuManager.presentOptions(direction: .fromRight)
+                DispatchQueue.main.async {
+                    let connectionAvailable = Reachability.checkReachable() // Check for connection
+                    if connectionAvailable == true {
+                        if indexPath.row == 0 {
+                            self.genreMenuManager.presentOptions(direction: .fromRight)
 
-                        if leftSideHasSelectedGenres == false {
-                            leftSideHasSelectedGenres = true
-                            collectionView.reloadItems(at: [indexPath])
+                            if self.leftSideHasSelectedGenres == false {
+                                self.leftSideHasSelectedGenres = true
+                                collectionView.reloadItems(at: [indexPath])
+                            }
+                        } else if indexPath.row == 1 {
+                            self.personMenuManager.presentOptions(direction: .fromRight)
+
+                            if self.leftSideHasSelectedPeople == false {
+                                self.leftSideHasSelectedPeople = true
+                                collectionView.reloadItems(at: [indexPath])
+                            }
+                        } else if indexPath.row == 2 {
+                            self.ratingSliderManager.presentSlider(direction: .fromRight)
+                            
+                            if self.leftSideHasSelectedRating == false {
+                                self.leftSideHasSelectedRating = true
+                                collectionView.reloadItems(at: [indexPath])
+                            }
+                        } else {
+                            print("Button not connected") // for possible additional future selection critera
                         }
                         
-                    } else if indexPath.row == 1 {
-                        self.personMenuManager.presentOptions(direction: .fromRight)
-
-                        if leftSideHasSelectedPeople == false {
-                            leftSideHasSelectedPeople = true
-                            collectionView.reloadItems(at: [indexPath])
-                        }
-                    } else if indexPath.row == 2 {
-                        self.ratingSliderManager.presentSlider(direction: .fromRight)
-                        
-                        if leftSideHasSelectedRating == false {
-                            leftSideHasSelectedRating = true
-                            collectionView.reloadItems(at: [indexPath])
-                        }
-                    } else {
-                        print("Button not connected") // for possible additional future selection critera
+                    } else if connectionAvailable == false {
+                        Alert.presentAlertFromNSObject(description: MovieDBError.noReachability.description)
                     }
-                    
-                } else if connectionAvailable == false {
-                    Alert.presentAlertFromNSObject(description: MovieDBError.noReachability.description)
                 }
             }
         } else if zipperIsAnimating == true {
             print("Zipper is animating, selection menu disabled")
         }
-        
     }
+    
 }

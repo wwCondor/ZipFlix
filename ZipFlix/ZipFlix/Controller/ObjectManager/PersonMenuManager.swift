@@ -119,7 +119,6 @@ class PersonMenuManager: ObjectManager {
                 },
                     completion: nil)
             }
-        
         }
     }
                 
@@ -128,7 +127,6 @@ class PersonMenuManager: ObjectManager {
             User.leftUser.selectedPersons.removeAll() // make sure its empty before storing
             for person in peopleOptionsMenu.leftSideSelectedPeople {
                 User.leftUser.selectedPersons.append(person)
-//                print("Stored: \(peopleOptionsMenu.leftSideSelectedPeople.count)")
             }
             // If we have 1 or more items in selection we are allowed to dismiss
             UIView.animate(

@@ -87,7 +87,7 @@ extension GenreOptionMenu {
                     rightSideSelectedGenres.append(selectedGenre)
                     tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.white
                 } else {
-//                    print("Already at max (3) selections")  // MARK: Alert?
+                    
                 }
             } else if tableView.cellForRow(at: indexPath)?.textLabel?.textColor == UIColor.white {
                 guard let index = findIndex(for: selectedGenre, in: rightSideSelectedGenres) else { return }

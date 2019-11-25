@@ -21,7 +21,7 @@ class PageHandler {
     
     static func getPages<T>(url: URL, pages: [Page<T>], completion: @escaping ([Page<T>]?, Error?) -> Void) {
         var allpages = pages
-        let maxPages: Int = 5
+        let maxPages: Int = 5 // max pages obtained per API call
         
         PageHandler.getPage(url: url) { (page: Page<T>?, error: Error?) in
             if let page = page {
@@ -50,7 +50,6 @@ class PageHandler {
         let request = URLRequest(url: url)
         
         let task = PageHandler.session.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
                 guard let httpResponse = response as? HTTPURLResponse else {
                     completion(nil, MovieDBError.requestFailed)
                     return
@@ -69,7 +68,6 @@ class PageHandler {
                 } else {
                     completion(nil, MovieDBError.invalidData)
                 }
-            }
         }
         task.resume()
     }

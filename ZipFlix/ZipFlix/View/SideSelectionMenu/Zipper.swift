@@ -41,8 +41,8 @@ class LeftSideZipper: Zipper {
         path.addLine(to: p8)
         path.close()
         path.fill()
-        
     }
+    
 }
 
 class RightSideZipper: Zipper {
@@ -78,8 +78,8 @@ class RightSideZipper: Zipper {
         path.addLine(to: p8)
         path.close()
         path.fill()
-
     }
+    
 }
 
 class Zipper: UIView {

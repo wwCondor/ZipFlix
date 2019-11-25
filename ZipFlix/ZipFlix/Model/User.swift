@@ -35,7 +35,7 @@ struct User {
     }
     
     static func getGenreIds() -> String {
-        // To ensure discovery and prevent repetition for same selections we shuffle totalGenres and select a max of 3
+        // To ensure 'discovery' and prevent repetition for same selections we shuffle totalGenres and select a max of 3
         let genres = getGenres(for: leftUser, and: rightUser).shuffled()
         let maxGenresReturned = 3
         var currentGenre = 0

@@ -41,4 +41,5 @@ class ClearInputButton: CustomButton {
         let darkModeTint = UIColor.black
         tintColor = bool ? darkModeTint : lightModeTint
     }
+    
 }

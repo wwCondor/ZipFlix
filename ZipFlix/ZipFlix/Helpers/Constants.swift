@@ -10,14 +10,14 @@ import UIKit
 
 struct Constants {
     // notification keys
-    static let lightModeNotificationKey = "lightMode"
-    static let darkModeNotificationKey = "darkMode"
+    static let lightModeNotificationKey     = "lightMode"
+    static let darkModeNotificationKey      = "darkMode"
     
-    static let dimNotificationKey = "dimmedMode" 
-    static let cancelDimNotificationKey = "cancelDimmedMode"
+    static let dimNotificationKey           = "dimmedMode" // enable dimmer
+    static let cancelDimNotificationKey     = "cancelDimmedMode" //disable dimmer
     
-    static let clearInputNotificationKey = "clearInput" // Option selections content and slider reset
-    static let zipperNotificationKey = "zipper"
+    static let clearInputNotificationKey    = "clearInput" // Option selections content and slider reset
+    static let zipperNotificationKey        = "zipper"
     
     // topBar
     static let topBarHeigth: CGFloat = 58
